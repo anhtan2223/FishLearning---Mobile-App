@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.fish.Model.Back
+import com.example.fish.ui.theme.DisplayUI
 
 @Composable
 fun CardInfoChangePass(modifier: Modifier = Modifier, info: UserInfo)
@@ -31,8 +33,9 @@ fun CardInfoChangePass(modifier: Modifier = Modifier, info: UserInfo)
     }
 }
 @Composable
-fun ChangePassword(nav: NavController)
+fun ChangePassword(nav: NavController , view : DisplayUI)
 {
+    Back(nav = nav , view = view , goTo = "Account")
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -47,7 +50,8 @@ fun ChangePassword(nav: NavController)
         CardInfoChangePass(info = infoTest)
         Row(Modifier.fillMaxWidth()) {
             ButtonNav(onClick = { /*TODO*/ }, content = "Xác Nhận", color = MaterialTheme.colorScheme.primaryContainer , modifier = Modifier.weight(1f))
-            ButtonNav(onClick = { nav.popBackStack() }, content = "Quay Lại", color = MaterialTheme.colorScheme.inversePrimary , modifier = Modifier.weight(1f))
+            ButtonNav(onClick = {
+                nav.popBackStack() ; view.changePage(("Account")) }, content = "Quay Lại", color = MaterialTheme.colorScheme.inversePrimary , modifier = Modifier.weight(1f))
         }
     }
 }

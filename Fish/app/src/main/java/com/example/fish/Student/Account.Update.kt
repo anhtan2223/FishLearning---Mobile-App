@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.fish.Model.Back
+import com.example.fish.ui.theme.DisplayUI
 
 @Composable
 fun CardInfoChange(modifier: Modifier = Modifier, info: UserInfo)
@@ -56,8 +58,9 @@ fun OneLineChange(title:String , content:String , readOnly:Boolean)
     }
 }
 @Composable
-fun UpdateInfo(nav: NavController)
+fun UpdateInfo(nav: NavController ,  view : DisplayUI)
 {
+    Back(nav = nav , view = view , goTo = "Account")
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -72,7 +75,7 @@ fun UpdateInfo(nav: NavController)
         CardInfoChange(info = infoTest)
         Row(Modifier.fillMaxWidth()) {
             ButtonNav(onClick = { /*TODO*/ }, content = "Xác Nhận", color = MaterialTheme.colorScheme.primaryContainer , modifier = Modifier.weight(1f))
-            ButtonNav(onClick = { nav.popBackStack() }, content = "Quay Lại", color = MaterialTheme.colorScheme.inversePrimary , modifier = Modifier.weight(1f))
+            ButtonNav(onClick = { view.changePage("Account") ; nav.popBackStack() }, content = "Quay Lại", color = MaterialTheme.colorScheme.inversePrimary , modifier = Modifier.weight(1f))
         }
     }
 }

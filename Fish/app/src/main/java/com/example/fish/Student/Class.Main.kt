@@ -19,11 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.fish.Model.Back
+import com.example.fish.ui.theme.DisplayUI
 
 //data class ()
 @Composable
-fun ClassScreen(modifier: Modifier = Modifier, search:String="", nav: NavController)
+fun ClassScreen(modifier: Modifier = Modifier, search:String="", nav: NavController , view : DisplayUI)
 {
     val listClass = listOf<ClassInfo>(
         ClassInfo(
@@ -77,10 +80,11 @@ fun ClassScreen(modifier: Modifier = Modifier, search:String="", nav: NavControl
             "Nguoi Day 4"
         ) ,
     )
+    Back(nav = nav, view = view)
     LazyColumn()
     {
         items(listClass){
-            OneClass(info = it , {nav.navigate("DetailClass")})
+            OneClass(info = it , {nav.navigate("DetailClass") ; view.changePage("DetailClass") })
         }
     }
 }
@@ -114,7 +118,9 @@ fun OneClass(info: ClassInfo , onClick: ()->Unit)
             )
         }
         IconButton(onClick = onClick ,
-                    modifier = Modifier.padding(horizontal = 8.dp).align(Alignment.CenterEnd)
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .align(Alignment.CenterEnd)
             ) {
             Icon(
                 imageVector = Icons.Rounded.ExitToApp,
