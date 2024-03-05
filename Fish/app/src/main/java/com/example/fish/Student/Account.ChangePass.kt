@@ -16,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
+import com.example.fish.Model.DemoData
+import com.example.fish.Model.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun CardInfoChangePass(modifier: Modifier = Modifier, info: UserInfo)
+fun CardInfoChangePass(modifier: Modifier = Modifier, info: User)
 {
     Card(
         modifier = Modifier
@@ -41,12 +43,7 @@ fun ChangePassword(nav: NavController , view : DisplayUI)
         modifier = Modifier
             .fillMaxSize()
     ) {
-        val infoTest = UserInfo(
-            Name = "Le Sy Anh Tan" ,
-            Email = "anhtan3332@gmail.com" ,
-            Username = "anhtan2003" ,
-            Password = "12345"
-        )
+        val infoTest = DemoData.UserInfo
         CardInfoChangePass(info = infoTest)
         Row(Modifier.fillMaxWidth()) {
             ButtonNav(onClick = { /*TODO*/ }, content = "Xác Nhận", color = MaterialTheme.colorScheme.primaryContainer , modifier = Modifier.weight(1f))

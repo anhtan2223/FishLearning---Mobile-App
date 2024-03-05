@@ -21,7 +21,7 @@ data class Class(
     val NameClass : String ,
     val Subtitle : String ,
     val TeacherID : String ,
-    val DateCreate : String ,
+    val DateCreate : String = "15/2/2020",
     val LabelID: Int = 0
 )
 data class Enrollment(

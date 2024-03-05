@@ -22,79 +22,25 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
+import com.example.fish.Model.Class
+import com.example.fish.Model.DemoData
 import com.example.fish.ui.theme.DisplayUI
 
 //data class ()
 @Composable
 fun ClassScreen(modifier: Modifier = Modifier, search:String="", nav: NavController , view : DisplayUI)
 {
-    val listClass = listOf<ClassInfo>(
-        ClassInfo(
-            "Math Basic" ,
-            "Nam 2023-2024" ,
-            "Anh Tan"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "HK2 - Nam Hoc 2023-2024" ,
-            "Nguoi Day 1"
-        ) ,
-        ClassInfo(
-            "OOP" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day 1"
-        ) ,
-        ClassInfo(
-            "Math Basic" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day 1"
-        ) ,
-        ClassInfo(
-            "Graph Theory" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day C"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day A"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day B"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day 2"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day 3"
-        ) ,
-        ClassInfo(
-            "Machine Learning" ,
-            "Nam 2023-2024" ,
-            "Nguoi Day 4"
-        ) ,
-    )
+    val listClass = DemoData.ListClass
     Back(nav = nav, view = view)
     LazyColumn()
     {
         items(listClass){
-            OneClass(info = it , {nav.navigate("DetailClass") ; view.changePage("DetailClass") })
+            OneClass(info = it , {nav.navigate("DetailClass") ; view.changePage("DetailClass") ; view.selectClass(it) })
         }
     }
 }
-data class ClassInfo(
-        val ClassName : String ,
-        val Subtitle : String ,
-        val Teacher : String
-        )
 @Composable
-fun OneClass(info: ClassInfo , onClick: ()->Unit)
+fun OneClass(info:Class , onClick: ()->Unit)
 {
     Box(modifier = Modifier)
     {
@@ -102,7 +48,7 @@ fun OneClass(info: ClassInfo , onClick: ()->Unit)
             .padding(8.dp)
             .fillMaxWidth() ,
         ) {
-            Text(text = info.ClassName ,
+            Text(text = info.NameClass ,
                 style = MaterialTheme.typography.titleMedium ,
                 modifier = Modifier
                     .padding(5.dp))
@@ -111,7 +57,7 @@ fun OneClass(info: ClassInfo , onClick: ()->Unit)
                 modifier = Modifier
                     .padding(horizontal = 5.dp)
             )
-            Text(text = info.Teacher ,
+            Text(text = info.TeacherID ,
                 style = MaterialTheme.typography.labelLarge ,
                 modifier =  Modifier
                     .padding(5.dp)

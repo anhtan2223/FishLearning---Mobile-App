@@ -26,17 +26,12 @@ import com.example.fish.ui.theme.DisplayUI
 fun DetailClass(nav:NavController , view:DisplayUI)
 {
     Back(nav , view)
-    InfoClass()
+    InfoClass(view)
 }
 @Composable
-fun InfoClass()
+fun InfoClass(view : DisplayUI)
 {
-    var ClassINFO = Class(
-        1,
-        "Tên Lớp" ,
-        "Phụ Đề Lớp Học" ,
-        "Mã Giảng Viên" ,
-        "10/10/2010")
+    var ClassINFO = view.nowClass
     Card(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()) {

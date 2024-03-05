@@ -24,10 +24,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
+import com.example.fish.Model.DemoData
+import com.example.fish.Model.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun CardInfoChange(modifier: Modifier = Modifier, info: UserInfo)
+fun CardInfoChange(modifier: Modifier = Modifier, info: User)
 {
     Card(
         modifier = Modifier
@@ -66,12 +68,7 @@ fun UpdateInfo(nav: NavController ,  view : DisplayUI)
         modifier = Modifier
             .fillMaxSize()
     ) {
-        val infoTest = UserInfo(
-            Name = "Le Sy Anh Tan" ,
-            Email = "anhtan3332@gmail.com" ,
-            Username = "anhtan2003" ,
-            Password = "12345"
-        )
+        val infoTest = DemoData.UserInfo
         CardInfoChange(info = infoTest)
         Row(Modifier.fillMaxWidth()) {
             ButtonNav(onClick = { /*TODO*/ }, content = "Xác Nhận", color = MaterialTheme.colorScheme.primaryContainer , modifier = Modifier.weight(1f))
