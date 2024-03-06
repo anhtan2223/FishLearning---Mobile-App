@@ -32,12 +32,12 @@ data class Enrollment(
 data class Topic(
     val TopicID:Int ,
     val Title:String,
-    val ClassID:Int
+    val ClassID:Int = 0
 );
 data class TextBox(
     val TextID:Int ,
     val Content:String,
-    val TopicID: Int
+    val TopicID: Int = 0
 );
 data class DocType(
     val DocType: Int ,
@@ -47,14 +47,14 @@ data class Document(
     val DocID : Int ,
     val Discribe : String ,
     val DocType : Int ,
-    val TopicID: Int
+    val TopicID: Int = 0
 )
 data class Test(
     val TestID:Int,
     val TestName : String ,
     val NumberQues : Int ,
     val Time : Int ,
-    val TopicID :Int ,
+    val TopicID :Int = 0,
 )
 data class Question(
     val QuesID : Int,
