@@ -1,6 +1,7 @@
 package com.example.fish.Student
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,9 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.Class
 import com.example.fish.Model.DemoData
+import com.example.fish.Model.Document
+import com.example.fish.Model.Test
+import com.example.fish.Model.TextBox
 import com.example.fish.Model.Topic
 import com.example.fish.ui.theme.DisplayUI
 
@@ -27,8 +31,7 @@ fun DetailClass(nav:NavController , view:DisplayUI)
 {
     Back(nav , view)
     val listTopic = DemoData.Topic
-    InfoClass(info = view.nowClass)
-    LazyColumn(modifier = Modifier.padding(top = 150.dp)){
+    LazyColumn(modifier = Modifier){
         item {
             InfoClass(info = view.nowClass)
         }
@@ -74,5 +77,26 @@ fun TopicView(info:Topic)
         ) {
             Text(text = info.Title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
         }
+        for(i in DemoData.InsideTopic)
+                when(i) {
+                    is TextBox  -> TextBoxView(info = i)
+                    is Document -> DocumentView(info = i)
+                    is Test     -> TestView(info = i)
+                }
     }
+}
+@Composable
+fun TextBoxView(info:TextBox)
+{
+    Text(text = info.Content)
+}
+@Composable 
+fun DocumentView(info:Document)
+{
+    Text(text = info.Discribe)
+}
+@Composable
+fun TestView(info:Test)
+{
+    Text(text = info.TestName)
 }
