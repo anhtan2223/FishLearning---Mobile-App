@@ -3,6 +3,7 @@ package com.example.fish.Student
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -40,32 +41,33 @@ fun OneClass(info:Class , onClick: ()->Unit)
     Box(modifier = Modifier)
     {
         Card(modifier = Modifier
-            .padding(8.dp)
+            .padding(10.dp)
             .fillMaxWidth() ,
         ) {
             Text(text = info.NameClass ,
                 style = MaterialTheme.typography.titleMedium ,
                 modifier = Modifier
-                    .padding(5.dp))
+                    .padding(start = 18.dp  , bottom = 6.dp , top = 18.dp) )
             Text(text = info.Subtitle ,
                 style = MaterialTheme.typography.labelMedium ,
                 modifier = Modifier
-                    .padding(horizontal = 5.dp)
+                    .padding(start = 18.dp  , bottom = 6.dp)
             )
             Text(text = info.TeacherID ,
                 style = MaterialTheme.typography.labelLarge ,
                 modifier =  Modifier
-                    .padding(5.dp)
+                    .padding(start = 18.dp , bottom = 18.dp)
             )
         }
         IconButton(onClick = onClick ,
                     modifier = Modifier
-                        .padding(horizontal = 8.dp)
+                        .padding(horizontal = 18.dp)
                         .align(Alignment.CenterEnd)
             ) {
             Icon(
                 imageVector = Icons.Rounded.ExitToApp,
                 contentDescription = null ,
+                modifier = Modifier.size(30.dp)
             )
         }
     }

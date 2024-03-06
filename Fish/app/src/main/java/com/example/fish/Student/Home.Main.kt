@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
+import com.example.fish.Model.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -18,8 +19,7 @@ fun HomeScreen(modifier: Modifier = Modifier, nav: NavController , view : Displa
     {
         items(listClass){
             OneClass(info = it , {
-                nav.navigate("DetailClass") ;
-                view.changePage("DetailClass")
+                goTo(nav , view , "DetailClass")
                 view.selectClass(it)
             })
         }

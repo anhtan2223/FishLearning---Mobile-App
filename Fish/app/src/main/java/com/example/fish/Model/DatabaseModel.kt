@@ -18,9 +18,9 @@ data class Label(
 )
 data class Class(
     val ClassID : Int = 0,
-    val NameClass : String ,
-    val Subtitle : String ,
-    val TeacherID : String ,
+    val NameClass : String = "",
+    val Subtitle : String = "",
+    val TeacherID : String = "",
     val DateCreate : String = "15/2/2020",
     val LabelID: Int = 0
 )
@@ -50,10 +50,10 @@ data class Document(
     val TopicID: Int = 0
 )
 data class Test(
-    val TestID:Int,
-    val TestName : String ,
-    val NumberQues : Int ,
-    val Time : Int ,
+    val TestID:Int = 0,
+    val TestName : String = "" ,
+    val NumberQues : Int = 0,
+    val Time : Int = 0,
     val TopicID :Int = 0,
 )
 data class Question(

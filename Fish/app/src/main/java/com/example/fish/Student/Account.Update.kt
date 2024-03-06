@@ -33,7 +33,7 @@ fun CardInfoChange(modifier: Modifier = Modifier, info: User)
 {
     Card(
         modifier = Modifier
-            .padding(20.dp)
+            .padding(5.dp)
             .wrapContentWidth(Alignment.CenterHorizontally) )
     {
         OneLineChange(title = "Tên", content = info.Name , false)

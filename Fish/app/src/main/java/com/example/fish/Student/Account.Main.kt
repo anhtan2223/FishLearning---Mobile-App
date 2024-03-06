@@ -28,6 +28,7 @@ fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : Di
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
+            .padding(5.dp)
             .fillMaxSize()
     ) {
         val infoTest = DemoData.UserInfo
@@ -44,7 +45,7 @@ fun CardInfo(modifier: Modifier = Modifier , info:User)
 {
     Card(
         modifier = Modifier
-            .padding(20.dp)
+            .padding(15.dp)
             .wrapContentWidth(Alignment.CenterHorizontally) )
     {
         OneLine(title = "Tên", content = info.Name)
@@ -61,8 +62,8 @@ fun OneLine(title:String , content:String )
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = title , style = MaterialTheme.typography.titleMedium , modifier = Modifier
-            .weight(3f)
+            .weight(4f)
             .padding(5.dp))
-        Text(text = content , modifier = Modifier.weight(8f) )
+        Text(text = content , modifier = Modifier.weight(7f) )
     }
 }

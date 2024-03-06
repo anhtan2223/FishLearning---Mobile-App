@@ -36,6 +36,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fish.Model.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 data class NavItem(
@@ -79,58 +80,72 @@ fun StudentView(
     }
     Scaffold(
         topBar = {
-            if(viewModel.Title == "Class"){
-                var search by remember { mutableStateOf("") }
-                CenterAlignedTopAppBar(title = {
-                    TextField(
-                        value = search,
-                        placeholder = { Text(text = "Find Class" , textAlign = TextAlign.Center) },
-                        onValueChange = {
-                            search = it
-                        },
-                        shape = CircleShape,
-                        modifier = Modifier
-                            .padding(5.dp) ,
-                        trailingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = null
-                            )
-                        },
-                        singleLine = true,
-                    )
-                })
-            }
-            else if(viewModel.Title == "DetailClass"){
-                CenterAlignedTopAppBar(
-                    title = { Text(text = "Lớp Học") } ,
-                    navigationIcon = {
-                        IconButton(onClick = { viewModel.changePage("Home") ; navController.navigate("Home") }) {
-                            Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                        }
-                    }
-                )
-            }
-            else if(viewModel.Title == "Home")
+            when(viewModel.Title)
             {
-                CenterAlignedTopAppBar(
-                    title = {
-                        Text(text = "Lớp Học Của Tôi" ,
+                "Class" -> {
+                    var search by remember { mutableStateOf("") }
+                    CenterAlignedTopAppBar(title = {
+                        TextField(
+                            value = search,
+                            placeholder = { Text(text = "Find Class" , textAlign = TextAlign.Center) },
+                            onValueChange = {
+                                search = it
+                            },
+                            shape = CircleShape,
+                            modifier = Modifier
+                                .padding(5.dp) ,
+                            trailingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = null
+                                )
+                            },
+                            singleLine = true,
+                        )
+                    })
+                }
+                "Home" -> {
+                    CenterAlignedTopAppBar({
+                            Text(text = "Lớp Học Của Tôi" ,
+                                style = MaterialTheme.typography.displaySmall)
+                        }
+                    )
+                }
+                "Account" -> {
+                    CenterAlignedTopAppBar({
+                        Text(text = "Tài Khoản Cá Nhân" ,
                             style = MaterialTheme.typography.displaySmall)
                     }
-                )
-            }
-            else{
-                CenterAlignedTopAppBar(title = {
-                    Text(
-                        text = if (selected == 0) "Lớp Học Của Tôi" else if(selected == 2) "Tài Khoản Cá Nhân" else "",
-                        style = MaterialTheme.typography.displaySmall
                     )
-                })
+                }
+                "ChangePass" , "UpdateInfo" -> {}
+                else -> {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            val text = when(viewModel.Title)
+                            {
+                                "DetailClass" -> "Lớp Học"
+                                "TestPrepare" -> "Bài Kiểm Tra"
+                                else -> " "
+                            }
+                            Text(text = text)
+                        } ,
+                        navigationIcon = {
+                            val goWhere = when(viewModel.Title)
+                            {
+                                "TestPrepare"   -> "DetailClass"
+                                else            -> "Home"
+                            }
+                            IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
+                                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                            }
+                        }
+                    )
+                }
             }
         },
         bottomBar = {
-            if(viewModel.Title != "DetailClass"){
+            if(viewModel.Title in listOf<String>("Home" , "Account" , "Class" ,"ChangePass" , "UpdateInfo")  ){
                 NavigationBar {
                     item.forEachIndexed { index: Int, navItem: NavItem ->
                         NavigationBarItem(

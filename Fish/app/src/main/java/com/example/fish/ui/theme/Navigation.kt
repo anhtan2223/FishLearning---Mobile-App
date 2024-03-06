@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.example.fish.Model.Class
+import com.example.fish.Model.Test
 
 data class NavItem(
     val title : String,
@@ -16,7 +17,10 @@ data class NavItem(
 class DisplayUI : ViewModel(){
     var Title by mutableStateOf("Home")
         private set
-    var nowClass by mutableStateOf(Class(0,"","","",""))
+    var nowClass by mutableStateOf( Class() )
+        private set
+    var nowTest by mutableStateOf( Test() )
+        private set
     fun changePage(title: String)
     {
         Title = title
@@ -24,6 +28,10 @@ class DisplayUI : ViewModel(){
     fun selectClass(selectedClass : Class)
     {
         nowClass = selectedClass
+    }
+    fun selectTest(test : Test)
+    {
+        nowTest = test
     }
 
 

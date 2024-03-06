@@ -108,80 +108,37 @@ object DemoData {
             4,
             "Chủ Đề 4"
         ) ,
-        Topic(
-            1,
-            "Chủ Đề Số 1" ,
-        ) ,
-        Topic(
-            2,
-            "Chủ Đề 2"
-        ) ,
-        Topic(
-            3,
-            "Chủ Đề Số 3" ,
-        ) ,
-        Topic(
-            4,
-            "Chủ Đề 4"
-        ) ,
-        Topic(
-            1,
-            "Chủ Đề Số 1" ,
-        ) ,
-        Topic(
-            2,
-            "Chủ Đề 2"
-        ) ,
-        Topic(
-            3,
-            "Chủ Đề Số 3" ,
-        ) ,
-        Topic(
-            4,
-            "Chủ Đề 4"
-        ) ,
-        Topic(
-            1,
-            "Chủ Đề Số 1" ,
-        ) ,
-        Topic(
-            2,
-            "Chủ Đề 2"
-        ) ,
-        Topic(
-            3,
-            "Chủ Đề Số 3" ,
-        ) ,
-        Topic(
-            4,
-            "Chủ Đề 4"
-        )
     )
     val InsideTopic = listOf<Any>(
         TextBox(
             0 ,
-            "Hello World" ,
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." ,
         ) ,
         TextBox(
             1 ,
-            "Doan Van Ban Se Nhu The Nay"
+            "Một Đoạn Văn Bản Sẽ Hiển Thị Như Trên"
         ) ,
         Document(
             0 ,
-            "Tai Lieu Se Nhu The Nay" ,
+            "Đây Là Tiêu Đề Cho Một Tài Liệu Để Tải Về" ,
             1
         ) ,
         Document(
             2,
-            "Tai Lieu Se Nhu The Nay" ,
+            "Một Tài Liệu Sẽ Như Thế Này" ,
             1
         ) ,
         Test(
             0,
-            "Test 01" ,
+            "Tên Của Bài Kiểm Tra" ,
             5 ,
             120
-
+        ) ,
+        Test(
+            1 ,
+            "Kiểm Tra Giữa Kỳ" ,
+            5 ,
+            120
         )
     )
 

@@ -13,3 +13,8 @@ fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
         view.changePage(goTo)
     })
 }
+fun goTo(nav: NavController , view: DisplayUI , goTo:String )
+{
+    nav.navigate(goTo)
+    view.changePage(goTo)
+}
