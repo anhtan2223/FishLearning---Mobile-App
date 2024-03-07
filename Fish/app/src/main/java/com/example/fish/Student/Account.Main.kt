@@ -22,7 +22,7 @@ import com.example.fish.Model.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : DisplayUI)
+fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : DisplayUI , navFather : NavController)
 {
     Back(nav = nav, view = view)
     Column(
@@ -37,7 +37,7 @@ fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : Di
             nav.navigate("UpdateInfo") ; view.changePage("UpdateInfo") }, content = "Cập Nhật Thông Tin" , color = MaterialTheme.colorScheme.secondary , modifier = Modifier.fillMaxWidth())
         ButtonNav(onClick = {
             nav.navigate("ChangePass") ; view.changePage("ChangePass")}, content = "Đổi Mật Khẩu" , color = MaterialTheme.colorScheme.onSurface , modifier = Modifier.fillMaxWidth())
-        ButtonNav(onClick = { /*TODO*/ }, content = "Đăng Xuất" , color = MaterialTheme.colorScheme.onError , modifier = Modifier.fillMaxWidth())
+        ButtonNav(onClick = { navFather.navigate(("LogIn")) }, content = "Đăng Xuất" , color = MaterialTheme.colorScheme.onError , modifier = Modifier.fillMaxWidth())
     }
 }
 @Composable

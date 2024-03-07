@@ -31,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -56,6 +58,7 @@ fun StudentView(
     modifier: Modifier = Modifier.fillMaxSize(),
     navController : NavHostController = rememberNavController() ,
     viewModel:DisplayUI =  viewModel<DisplayUI>() ,
+    navFather : NavController
 )
 {
     val item = listOf<NavItem>(
@@ -107,14 +110,19 @@ fun StudentView(
                 "Home" -> {
                     CenterAlignedTopAppBar({
                             Text(text = "Lớp Học Của Tôi" ,
-                                style = MaterialTheme.typography.displaySmall)
+                                style = MaterialTheme.typography.labelLarge ,
+                                fontSize = 28.sp
+                            )
                         }
                     )
                 }
                 "Account" -> {
                     CenterAlignedTopAppBar({
-                        Text(text = "Tài Khoản Cá Nhân" ,
-                            style = MaterialTheme.typography.displaySmall)
+                        Text(
+                            text = "Tài Khoản Cá Nhân" ,
+                            style = MaterialTheme.typography.labelLarge ,
+                            fontSize = 28.sp
+                        )
                     }
                     )
                 }
@@ -128,7 +136,11 @@ fun StudentView(
                                 "TestPrepare" -> "Bài Kiểm Tra"
                                 else -> " "
                             }
-                            Text(text = text)
+                            Text(
+                                text = text ,
+                                style = MaterialTheme.typography.labelMedium ,
+                                fontSize = 28.sp
+                                )
                         } ,
                         navigationIcon = {
                             val goWhere = when(viewModel.Title)
@@ -176,7 +188,7 @@ fun StudentView(
             composable("Class")
             { ClassScreen(nav = navController , view = viewModel) }
             composable("Account")
-            { AccountScreen(nav = navController , view = viewModel) }
+            { AccountScreen(nav = navController , view = viewModel , navFather = navFather) }
             composable("UpdateInfo")
             { UpdateInfo(nav = navController , view = viewModel) }
             composable("ChangePass")

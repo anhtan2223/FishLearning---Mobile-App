@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
@@ -42,7 +43,7 @@ fun CardInfoChange(modifier: Modifier = Modifier, info: User)
     }
 }
 @Composable
-fun OneLineChange(title:String , content:String , readOnly:Boolean)
+fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:() -> Unit = {} , visual:VisualTransformation = VisualTransformation.None)
 {
     Row(
         modifier = Modifier.fillMaxWidth() ,
@@ -56,7 +57,13 @@ fun OneLineChange(title:String , content:String , readOnly:Boolean)
         var value by remember {
             mutableStateOf("")
         }
-        TextField(value = value, placeholder = { Text(content) } , readOnly = readOnly , onValueChange = { value = it } , modifier = Modifier.weight(8f) , singleLine = true)
+        TextField(
+            value = value,
+            placeholder = { Text(content) } ,
+            readOnly = readOnly ,
+            visualTransformation = visual,
+            onValueChange = { value = it ; onChange() } ,
+            modifier = Modifier.weight(8f) , singleLine = true)
     }
 }
 @Composable
@@ -77,7 +84,7 @@ fun UpdateInfo(nav: NavController ,  view : DisplayUI)
     }
 }
 @Composable
-fun ButtonNav(onClick:()->Unit, content:String, color: Color, modifier: Modifier = Modifier)
+fun ButtonNav(onClick:()->Unit, content:String, color: Color = Color.Transparent, modifier: Modifier = Modifier)
 {
     Button(
         onClick = onClick ,
