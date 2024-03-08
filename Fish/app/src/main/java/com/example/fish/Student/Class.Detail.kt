@@ -89,14 +89,19 @@ fun TopicView(info:Topic , nav:NavController , view: DisplayUI)
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = info.Title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
+            Text(
+                text = info.Title ,
+                style = TextStyle(fontWeight = FontWeight.Bold ,
+                fontSize = 18.sp))
         }
         for(i in DemoData.InsideTopic)
-                when(i) {
-                    is TextBox  -> TextBoxView(info = i)
-                    is Document -> DocumentView(info = i)
-                    is Test     -> TestView(info = i , nav , view)
-                }
+        {
+            when(i) {
+                is TextBox  -> if (i.TopicID == info.TopicID) TextBoxView(info = i)
+                is Document -> if (i.TopicID == info.TopicID) DocumentView(info = i)
+                is Test     -> if (i.TopicID == info.TopicID) TestView(info = i , nav , view)
+            }
+        }
     }
 }
 @Composable
@@ -136,7 +141,7 @@ fun DocumentView(info:Document)
     }
 }
 @Composable
-fun TestView(info:Test , nav:NavController , view: DisplayUI)
+fun TestView(info:Test , nav:NavController , view: DisplayUI , destination:String = "TestPrepare")
 {
     Row(
         modifier = Modifier.padding(start = 15.dp)
@@ -153,7 +158,7 @@ fun TestView(info:Test , nav:NavController , view: DisplayUI)
             style = MaterialTheme.typography.bodyLarge ,
             modifier = Modifier
                 .padding(start = 5.dp, bottom = 20.dp)
-                .clickable { goTo(nav = nav, view = view, goTo = "TestPrepare") ; view.selectTest(info) }
+                .clickable { goTo(nav = nav, view = view, goTo = destination) ; view.selectTest(info) }
         )
     }
 }

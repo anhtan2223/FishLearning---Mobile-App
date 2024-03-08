@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                         composable("Student")
                         { StudentView(navFather = nav) }
                         composable("Teacher")
-                        { TeacherView() }
+                        { TeacherView(navFather = nav) }
                         composable("Admin")
                         { AdminView() }
                         composable("Login")

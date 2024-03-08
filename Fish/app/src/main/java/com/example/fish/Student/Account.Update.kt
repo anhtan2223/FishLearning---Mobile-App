@@ -1,6 +1,7 @@
 package com.example.fish.Student
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -91,6 +94,8 @@ fun ButtonNav(onClick:()->Unit, content:String, color: Color = Color.Transparent
         border = BorderStroke(2.dp , color),
         modifier = modifier
             .padding(10.dp)
+        ,
+        colors = ButtonDefaults.buttonColors( containerColor = Color.Green )
     ) {
         Text(text = content )
     }
