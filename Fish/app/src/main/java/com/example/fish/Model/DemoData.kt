@@ -136,15 +136,23 @@ object DemoData {
         Test(
             0,
             "Tên Của Bài Kiểm Tra" ,
-            5 ,
-            120 , 1
+            12 ,
+            120 ,
+            1
         ) ,
         Test(
             1 ,
             "Kiểm Tra Giữa Kỳ" ,
-            5 ,
+            60 ,
             120 ,
             3
+        ) ,
+        Test(
+            2 ,
+            "TOEIC" ,
+            200 ,
+            120 ,
+            1
         )
     )
     val QuestionList = listOf<Question>(

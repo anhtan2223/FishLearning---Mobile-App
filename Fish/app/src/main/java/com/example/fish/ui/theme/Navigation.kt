@@ -21,7 +21,7 @@ class DisplayUI : ViewModel(){
         private set
     var nowTest by mutableStateOf( Test() )
         private set
-    var isChoose by mutableStateOf( true )
+    var isChoose by mutableStateOf( false )
         private set
     fun changePage(title: String)
     {

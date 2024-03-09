@@ -180,7 +180,7 @@ fun StudentView(
     ) {
         NavHost(
             navController = navController ,
-            startDestination = "Test" ,
+            startDestination = "Home" ,
             modifier = Modifier.padding(it)
         ){
             composable("Home")
