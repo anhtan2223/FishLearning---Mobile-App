@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.User
+import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -81,13 +82,27 @@ fun UpdateInfo(nav: NavController ,  view : DisplayUI)
         val infoTest = DemoData.UserInfo
         CardInfoChange(info = infoTest)
         Row(Modifier.fillMaxWidth()) {
-            ButtonNav(onClick = { /*TODO*/ }, content = "Xác Nhận", color = MaterialTheme.colorScheme.primaryContainer , modifier = Modifier.weight(1f))
-            ButtonNav(onClick = { view.changePage("Account") ; nav.popBackStack() }, content = "Quay Lại", color = MaterialTheme.colorScheme.inversePrimary , modifier = Modifier.weight(1f))
+            ButtonNav(onClick = { /*TODO*/ },
+                content = "Xác Nhận",
+                color = Color(0xFF00FC46),
+                modifier = Modifier.weight(1f))
+            ButtonNav(
+                onClick = { view.changePage("Account") ; nav.popBackStack() },
+                content = "Quay Lại",
+                color = Color(0xFFDC0F0F),
+                contentColor = Color.White,
+                modifier = Modifier.weight(1f))
         }
     }
 }
 @Composable
-fun ButtonNav(onClick:()->Unit, content:String, color: Color = Color.Transparent, modifier: Modifier = Modifier)
+fun ButtonNav(
+    modifier: Modifier = Modifier,
+    onClick : ()-> Unit,
+    content : String,
+    color   : Color = Color(0xFF28FFFF),
+    contentColor : Color = Color.DarkGray
+            )
 {
     Button(
         onClick = onClick ,
@@ -95,7 +110,7 @@ fun ButtonNav(onClick:()->Unit, content:String, color: Color = Color.Transparent
         modifier = modifier
             .padding(10.dp)
         ,
-        colors = ButtonDefaults.buttonColors( containerColor = Color.Green )
+        colors = ButtonDefaults.buttonColors( containerColor = color , contentColor = contentColor)
     ) {
         Text(text = content )
     }

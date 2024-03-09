@@ -126,7 +126,7 @@ fun StudentView(
                     }
                     )
                 }
-                "ChangePass" , "UpdateInfo" -> {}
+                "ChangePass" , "UpdateInfo" , "Test" -> {}
                 else -> {
                     CenterAlignedTopAppBar(
                         title = {
@@ -180,7 +180,7 @@ fun StudentView(
     ) {
         NavHost(
             navController = navController ,
-            startDestination = "Home" ,
+            startDestination = "Test" ,
             modifier = Modifier.padding(it)
         ){
             composable("Home")
@@ -197,6 +197,8 @@ fun StudentView(
             { DetailClass(nav = navController , view = viewModel) }
             composable("TestPrepare")
             { TestPrepareView(nav = navController , view = viewModel) }
+            composable("Test")
+            { TestView(nav = navController , view = viewModel) }
         }
     }
 }

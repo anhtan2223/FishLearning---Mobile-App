@@ -21,6 +21,8 @@ class DisplayUI : ViewModel(){
         private set
     var nowTest by mutableStateOf( Test() )
         private set
+    var isChoose by mutableStateOf( true )
+        private set
     fun changePage(title: String)
     {
         Title = title
@@ -32,6 +34,10 @@ class DisplayUI : ViewModel(){
     fun selectTest(test : Test)
     {
         nowTest = test
+    }
+    fun toogleChoose()
+    {
+        isChoose = !isChoose
     }
 
 

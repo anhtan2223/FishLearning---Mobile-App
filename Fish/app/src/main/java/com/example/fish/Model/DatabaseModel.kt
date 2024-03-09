@@ -62,7 +62,7 @@ data class Question(
     val TestID : Int
 )
 data class Answer(
-    val AnsID : Int ,
+    val AnsID : Int = 0,
     val Detail: String ,
     val isCorrect : Boolean ,
     val QuesID: Int

@@ -147,6 +147,126 @@ object DemoData {
             3
         )
     )
+    val QuestionList = listOf<Question>(
+        Question(
+            0 ,
+            "Ví Dụ Của Một Câu Hỏi" ,
+            0
+        ) ,
+        Question(
+            1 ,
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Te enim iudicem aequum puto, modo quae dicat ille bene noris. Apparet statim, quae sint officia, quae actiones" ,
+            2
+        ) ,
+        Question(
+            2 ,
+            "Con Cá Có Mấy Tay" ,
+            0
+        ) ,
+        Question(
+            3 ,
+            "Con Cá Có Mấy Mắt" ,
+            0
+        ) ,
+    )
+    val AnswerList = listOf<Answer>(
+        Answer(
+            0 ,
+            "Câu Trả Lời Đúng" ,
+            true ,
+            0
+        ) ,
+        Answer(
+            0 ,
+            "Câu Trả Lời Sẽ Như Thế Này" ,
+            false ,
+            0
+        ) ,
+        Answer(
+            0 ,
+            "Câu Trả Lời Sai" ,
+            false ,
+            0
+        ) ,
+        Answer(
+            0 ,
+            "Và Có Thể Có Số Lượng Câu Trả Lời Đúng Và Sai Là Tuỳ Ý" ,
+            false ,
+            0
+        ) ,
+        Answer(
+            0 ,
+            "0" ,
+            true ,
+            1
+        ) ,
+        Answer(
+            0 ,
+            "1" ,
+            false ,
+            1
+        ) ,
+        Answer(
+            0 ,
+            "2" ,
+            false ,
+            1
+        ) ,
+        Answer(
+            0 ,
+            "3" ,
+            false ,
+            1
+        ) ,
+        Answer(
+            0 ,
+            "0" ,
+            true ,
+            2
+        ) ,
+        Answer(
+            0 ,
+            "1" ,
+            false ,
+            2
+        ) ,
+        Answer(
+            0 ,
+            "2" ,
+            false ,
+            2
+        ) ,
+        Answer(
+            0 ,
+            "3" ,
+            false ,
+            2
+        ) ,
+        Answer(
+            0 ,
+            "0" ,
+            false ,
+            3
+        ) ,
+        Answer(
+            0 ,
+            "1" ,
+            false ,
+            3
+        ) ,
+        Answer(
+            0 ,
+            "2" ,
+            true ,
+            3
+        ) ,
+        Answer(
+            0 ,
+            "3" ,
+            false ,
+            3
+        )
+    )
 //    val InsideTopic = listOf<Any>()
 
 }

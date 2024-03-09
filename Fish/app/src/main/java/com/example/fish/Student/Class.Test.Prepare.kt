@@ -16,16 +16,21 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.Class
 import com.example.fish.Model.Test
+import com.example.fish.Model.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
 fun TestPrepareView(nav :NavController , view:DisplayUI)
 {
     Back(nav = nav, view = view , "DetailClass")
-    DisplayInfo(classInfo = view.nowClass, testInfo = view.nowTest)
+    DisplayInfo(
+        classInfo = view.nowClass ,
+        testInfo = view.nowTest ,
+        onclick = { goTo(nav,view,"Test") }
+    )
 }
 @Composable
-fun DisplayInfo(classInfo : Class , testInfo:Test)
+fun DisplayInfo(classInfo : Class , testInfo:Test , onclick : ()->Unit)
 {
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
@@ -43,7 +48,7 @@ fun DisplayInfo(classInfo : Class , testInfo:Test)
                 .padding(top = 30.dp)
 
         ) {
-            ButtonNav(onClick = { /*TODO*/ }, content = "Bắt Đầu Bài Thi" , color = MaterialTheme.colorScheme.primary)
+            ButtonNav(onClick = { onclick() }, content = "Bắt Đầu Bài Thi" , color = MaterialTheme.colorScheme.primary)
         }
 
     }

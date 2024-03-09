@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Model.Back
@@ -34,10 +35,20 @@ fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : Di
         val infoTest = DemoData.UserInfo
         CardInfo(info = infoTest)
         ButtonNav(onClick = {
-            nav.navigate("UpdateInfo") ; view.changePage("UpdateInfo") }, content = "Cập Nhật Thông Tin" , color = MaterialTheme.colorScheme.secondary , modifier = Modifier.fillMaxWidth())
+            nav.navigate("UpdateInfo") ; view.changePage("UpdateInfo") },
+            content = "Cập Nhật Thông Tin" ,
+            color = Color(0xFF00FC46),
+            modifier = Modifier.fillMaxWidth())
         ButtonNav(onClick = {
-            nav.navigate("ChangePass") ; view.changePage("ChangePass")}, content = "Đổi Mật Khẩu" , color = MaterialTheme.colorScheme.onSurface , modifier = Modifier.fillMaxWidth())
-        ButtonNav(onClick = { navFather.navigate(("LogIn")) }, content = "Đăng Xuất" , color = MaterialTheme.colorScheme.onError , modifier = Modifier.fillMaxWidth())
+            nav.navigate("ChangePass") ; view.changePage("ChangePass")},
+            content = "Đổi Mật Khẩu" ,
+            color = Color(0xFF00FC46),
+            modifier = Modifier.fillMaxWidth())
+        ButtonNav(onClick = { navFather.navigate(("LogIn")) },
+            content = "Đăng Xuất" ,
+            color = Color(0xFFDC0F0F),
+            contentColor = Color.White,
+            modifier = Modifier.fillMaxWidth())
     }
 }
 @Composable
