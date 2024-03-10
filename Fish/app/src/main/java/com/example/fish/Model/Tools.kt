@@ -17,4 +17,9 @@ fun goTo(nav: NavController , view: DisplayUI , goTo:String )
 {
     nav.navigate(goTo)
     view.changePage(goTo)
+}fun formatTime(seconds: Int): String {
+    val hours = seconds / 3600
+    val minutes = (seconds % 3600) / 60
+    val remainingSeconds = seconds % 60
+    return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds)
 }

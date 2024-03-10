@@ -24,21 +24,26 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
@@ -49,8 +54,14 @@ import com.example.fish.Model.Answer
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.Question
 import com.example.fish.Model.Test
+import com.example.fish.Model.formatTime
 import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.delay
+import java.time.Duration
+import kotlin.time.DurationUnit
 
 
 @Composable
@@ -60,28 +71,39 @@ fun TestView(modifier: Modifier = Modifier ,  nav: NavController, view : Display
     val listA = DemoData.AnswerList
 //    BackHandler {
 //        //Do Later
+//            view.toogleChoose()
 //    }
+
     if(view.isChoose)
         ChooseQuestion(view)
-    QNA(nav = nav, view = view , listQ[0] , listA )
+    QNA(nav = nav, view = view , listQ[view.nowQuestion] , listA )
 }
 @Composable
-fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer)
+fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer ,  onlick: () -> Unit )
 {
+    val isChoose by remember {
+        mutableStateOf( view.answerList[view.nowQuestion] == A.AnsID )
+    }
+    val CardColors = if(isChoose) Color(0xFFFFAB40) else Color(0xFF444444)
+    val TextColor = if(isChoose) Color.Black else Color.White
+
     Card(
         Modifier
             .padding(top = 20.dp)
             .fillMaxWidth(0.9f)
+            .clickable { onlick() }
     ) {
         Text(
             modifier = Modifier
                 .fillMaxSize()
+                .background(CardColors)
                 .padding(10.dp) ,
             text = A.Detail ,
             style = MaterialTheme.typography.labelMedium ,
             fontSize = 16.sp ,
             textAlign = TextAlign.Center ,
-            lineHeight = 20.sp
+            lineHeight = 20.sp ,
+            color = TextColor
         )
     }
 }
@@ -95,57 +117,77 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer>)
                 .padding(top = 15.dp)
     )
     {
-        item{
-            Row {
-                Spacer(modifier = Modifier.weight(0.8f))
-                IconButton(
-                    modifier = Modifier
-                        .size(25.dp)
-                        .weight(0.2f)
-                    ,
-                    onClick = { view.toogleChoose() }
-                )
-                {
-                    Icon(painter = painterResource(id = R.drawable.list_solid), contentDescription = null)
+        item {
+            Box{
+                Timer(time = view.nowTest.Time)
+                Row(Modifier.padding(10.dp)) {
+                    Spacer(modifier = Modifier.weight(0.8f))
+                    IconButton(
+                        modifier = Modifier
+                            .size(25.dp)
+                            .weight(0.2f),
+                        onClick = { view.toogleChoose() }
+                    )
+                    {
+                        Icon(
+                            painter = painterResource(id = R.drawable.list_solid),
+                            contentDescription = null
+                        )
+                    }
                 }
+
             }
-            
+
         }
         item {
             Card(
                 Modifier
                     .padding(bottom = 40.dp, top = 50.dp)
                     .fillMaxWidth(0.9f)
+                    .clickable { view.moveNextQues() } ,
+                colors = CardDefaults.cardColors(Color(0xFF6D6D6D))
             ) {
                 Text(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(20.dp) ,
-                    text = Q.Detail ,
-                    style = MaterialTheme.typography.labelMedium ,
-                    fontSize = 20.sp ,
-                    textAlign = TextAlign.Center ,
-                    lineHeight = 8.sp
+                    text = Q.Detail,
+                    style = MaterialTheme.typography.labelMedium,
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 25.sp ,
+                    color = Color.White
                 )
             }
         }
-        items(A){
-            if(Q.QuesID == it.QuesID)
-                OneAnswer(nav = nav, view = view, A = it)
+        items(A) {
+//            var isChoose = view.answerList[view.nowQuestion] == it.AnsID
+            if (Q.QuesID == it.QuesID) {
+//                Text(text = "($isChoose , ${view.answerList[view.nowQuestion]} , ${it.AnsID})")
+                OneAnswer(
+                    nav = nav,
+                    view = view,
+                    A = it,
+//                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
+                    onlick = { view.chooseAnswer(it.AnsID) })
+            }
         }
     }
 }
 @Composable
-fun OneNumber(onClick : ()-> Unit , content:String )
+fun OneNumber(onClick : ()-> Unit , content:String , isChoose:Boolean )
 {
+    var borderColor = when(isChoose){
+        true -> Color(0xFF1CCF39)
+        false -> Color.White
+    }
     Box(
         modifier = Modifier
             .padding(10.dp)
             .clickable { onClick() }
             .background(Color.Transparent)
-            .border(2.dp, Color.White, CircleShape)
+            .border(2.dp, borderColor, CircleShape)
             .graphicsLayer { shape = CircleShape }
-        ,
     ){
         Text(
             modifier = Modifier
@@ -155,7 +197,8 @@ fun OneNumber(onClick : ()-> Unit , content:String )
             text = content ,
             style = MaterialTheme.typography.labelLarge ,
             fontSize = 25.sp ,
-            maxLines = 1
+            maxLines = 1 ,
+            color = borderColor
         )
     }
 }
@@ -180,11 +223,46 @@ fun ChooseQuestion(view : DisplayUI)
                 {
                     items(view.nowTest.NumberQues){
                         OneNumber(
-                            onClick = { /*TODO*/ },
-                            content = it.toString()
+                            onClick = { view.changeQuestion(it) ; view.toogleChoose() },
+                            content = (it+1).toString() ,
+                            isChoose = view.answerList[it] != -1
                         )
+//                        Text(text = "${view.answerList[it]}")
                     }
                 }
             }
+    }
+}
+@Composable
+fun Timer(time:Int)
+{
+    var remainTime by remember {
+        mutableStateOf(time)
+    }
+    val corountine = rememberCoroutineScope()
+
+    LaunchedEffect(Unit)
+    {
+        corountine.launch(Dispatchers.Default){
+            while (remainTime != 0)
+            {
+                kotlinx.coroutines.delay(1000)
+                remainTime--
+            }
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = formatTime(remainTime) ,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+        )
     }
 }
