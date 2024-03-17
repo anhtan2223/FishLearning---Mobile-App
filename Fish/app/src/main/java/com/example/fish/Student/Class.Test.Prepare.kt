@@ -27,7 +27,7 @@ fun TestPrepareView(nav :NavController , view:DisplayUI)
     DisplayInfo(
         classInfo = view.nowClass ,
         testInfo = view.nowTest ,
-        onclick = { goTo(nav,view,"Test") }
+        onclick = { view.resetTest() ; goTo(nav,view,"Test") }
     )
 }
 @Composable

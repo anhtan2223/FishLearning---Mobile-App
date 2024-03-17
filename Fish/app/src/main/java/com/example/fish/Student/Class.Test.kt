@@ -55,6 +55,7 @@ import com.example.fish.Model.DemoData
 import com.example.fish.Model.Question
 import com.example.fish.Model.Test
 import com.example.fish.Model.formatTime
+import com.example.fish.Model.goTo
 import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.R
 import kotlinx.coroutines.Dispatchers
@@ -69,21 +70,19 @@ fun TestView(modifier: Modifier = Modifier ,  nav: NavController, view : Display
 {
     val listQ = DemoData.QuestionList
     val listA = DemoData.AnswerList
-//    BackHandler {
-//        //Do Later
-//            view.toogleChoose()
-//    }
-
+    BackHandler {
+        //Do Later
+            view.toogleChoose()
+    }
+    if(view.isTimeout)
+        goTo(nav , view , "Result")
     if(view.isChoose)
-        ChooseQuestion(view)
-    QNA(nav = nav, view = view , listQ[view.nowQuestion] , listA )
+        ChooseQuestion(nav , view)
+    QNA(nav = nav, view = view , listQ[view.nowQuestion] , listA , goBack = {  view.timeOut() } )
 }
 @Composable
-fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer ,  onlick: () -> Unit )
+fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Boolean ,  onlick: () -> Unit )
 {
-    val isChoose by remember {
-        mutableStateOf( view.answerList[view.nowQuestion] == A.AnsID )
-    }
     val CardColors = if(isChoose) Color(0xFFFFAB40) else Color(0xFF444444)
     val TextColor = if(isChoose) Color.Black else Color.White
 
@@ -108,7 +107,7 @@ fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer ,  onlick: () ->
     }
 }
 @Composable
-fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer>)
+fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , goBack: () -> Unit)
 {
     LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally ,
@@ -117,9 +116,10 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer>)
                 .padding(top = 15.dp)
     )
     {
+        //Timer
         item {
             Box{
-                Timer(time = view.nowTest.Time)
+                Timer(time = view.nowTest.Time , { goBack() })
                 Row(Modifier.padding(10.dp)) {
                     Spacer(modifier = Modifier.weight(0.8f))
                     IconButton(
@@ -140,6 +140,7 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer>)
 
         }
         item {
+            //Question
             Card(
                 Modifier
                     .padding(bottom = 40.dp, top = 50.dp)
@@ -161,15 +162,15 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer>)
             }
         }
         items(A) {
-//            var isChoose = view.answerList[view.nowQuestion] == it.AnsID
+            //Answer
+            val isChoose = view.answerList[view.nowQuestion] == it.AnsID
             if (Q.QuesID == it.QuesID) {
-//                Text(text = "($isChoose , ${view.answerList[view.nowQuestion]} , ${it.AnsID})")
                 OneAnswer(
                     nav = nav,
                     view = view,
                     A = it,
 //                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
-                    onlick = { view.chooseAnswer(it.AnsID) })
+                    onlick = { view.chooseAnswer(it.AnsID) } , isChoose = isChoose)
             }
         }
     }
@@ -203,7 +204,7 @@ fun OneNumber(onClick : ()-> Unit , content:String , isChoose:Boolean )
     }
 }
 @Composable
-fun ChooseQuestion(view : DisplayUI)
+fun ChooseQuestion(nav: NavController , view : DisplayUI)
 {
     Dialog( onDismissRequest = { /*TODO*/ })
     {
@@ -230,11 +231,17 @@ fun ChooseQuestion(view : DisplayUI)
 //                        Text(text = "${view.answerList[it]}")
                     }
                 }
+                ButtonNav(
+                    onClick = { view.toogleChoose() ; goTo(nav , view , "Result") },
+                    content = "Kết Thúc Phần Thi" ,
+                    color = Color.Transparent ,
+                    contentColor = Color.White
+                )
             }
     }
 }
 @Composable
-fun Timer(time:Int)
+fun Timer(time:Int , goBack : () -> Unit)
 {
     var remainTime by remember {
         mutableStateOf(time)
@@ -244,11 +251,13 @@ fun Timer(time:Int)
     LaunchedEffect(Unit)
     {
         corountine.launch(Dispatchers.Default){
-            while (remainTime != 0)
+            while (remainTime > 0)
             {
                 kotlinx.coroutines.delay(1000)
                 remainTime--
             }
+            if(remainTime == 0)
+                goBack()
         }
     }
 

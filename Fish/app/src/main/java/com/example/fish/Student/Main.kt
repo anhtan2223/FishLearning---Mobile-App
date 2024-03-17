@@ -39,6 +39,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Model.goTo
+import com.example.fish.Teacher.TestResult
 import com.example.fish.ui.theme.DisplayUI
 
 data class NavItem(
@@ -134,6 +135,7 @@ fun StudentView(
                             {
                                 "DetailClass" -> "Lớp Học"
                                 "TestPrepare" -> "Bài Kiểm Tra"
+                                "Result"      -> "Chi Tiết Bài Kiểm Tra"
                                 else -> " "
                             }
                             Text(
@@ -146,6 +148,7 @@ fun StudentView(
                             val goWhere = when(viewModel.Title)
                             {
                                 "TestPrepare"   -> "DetailClass"
+                                "Result"        -> "TestPrepare"
                                 else            -> "Home"
                             }
                             IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
@@ -199,6 +202,8 @@ fun StudentView(
             { TestPrepareView(nav = navController , view = viewModel) }
             composable("Test")
             { TestView(nav = navController , view = viewModel) }
+            composable("Result")
+            { ResultView(nav = navController, view = viewModel) }
         }
     }
 }

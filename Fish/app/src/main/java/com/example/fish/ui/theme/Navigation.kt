@@ -19,7 +19,7 @@ data class NavItem(
 class DisplayUI : ViewModel(){
     var nowQuestion by mutableStateOf(0)
         private set
-    var answerList by mutableStateOf(mutableListOf<Int>())
+    var answerList by mutableStateOf( mutableListOf<Int>() )
     var Title by mutableStateOf("Home")
         private set
     var nowClass by mutableStateOf( Class() )
@@ -28,6 +28,12 @@ class DisplayUI : ViewModel(){
         private set
     var isChoose by mutableStateOf( false )
         private set
+    var isTimeout by mutableStateOf(false)
+        private set
+    fun timeOut()
+    {
+        isTimeout = true
+    }
     fun changeQuestion(question : Int)
     {
         nowQuestion =  question
@@ -40,10 +46,20 @@ class DisplayUI : ViewModel(){
     {
         nowClass = selectedClass
     }
+    fun resetTest()
+    {
+        isTimeout = false
+        answerList.clear()
+        for(i in 0 until nowTest.NumberQues)
+            answerList.add(-1)
+        nowQuestion = 0
+
+    }
     fun selectTest(test : Test)
     {
         answerList.clear()
         nowTest = test
+        isTimeout = false
         for(i in 0 until nowTest.NumberQues ){
             answerList.add(-1)
         }
@@ -55,7 +71,10 @@ class DisplayUI : ViewModel(){
     }
     fun moveNextQues()
     {
-        if(nowQuestion == nowTest.NumberQues-1) ;
+        if(nowQuestion == nowTest.NumberQues-1)
+        {
+            toogleChoose()
+        }
         else changeQuestion(nowQuestion+1)
     }
     fun toogleChoose()

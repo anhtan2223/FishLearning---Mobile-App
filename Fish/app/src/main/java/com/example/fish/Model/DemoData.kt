@@ -143,8 +143,8 @@ object DemoData {
         Test(
             1 ,
             "Kiểm Tra Giữa Kỳ" ,
-            60 ,
-            120 ,
+            5 ,
+            5 ,
             3
         ) ,
         Test(
