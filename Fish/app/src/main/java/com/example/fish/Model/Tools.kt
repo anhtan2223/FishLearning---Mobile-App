@@ -4,6 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.fish.ui.theme.DisplayUI
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
@@ -17,9 +19,15 @@ fun goTo(nav: NavController , view: DisplayUI , goTo:String )
 {
     nav.navigate(goTo)
     view.changePage(goTo)
-}fun formatTime(seconds: Int): String {
+}
+fun formatTime(seconds: Int): String {
     val hours = seconds / 3600
     val minutes = (seconds % 3600) / 60
     val remainingSeconds = seconds % 60
     return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds)
+}
+fun getToday():String{
+    val today = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    return formatter.format(today)
 }

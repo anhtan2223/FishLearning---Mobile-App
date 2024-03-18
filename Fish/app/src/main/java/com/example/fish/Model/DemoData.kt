@@ -9,6 +9,80 @@ object DemoData {
         "12345" ,
         1
     )
+    val UserInfo2 = User(
+        2 ,
+        "Lê Sỹ Anh Tấn" ,
+        "anhtan3332@gmail.com" ,
+        "anhtan2223" ,
+        "12345" ,
+        2
+    )
+    val ListUser = listOf<User>(
+        User(
+            1 ,
+            "Giao Vien" ,
+            "anhtan3332@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            2
+        ) ,
+        User(
+            2 ,
+            "Tôn Ðình Phúc" ,
+            "user1@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            3 ,
+            "Nguyễn Triệu Thái" ,
+            "user2@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            4 ,
+            "Lý Ðắc Trọng" ,
+            "user3@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            5 ,
+            "Lê Sỹ Anh Tấn" ,
+            "anhtan3332@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            6 ,
+            "Vũ Huy Lĩnh" ,
+            "user6@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            7 ,
+            "Bùi Huyền Trân" ,
+            "user7@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+        User(
+            8 ,
+            "Hoàng Diệu Ngọc" ,
+            "user8@gmail.com" ,
+            "anhtan2223" ,
+            "12345" ,
+            1
+        ) ,
+    )
     val ListClass = listOf<Class>(
         Class(
             1,
@@ -20,25 +94,25 @@ object DemoData {
             2,
             "Machine Learning" ,
             "HK2 - Nam Hoc 2023-2024" ,
-            "Nguoi Day 1"
+            "Hoàng Chí Thanh"
         ) ,
         Class(
             3,
             "OOP" ,
             "Nam 2023-2024" ,
-            "Nguoi Day 1"
+            "Nguyễn Tuấn Việt"
         ) ,
         Class(
             4,
             "Math Basic" ,
             "Nam 2023-2024" ,
-            "Nguoi Day 1"
+            "Hoàng Ðông Sơn"
         ) ,
         Class(
             5,
             "Graph Theory" ,
             "Nam 2023-2024" ,
-            "Nguoi Day C"
+            "Bạch Ðức Hải"
         ) ,
         Class(
             6,
@@ -76,19 +150,19 @@ object DemoData {
             2,
             "Machine Learning" ,
             "HK2 - Nam Hoc 2023-2024" ,
-            "Nguoi Day 1"
+            "Nguyễn Tuấn Việt"
         ),
         Class(
             3,
             "OOP" ,
             "Nam 2023-2024" ,
-            "Nguoi Day 1"
+            "Lý Trọng Dũng"
         ) ,
         Class(
             5,
             "Graph Theory" ,
             "Nam 2023-2024" ,
-            "Nguoi Day C"
+            "Nguyễn Minh Thông"
         )
     )
     val Topic = listOf<Topic>(

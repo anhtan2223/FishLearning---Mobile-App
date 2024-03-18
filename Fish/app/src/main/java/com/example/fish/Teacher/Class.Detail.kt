@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,6 +23,7 @@ import com.example.fish.Model.Document
 import com.example.fish.Model.Test
 import com.example.fish.Model.TextBox
 import com.example.fish.Model.Topic
+import com.example.fish.Model.goTo
 import com.example.fish.Student.DocumentView
 import com.example.fish.Student.InfoClass
 import com.example.fish.Student.TestView
@@ -35,7 +37,7 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
     val listTopic = DemoData.Topic
     LazyColumn(modifier = Modifier){
         item {
-            InfoClass(info = view.nowClass)
+            InfoClass(info = view.nowClass , { goTo(nav, view , "ClassInfo") })
         }
         items(listTopic)
         {
@@ -60,7 +62,8 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
             Text(
                 text = info.Title ,
                 style = TextStyle(fontWeight = FontWeight.Bold ,
-                    fontSize = 18.sp))
+                    fontSize = 18.sp)
+            )
         }
         for(i in DemoData.InsideTopic)
         {

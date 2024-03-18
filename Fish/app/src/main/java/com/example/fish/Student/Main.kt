@@ -204,6 +204,8 @@ fun StudentView(
             { TestView(nav = navController , view = viewModel) }
             composable("Result")
             { ResultView(nav = navController, view = viewModel) }
+            composable("ClassInfo")
+            { ClassInfoView(nav = navController, view = viewModel) }
         }
     }
 }

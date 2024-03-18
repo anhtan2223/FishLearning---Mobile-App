@@ -2,6 +2,7 @@ package com.example.fish.Student
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,12 +12,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.sharp.DateRange
 import androidx.compose.material.icons.twotone.Email
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,7 +51,7 @@ fun DetailClass(nav:NavController , view:DisplayUI)
     val listTopic = DemoData.Topic
     LazyColumn(modifier = Modifier){
         item {
-            InfoClass(info = view.nowClass)
+            InfoClass(info = view.nowClass , { goTo(nav, view , "ClassInfo") })
         }
         items(listTopic)
         {
@@ -56,19 +60,28 @@ fun DetailClass(nav:NavController , view:DisplayUI)
     }
 }
 @Composable
-fun InfoClass(info : Class)
+fun InfoClass(info : Class , onClick : () -> Unit = {})
 {
     Card(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()) {
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth() ,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Thông Tin Lớp Học" , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
+        Box(
+            modifier = Modifier.fillMaxWidth() ,
+            contentAlignment = Alignment.TopEnd
+        )
+        {
+            IconButton(onClick = { onClick() }) {
+                Icon(imageVector = Icons.Filled.Settings, contentDescription = null)
+            }
+            Row(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth() ,
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Thông Tin Lớp Học" , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
+            }
         }
         OneLine(title = "Tên Lớp", content = info.NameClass)
         OneLine(title = "Giảng Viên", content = info.TeacherID)
@@ -158,7 +171,13 @@ fun TestView(info:Test , nav:NavController , view: DisplayUI , destination:Strin
             style = MaterialTheme.typography.bodyLarge ,
             modifier = Modifier
                 .padding(start = 5.dp, bottom = 20.dp)
-                .clickable { goTo(nav = nav, view = view, goTo = destination) ; view.selectTest(info) }
+                .clickable {
+                    goTo(
+                        nav = nav,
+                        view = view,
+                        goTo = destination
+                    ); view.selectTest(info)
+                }
         )
     }
 }

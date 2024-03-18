@@ -1,0 +1,41 @@
+package com.example.fish.Teacher
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.fish.Model.Back
+import com.example.fish.Model.DemoData
+import com.example.fish.Model.getToday
+import com.example.fish.Model.goTo
+import com.example.fish.Student.ButtonNav
+import com.example.fish.Student.OneLineChange
+import com.example.fish.ui.theme.DisplayUI
+
+@Composable
+fun NewClassView(nav:NavController , view:DisplayUI)
+{
+    Back(nav = nav, view = view )
+    Column(
+        modifier = Modifier.padding(start = 20.dp , end = 20.dp , top = 40.dp) ,
+        horizontalAlignment = Alignment.CenterHorizontally ,
+        verticalArrangement = Arrangement.SpaceBetween
+
+    ) {
+        OneLineChange(title = "Giảng Viên", content = DemoData.UserInfo.Name, readOnly = true )
+        OneLineChange(title = "Lớp Học", content = "Tên Lớp Học" , readOnly = false )
+        OneLineChange(title = "Tiêu Đề", content = "Tiêu Đề Lớp Học" , readOnly = false )
+        OneLineChange(title = "Ngày Tạo", content = getToday() , readOnly = true )
+        Spacer(modifier = Modifier.padding(10.dp))
+        ButtonNav(onClick = { goTo(nav , view , "Home") }, content = "Tạo Lớp")
+    }
+
+}

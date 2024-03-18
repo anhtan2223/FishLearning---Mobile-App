@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.Class
 import com.example.fish.Model.Test
+import com.example.fish.Model.formatTime
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -35,16 +36,15 @@ fun Teacher_DisplayInfo(classInfo : Class , testInfo:Test)
         OneLine(title = "Tên Lớp", content = classInfo.NameClass)
         OneLine(title = "Bài Kiểm Tra", content = testInfo.TestName)
         OneLine(title = "Số Câu Hỏi", content = testInfo.NumberQues.toString())
-        OneLine(title = "Thời Gian", content = testInfo.Time.toString())
+        OneLine(title = "Thời Gian", content = formatTime(testInfo.Time))
         OneLine(title = "Người Tham Dự", content = "0")
-        OneLine(title = "Kết Quả", content = "")
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 30.dp)
-
         ) {
+            ButtonNav(onClick = { /*TODO*/ }, content = "Tổng Kết Bài Thi" , color = MaterialTheme.colorScheme.primary)
             ButtonNav(onClick = { /*TODO*/ }, content = "Chỉnh Sửa Bài Thi" , color = MaterialTheme.colorScheme.primary)
         }
 

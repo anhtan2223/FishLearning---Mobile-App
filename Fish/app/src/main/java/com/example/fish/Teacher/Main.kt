@@ -3,6 +3,7 @@ package com.example.fish.Teacher
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
@@ -80,7 +81,7 @@ fun TeacherView(
             topBar = {
                 when(viewModel.Title)
                 {
-                    "Class" -> {
+                    "Home" , "Class" -> {
                         var search by remember { mutableStateOf("") }
                         CenterAlignedTopAppBar(title = {
                             TextField(
@@ -102,15 +103,6 @@ fun TeacherView(
                             )
                         })
                     }
-                    "Home" -> {
-                        CenterAlignedTopAppBar({
-                            Text(text = "Lớp Học Của Tôi" ,
-                                style = MaterialTheme.typography.labelLarge ,
-                                fontSize = 28.sp
-                            )
-                        }
-                        )
-                    }
                     "Account" -> {
                         CenterAlignedTopAppBar({
                             Text(
@@ -129,6 +121,7 @@ fun TeacherView(
                                 {
                                     "DetailClass" -> "Lớp Học"
                                     "TestResult" -> "Kết Quả Kiểm Tra"
+                                    "NewClass" -> "Tạo Lớp Mới"
                                     else -> " "
                                 }
                                 Text(
@@ -140,8 +133,8 @@ fun TeacherView(
                             navigationIcon = {
                                 val goWhere = when(viewModel.Title)
                                 {
-                                    "TestResult"   -> "DetailClass"
-                                    else            -> "Home"
+                                    "TestResult" , "ClassInfo"  -> "DetailClass"
+                                    else                        -> "Home"
                                 }
                                 IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
                                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
@@ -178,7 +171,7 @@ fun TeacherView(
                 modifier = Modifier.padding(it)
             ){
                 composable("Home")
-                { HomeScreen(nav = navController , view = viewModel) }
+                { TeacherHomeScreen(nav = navController , view = viewModel) }
                 composable("Class")
                 { ClassScreen(nav = navController , view = viewModel) }
                 composable("Account")
@@ -191,6 +184,10 @@ fun TeacherView(
                 { Teacher_DetailClass(nav = navController , view = viewModel) }
                 composable("TestResult")
                 { TestResult(nav = navController , view = viewModel) }
+                composable("NewClass")
+                { NewClassView(nav = navController, view = viewModel) }
+                composable("ClassInfo")
+                { ClassInfoView(nav = navController, view = viewModel) }
             }
         }
     }
