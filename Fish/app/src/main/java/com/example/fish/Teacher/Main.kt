@@ -188,6 +188,10 @@ fun TeacherView(
                 { NewClassView(nav = navController, view = viewModel) }
                 composable("ClassInfo")
                 { ClassInfoView(nav = navController, view = viewModel) }
+                composable("ChangeQues")
+                { ChangeQuestionView(nav = navController, view = viewModel) }
+                composable("SumTest")
+                { SummaryTestView(nav = navController, view = viewModel) }
             }
         }
     }

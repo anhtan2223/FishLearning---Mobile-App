@@ -75,6 +75,8 @@ fun OneLine(title:String , content:String )
         Text(text = title , style = MaterialTheme.typography.titleMedium , modifier = Modifier
             .weight(4f)
             .padding(5.dp))
-        Text(text = content , modifier = Modifier.weight(7f) )
+        Text(text = content , modifier =
+        Modifier.weight(7f).padding(start = 5.dp)
+        )
     }
 }

@@ -132,7 +132,6 @@ fun TextBoxView(info:TextBox)
             modifier = Modifier.padding(bottom = 20.dp)
         )
     }
-
 }
 @Composable 
 fun DocumentView(info:Document)
