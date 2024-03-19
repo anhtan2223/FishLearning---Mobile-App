@@ -258,7 +258,6 @@ fun CorrectText(info : TextBox)
                             .padding(vertical = 8.dp)
                             .size(25.dp)
                             .clickable { isCorrect = !isCorrect }
-
                     )
                 }
                 BasicTextField(

@@ -113,7 +113,7 @@ fun TeacherView(
                         }
                         )
                     }
-                    "ChangePass" , "UpdateInfo" -> {}
+                    "ChangePass" , "UpdateInfo" , "ChangeQues" -> {}
                     else -> {
                         CenterAlignedTopAppBar(
                             title = {

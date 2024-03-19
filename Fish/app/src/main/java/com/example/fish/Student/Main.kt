@@ -127,7 +127,7 @@ fun StudentView(
                     }
                     )
                 }
-                "ChangePass" , "UpdateInfo" , "Test" -> {}
+                "ChangePass" , "UpdateInfo" , "Test"  -> {}
                 else -> {
                     CenterAlignedTopAppBar(
                         title = {
