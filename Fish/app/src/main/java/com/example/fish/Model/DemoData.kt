@@ -20,7 +20,7 @@ object DemoData {
     val ListUser = listOf<User>(
         User(
             1 ,
-            "Giao Vien" ,
+            "Giáo Viên" ,
             "anhtan3332@gmail.com" ,
             "anhtan2223" ,
             "12345" ,

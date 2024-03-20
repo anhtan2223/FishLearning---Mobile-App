@@ -26,6 +26,15 @@ import com.example.fish.ui.theme.DisplayUI
 fun TeacherHomeScreen(modifier: Modifier = Modifier, nav: NavController, view : DisplayUI)
 {
     val listClass = DemoData.myClass
+    Back(nav = nav, view = view , goTo = "Account")
+    LazyColumn()
+    {
+        items(listClass){
+            OneClass(info = it , {
+                goTo(nav , view , "DetailClass")
+                view.selectClass(it) })
+        }
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,16 +47,6 @@ fun TeacherHomeScreen(modifier: Modifier = Modifier, nav: NavController, view : 
         )
         {
             Icon(imageVector = Icons.Filled.Add, contentDescription = null)
-        }
-    }
-    Back(nav = nav, view = view , goTo = "Account")
-    LazyColumn()
-    {
-        items(listClass){
-            OneClass(info = it , {
-                goTo(nav , view , "DetailClass")
-                view.selectClass(it)
-            })
         }
     }
 }

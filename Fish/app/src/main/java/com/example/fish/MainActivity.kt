@@ -50,14 +50,14 @@ class MainActivity : ComponentActivity() {
                     val nav:NavHostController = rememberNavController()
                     NavHost(
                         navController = nav,
-                        startDestination = "Teacher")
+                        startDestination = "Admin")
                     {
                         composable("Student")
                         { StudentView(navFather = nav) }
                         composable("Teacher")
                         { TeacherView(navFather = nav) }
                         composable("Admin")
-                        { AdminView() }
+                        { AdminView(navFather = nav) }
                         composable("Login")
                         { LoginView(nav) }
                         composable("SignIn")

@@ -157,7 +157,7 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q: Question, A: List<Answe
         items(A)
         {
             var isChange by remember {
-                mutableStateOf(false)
+                mutableStateOf(it.isCorrect)
             }
             if (Q.QuesID == it.QuesID) {
                 ChangeAnswer(
@@ -168,6 +168,22 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q: Question, A: List<Answe
                     isChoose = it.isCorrect ,
                     isSetting = isSetting
                 )
+            }
+        }
+        item {
+            IconButton(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .border(
+                        BorderStroke(3.dp, Color(0xFFF57C00)),
+                        shape = CircleShape
+                    ) ,
+                onClick = {  }
+            ) {
+                Icon(
+                    tint = Color(0xFFF57C00),
+                    imageVector = Icons.Default.Add ,
+                    contentDescription = null)
             }
         }
     }

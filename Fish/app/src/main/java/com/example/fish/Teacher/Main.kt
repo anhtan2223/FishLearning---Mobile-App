@@ -1,5 +1,7 @@
 package com.example.fish.Teacher
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -48,6 +50,7 @@ import com.example.fish.Student.TestPrepareView
 import com.example.fish.Student.UpdateInfo
 import com.example.fish.ui.theme.DisplayUI
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TeacherView(
@@ -74,9 +77,6 @@ fun TeacherView(
                 Icons.Outlined.AccountCircle
             )
         )
-        var selected by remember {
-            mutableStateOf(0)
-        }
         Scaffold(
             topBar = {
                 when(viewModel.Title)

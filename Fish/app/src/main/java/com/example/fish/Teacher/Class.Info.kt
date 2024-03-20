@@ -1,5 +1,7 @@
 package com.example.fish.Teacher
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,6 +44,7 @@ import com.example.fish.ui.theme.DisplayUI
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ClassInfoView(nav : NavController , view : DisplayUI)
 {

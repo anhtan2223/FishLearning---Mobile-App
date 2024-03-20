@@ -6,11 +6,11 @@ data class Role(
 )
 data class User(
     val UID : Int = 0,
-    val Name : String ,
-    val Email : String ,
-    val Username : String ,
-    val Passwork : String ,
-    val RoleID: Int
+    val Name : String = "",
+    val Email : String = "",
+    val Username : String = "",
+    val Passwork : String = "",
+    val RoleID: Int = 3
 )
 data class Label(
     val LabelID : Int ,

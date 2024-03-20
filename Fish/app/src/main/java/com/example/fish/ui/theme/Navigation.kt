@@ -9,6 +9,7 @@ import com.example.fish.Model.Answer
 import com.example.fish.Model.Class
 import com.example.fish.Model.Question
 import com.example.fish.Model.Test
+import com.example.fish.Model.User
 
 data class NavItem(
     val title : String,
@@ -26,10 +27,16 @@ class DisplayUI : ViewModel(){
         private set
     var nowTest by mutableStateOf( Test() )
         private set
+    var nowUser by mutableStateOf( User() )
+        private set
     var isChoose by mutableStateOf( false )
         private set
     var isTimeout by mutableStateOf(false)
         private set
+    fun chooseUser(user: User)
+    {
+        nowUser = user
+    }
     fun timeOut()
     {
         isTimeout = true
