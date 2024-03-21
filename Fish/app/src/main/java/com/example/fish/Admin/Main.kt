@@ -1,10 +1,11 @@
 package com.example.fish.Admin
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
@@ -43,20 +44,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fish.Model.goTo
 import com.example.fish.Student.AccountScreen
 import com.example.fish.Student.ChangePassword
-import com.example.fish.Student.ClassScreen
 import com.example.fish.Student.DetailClass
 import com.example.fish.Student.HomeScreen
 import com.example.fish.Student.NavItem
 import com.example.fish.Student.UpdateInfo
-import com.example.fish.Teacher.ChangeQuestionView
-import com.example.fish.Teacher.ClassInfoView
-import com.example.fish.Teacher.NewClassView
+import com.example.fish.Student.ClassInfoView
 import com.example.fish.Teacher.SummaryTestView
-import com.example.fish.Teacher.TeacherHomeScreen
-import com.example.fish.Teacher.Teacher_DetailClass
-import com.example.fish.Teacher.TestResult
 import com.example.fish.ui.theme.DisplayUI
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AdminView(
@@ -131,8 +127,9 @@ fun AdminView(
                             val text = when(viewModel.Title)
                             {
                                 "DetailClass" -> "Lớp Học"
-                                "TestResult" -> "Kết Quả Kiểm Tra"
+                                "TestPrepare" -> "Thông Tin Bài Kiểm Tra"
                                 "NewClass" -> "Tạo Lớp Mới"
+                                "TestSummary" -> "Thống Kê Lớp Học"
                                 else -> " "
                             }
                             Text(
@@ -144,7 +141,7 @@ fun AdminView(
                         navigationIcon = {
                             val goWhere = when(viewModel.Title)
                             {
-                                "TestResult" , "ClassInfo"  -> "DetailClass"
+                                "TestPrepare" , "ClassInfo"  -> "DetailClass"
                                 else                        -> "Home"
                             }
                             IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
@@ -197,7 +194,12 @@ fun AdminView(
             { NewUserView(nav = navController, view = viewModel) }
             composable("DetailUser")
             { DetaiUserView(nav = navController, view = viewModel) }
-
+            composable("ClassInfo")
+            { ClassInfoView_Admin(nav = navController, view = viewModel) }
+            composable("TestPrepare")
+            { TestPrepareView_Admin(nav = navController, view = viewModel) }
+            composable("TestSummary")
+            { SummaryTestView_Admin(navController , viewModel) }
         }
     }
 }

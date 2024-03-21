@@ -1,9 +1,11 @@
 package com.example.fish
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,6 +40,7 @@ import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.ui.theme.FishTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -50,7 +53,7 @@ class MainActivity : ComponentActivity() {
                     val nav:NavHostController = rememberNavController()
                     NavHost(
                         navController = nav,
-                        startDestination = "Admin")
+                        startDestination = "Login")
                     {
                         composable("Student")
                         { StudentView(navFather = nav) }
