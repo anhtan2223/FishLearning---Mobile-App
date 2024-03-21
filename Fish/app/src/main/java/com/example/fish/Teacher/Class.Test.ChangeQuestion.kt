@@ -49,15 +49,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import com.example.fish.Model.Answer
-import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.Question
 import com.example.fish.Model.goTo
 import com.example.fish.R
 import com.example.fish.Student.ButtonNav
-import com.example.fish.Student.OneAnswer
 import com.example.fish.Student.OneNumber
-import com.example.fish.Student.Timer
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

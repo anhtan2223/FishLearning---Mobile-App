@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -21,8 +20,6 @@ import com.example.fish.Model.Back
 import com.example.fish.Model.User
 import com.example.fish.Model.goTo
 import com.example.fish.Student.ButtonNav
-import com.example.fish.Student.CardInfo
-import com.example.fish.Student.CardInfoChange
 import com.example.fish.Student.OneLineChange
 import com.example.fish.ui.theme.DisplayUI
 

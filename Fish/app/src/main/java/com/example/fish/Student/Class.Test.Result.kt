@@ -4,10 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,8 +32,6 @@ import com.example.fish.Model.Answer
 import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.Question
-import com.example.fish.Model.formatTime
-import com.example.fish.Model.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

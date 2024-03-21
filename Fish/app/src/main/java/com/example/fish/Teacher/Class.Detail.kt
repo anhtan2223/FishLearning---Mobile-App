@@ -24,11 +24,9 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -56,7 +54,6 @@ import com.example.fish.R
 import com.example.fish.Student.DocumentView
 import com.example.fish.Student.InfoClass
 import com.example.fish.Student.TestView
-import com.example.fish.Student.TextBoxView
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

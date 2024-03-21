@@ -1,18 +1,12 @@
 package com.example.fish.Teacher
 
-import com.example.fish.Student.ButtonNav
-import com.example.fish.Student.OneLine
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,8 +27,9 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.Class
 import com.example.fish.Model.Test
-import com.example.fish.Model.formatTime
 import com.example.fish.Model.goTo
+import com.example.fish.Student.ButtonNav
+import com.example.fish.Student.OneLine
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

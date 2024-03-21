@@ -1,6 +1,5 @@
 package com.example.fish.Student
 
-import androidx.activity.OnBackPressedDispatcher
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -39,7 +38,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Model.goTo
-import com.example.fish.Teacher.TestResult
 import com.example.fish.ui.theme.DisplayUI
 
 data class NavItem(

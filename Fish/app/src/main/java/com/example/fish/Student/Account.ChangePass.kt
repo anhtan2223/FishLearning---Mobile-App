@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +17,6 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.User
-import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

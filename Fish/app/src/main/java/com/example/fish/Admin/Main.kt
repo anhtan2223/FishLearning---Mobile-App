@@ -11,11 +11,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -48,8 +46,6 @@ import com.example.fish.Student.DetailClass
 import com.example.fish.Student.HomeScreen
 import com.example.fish.Student.NavItem
 import com.example.fish.Student.UpdateInfo
-import com.example.fish.Student.ClassInfoView
-import com.example.fish.Teacher.SummaryTestView
 import com.example.fish.ui.theme.DisplayUI
 
 @RequiresApi(Build.VERSION_CODES.O)

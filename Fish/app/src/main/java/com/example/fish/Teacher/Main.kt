@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
@@ -43,10 +42,7 @@ import com.example.fish.Model.goTo
 import com.example.fish.Student.AccountScreen
 import com.example.fish.Student.ChangePassword
 import com.example.fish.Student.ClassScreen
-import com.example.fish.Student.DetailClass
-import com.example.fish.Student.HomeScreen
 import com.example.fish.Student.NavItem
-import com.example.fish.Student.TestPrepareView
 import com.example.fish.Student.UpdateInfo
 import com.example.fish.ui.theme.DisplayUI
 

@@ -1,7 +1,6 @@
 package com.example.fish.Student
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +28,6 @@ import androidx.navigation.NavController
 import com.example.fish.Model.Back
 import com.example.fish.Model.DemoData
 import com.example.fish.Model.User
-import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
