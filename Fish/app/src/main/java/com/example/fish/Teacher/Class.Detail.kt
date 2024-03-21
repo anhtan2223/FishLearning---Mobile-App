@@ -113,8 +113,14 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
             contentAlignment = Alignment.TopEnd
         )
         {
-            IconButton(onClick = { isSetting = !isSetting }) {
-                Icon(imageVector = Icons.Filled.Settings, contentDescription = null)
+            Row {
+                if(isSetting)
+                    IconButton(onClick = {  } ) {
+                      Icon(imageVector = Icons.Filled.Delete , contentDescription = null)
+                    }
+                IconButton(onClick = { isSetting = !isSetting }) {
+                    Icon(imageVector = Icons.Filled.Settings, contentDescription = null)
+                }
             }
             Row(
                 modifier = Modifier
