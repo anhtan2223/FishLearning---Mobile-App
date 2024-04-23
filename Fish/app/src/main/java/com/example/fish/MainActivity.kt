@@ -65,6 +65,8 @@ class MainActivity : ComponentActivity() {
                         { LoginView(nav) }
                         composable("SignIn")
                         { SignInView(nav) }
+                        composable("Test")
+                        { TestRoom() }
                     }
                 }
             }
@@ -109,6 +111,7 @@ fun LoginView(nav:NavController)
             modifier =  Modifier.padding(top = 10.dp)
         ) {
             ButtonNav(onClick = { /*TODO*/ }, content = "Đăng Nhập")
+            ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
         }
     }
     Row(
