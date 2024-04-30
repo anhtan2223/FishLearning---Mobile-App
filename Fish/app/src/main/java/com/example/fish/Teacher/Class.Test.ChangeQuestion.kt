@@ -48,10 +48,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
-import com.example.fish.Model.Answer
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.Question
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Answer
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.Question
+import com.example.fish.Database.goTo
 import com.example.fish.R
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneNumber
@@ -156,7 +156,7 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q: Question, A: List<Answe
             var isChange by remember {
                 mutableStateOf(it.isCorrect)
             }
-            if (Q.QuesID == it.QuesID) {
+            if (Q.quesID == it.quesID) {
                 ChangeAnswer(
                     nav = nav,
                     view = view,
@@ -205,7 +205,7 @@ fun MenuQuestion(nav: NavController , view : DisplayUI)
             )
             LazyVerticalGrid(columns = GridCells.Adaptive(60.dp) )
             {
-                items(view.nowTest.NumberQues){
+                items(view.nowTest.numberQues){
                     OneNumber(
                         onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                         content = (it+1).toString() ,
@@ -237,7 +237,7 @@ fun ChangeAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: B
     val CardColors = if(isChoose) Color(0xFF23DC2D) else Color(0xFF444444)
     val TextColor = if(isChoose) Color.Black else Color.White
     var content by remember {
-        mutableStateOf(A.Detail)
+        mutableStateOf(A.detail)
     }
     Card(
         Modifier
@@ -251,7 +251,7 @@ fun ChangeAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: B
                     .fillMaxSize()
                     .background(CardColors)
                     .padding(10.dp) ,
-                text = A.Detail ,
+                text = A.detail ,
                 style = MaterialTheme.typography.labelMedium ,
                 fontSize = 16.sp ,
                 textAlign = TextAlign.Center ,
@@ -280,7 +280,7 @@ fun ChangeAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: B
 fun ChangeQuestion(nav: NavController, view : DisplayUI , Q:Question , isSetting: Boolean)
 {
     var content by remember {
-        mutableStateOf(Q.Detail)
+        mutableStateOf(Q.detail)
     }
     Card(
         Modifier
@@ -294,7 +294,7 @@ fun ChangeQuestion(nav: NavController, view : DisplayUI , Q:Question , isSetting
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(20.dp) ,
-                text = Q.Detail ,
+                text = Q.detail ,
                 style = MaterialTheme.typography.labelMedium,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
@@ -306,7 +306,7 @@ fun ChangeQuestion(nav: NavController, view : DisplayUI , Q:Question , isSetting
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(20.dp) ,
-                value = Q.Detail ,
+                value = Q.detail ,
                 onValueChange = {content = it} ,
                 textStyle = TextStyle(
                     fontSize = 20.sp ,

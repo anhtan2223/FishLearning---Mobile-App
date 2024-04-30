@@ -43,13 +43,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.Document
-import com.example.fish.Model.Test
-import com.example.fish.Model.TextBox
-import com.example.fish.Model.Topic
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.Document
+import com.example.fish.Database.Test
+import com.example.fish.Database.TextBox
+import com.example.fish.Database.Topic
+import com.example.fish.Database.goTo
 import com.example.fish.R
 import com.example.fish.Student.DocumentView
 import com.example.fish.Student.InfoClass
@@ -127,10 +127,10 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 var content by remember {
-                    mutableStateOf(info.Title)
+                    mutableStateOf(info.title)
                 }
                 if(!isSetting)
-                    Text(text = info.Title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
+                    Text(text = info.title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
                 else
                     BasicTextField(
                         value =  content,
@@ -142,10 +142,10 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
         for(i in DemoData.InsideTopic)
         {
             when(i) {
-                is TextBox  -> if (i.TopicID == info.TopicID) CorrectText(info = i)
-                is Test     -> if (i.TopicID == info.TopicID) TestView(info = i , nav , view ,"TestResult")
+                is TextBox  -> if (i.topicID == info.topicID) CorrectText(info = i)
+                is Test     -> if (i.topicID == info.topicID) TestView(info = i , nav , view ,"TestResult")
 //                is TextBox  -> if (i.TopicID == info.TopicID) TextBoxView(info = i)
-                is Document -> if (i.TopicID == info.TopicID) DocumentView(info = i)
+                is Document -> if (i.topicID == info.topicID) DocumentView(info = i)
 //                is Test     -> if (i.TopicID == info.TopicID) TestView(info = i , nav , view ,"TestResult")
             }
         }
@@ -219,7 +219,7 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
 fun CorrectText(info : TextBox)
 {
     var setting by remember {
-        mutableStateOf(info.Content)
+        mutableStateOf(info.content)
     }
     var isCorrect by remember {
         mutableStateOf(false)
@@ -275,7 +275,7 @@ fun CorrectText(info : TextBox)
             }
         else
             Text(
-                text = info.Content ,
+                text = info.content ,
                 style = MaterialTheme.typography.bodyLarge ,
                 modifier = Modifier
                     .padding(bottom = 20.dp, top = 8.dp)

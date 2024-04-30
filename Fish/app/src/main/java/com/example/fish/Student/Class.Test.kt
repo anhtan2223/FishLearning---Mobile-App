@@ -42,11 +42,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
-import com.example.fish.Model.Answer
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.Question
-import com.example.fish.Model.formatTime
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Answer
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.Question
+import com.example.fish.Database.formatTime
+import com.example.fish.Database.goTo
 import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 import kotlinx.coroutines.Dispatchers
@@ -85,7 +85,7 @@ fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Bool
                 .fillMaxSize()
                 .background(CardColors)
                 .padding(10.dp) ,
-            text = A.Detail ,
+            text = A.detail ,
             style = MaterialTheme.typography.labelMedium ,
             fontSize = 16.sp ,
             textAlign = TextAlign.Center ,
@@ -107,7 +107,7 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
         //Timer
         item {
             Box{
-                Timer(time = view.nowTest.Time , { goBack() })
+                Timer(time = view.nowTest.time , { goBack() })
                 Row(Modifier.padding(10.dp)) {
                     Spacer(modifier = Modifier.weight(0.8f))
                     IconButton(
@@ -140,7 +140,7 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(20.dp) ,
-                    text = Q.Detail,
+                    text = Q.detail,
                     style = MaterialTheme.typography.labelMedium,
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
@@ -151,14 +151,14 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
         }
         items(A) {
             //Answer
-            val isChoose = view.answerList[view.nowQuestion] == it.AnsID
-            if (Q.QuesID == it.QuesID) {
+            val isChoose = view.answerList[view.nowQuestion] == it.ansID
+            if (Q.quesID == it.quesID) {
                 OneAnswer(
                     nav = nav,
                     view = view,
                     A = it,
 //                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
-                    onlick = { view.chooseAnswer(it.AnsID) } , isChoose = isChoose)
+                    onlick = { view.chooseAnswer(it.ansID) } , isChoose = isChoose)
             }
         }
     }
@@ -210,7 +210,7 @@ fun ChooseQuestion(nav: NavController , view : DisplayUI)
                 )
                 LazyVerticalGrid(columns = GridCells.Adaptive(60.dp) )
                 {
-                    items(view.nowTest.NumberQues){
+                    items(view.nowTest.numberQues){
                         OneNumber(
                             onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                             content = (it+1).toString() ,

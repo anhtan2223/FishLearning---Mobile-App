@@ -5,9 +5,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

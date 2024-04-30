@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
-import com.example.fish.Model.Answer
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.Question
+import com.example.fish.Database.Answer
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.Question
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -47,9 +47,9 @@ fun ResultView(nav : NavController , view : DisplayUI)
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
     ) {
-        OneLine(title = "Tên Lớp", content = classInfo.NameClass)
-        OneLine(title = "Bài Kiểm Tra", content = testInfo.TestName)
-        OneLine(title = "Số Câu Đúng", content = CountNumberCorrect(testInfo.NumberQues , view.answerList))
+        OneLine(title = "Tên Lớp", content = classInfo.nameClass)
+        OneLine(title = "Bài Kiểm Tra", content = testInfo.testName)
+        OneLine(title = "Số Câu Đúng", content = CountNumberCorrect(testInfo.numberQues , view.answerList))
         OneLine(title = "Chi Tiết ", content = "")
         DetailResult(nav = nav, view = view)
     }
@@ -60,9 +60,9 @@ fun DetailResult(nav: NavController , view: DisplayUI)
 {
     LazyVerticalGrid(columns = GridCells.Adaptive(60.dp) )
     {
-        items(view.nowTest.NumberQues){
+        items(view.nowTest.numberQues){
             val answer = view.answerList[it]
-            val isTrue = (DemoData.AnswerList.find { it.AnsID == answer })?.isCorrect ?: false
+            val isTrue = (DemoData.AnswerList.find { it.ansID == answer })?.isCorrect ?: false
                 OneRepareAnswer(
                     onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                     content = (it+1).toString() ,
@@ -100,7 +100,7 @@ fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answ
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(20.dp) ,
-                        text = Q.Detail,
+                        text = Q.detail,
                         style = MaterialTheme.typography.labelMedium,
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
@@ -110,8 +110,8 @@ fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answ
                 }
             }
              items(A) {
-                 val isChoose = view.answerList[view.nowQuestion] == it.AnsID
-                 if (Q.QuesID == it.QuesID) {
+                 val isChoose = view.answerList[view.nowQuestion] == it.ansID
+                 if (Q.quesID == it.quesID) {
                      RepairOneAnswer(
                          nav = nav,
                          view = view,
@@ -157,7 +157,7 @@ fun CountNumberCorrect(numberQuestion : Int , answerList : List<Int> ) : String
     {
         for( j in DemoData.AnswerList)
         {
-            if(i == j.AnsID){
+            if(i == j.ansID){
                 if(j.isCorrect) correct++
             }
         }
@@ -186,7 +186,7 @@ fun RepairOneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose
                 .fillMaxSize()
                 .background(CardColors)
                 .padding(10.dp) ,
-            text = A.Detail ,
+            text = A.detail ,
             style = MaterialTheme.typography.labelMedium ,
             fontSize = 16.sp ,
             textAlign = TextAlign.Center ,

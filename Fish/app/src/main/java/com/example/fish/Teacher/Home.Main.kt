@@ -15,9 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.goTo
 import com.example.fish.Student.OneClass
 import com.example.fish.ui.theme.DisplayUI
 

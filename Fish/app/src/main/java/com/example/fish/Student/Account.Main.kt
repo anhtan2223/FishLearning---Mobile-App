@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.User
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -58,9 +58,9 @@ fun CardInfo(modifier: Modifier = Modifier , info:User)
             .padding(15.dp)
             .wrapContentWidth(Alignment.CenterHorizontally) )
     {
-        OneLine(title = "Tên", content = info.Name)
-        OneLine(title = "Email", content = info.Email)
-        OneLine(title = "Tài Khoản", content = info.Username)
+        OneLine(title = "Tên", content = info.name)
+        OneLine(title = "Email", content = info.email)
+        OneLine(title = "Tài Khoản", content = info.username)
     }
 }
 @Composable

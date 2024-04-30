@@ -5,11 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import com.example.fish.Model.Answer
-import com.example.fish.Model.Class
-import com.example.fish.Model.Question
-import com.example.fish.Model.Test
-import com.example.fish.Model.User
+import com.example.fish.Database.Class
+import com.example.fish.Database.Test
+import com.example.fish.Database.User
 
 data class NavItem(
     val title : String,
@@ -57,7 +55,7 @@ class DisplayUI : ViewModel(){
     {
         isTimeout = false
         answerList.clear()
-        for(i in 0 until nowTest.NumberQues)
+        for(i in 0 until nowTest.numberQues)
             answerList.add(-1)
         nowQuestion = 0
 
@@ -67,7 +65,7 @@ class DisplayUI : ViewModel(){
         answerList.clear()
         nowTest = test
         isTimeout = false
-        for(i in 0 until nowTest.NumberQues ){
+        for(i in 0 until nowTest.numberQues ){
             answerList.add(-1)
         }
     }
@@ -78,7 +76,7 @@ class DisplayUI : ViewModel(){
     }
     fun moveNextQues()
     {
-        if(nowQuestion == nowTest.NumberQues-1)
+        if(nowQuestion == nowTest.numberQues-1)
         {
             toogleChoose()
         }

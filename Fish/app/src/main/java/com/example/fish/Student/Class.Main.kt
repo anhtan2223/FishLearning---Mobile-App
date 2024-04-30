@@ -20,9 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.Class
-import com.example.fish.Model.DemoData
+import com.example.fish.Database.Back
+import com.example.fish.Database.Class
+import com.example.fish.Database.DemoData
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -47,18 +47,18 @@ fun OneClass(info:Class , onClick: ()->Unit)
             .clickable { onClick() }
             .fillMaxWidth() ,
         ) {
-            Text(text = info.NameClass ,
+            Text(text = info.nameClass ,
                 style = MaterialTheme.typography.titleMedium ,
                 fontSize = 18.sp,
                 modifier = Modifier
                     .padding(start = 18.dp  , bottom = 6.dp , top = 18.dp) )
-            Text(text = info.Subtitle ,
+            Text(text = info.subtitle ,
                 style = MaterialTheme.typography.labelMedium ,
                 fontSize = 12.sp ,
                 modifier = Modifier
                     .padding(start = 18.dp  , bottom = 6.dp)
             )
-            Text(text = info.TeacherID ,
+            Text(text = info.teacherID ,
                 style = MaterialTheme.typography.labelLarge ,
                 fontSize = 12.sp ,
                 modifier =  Modifier

@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.Class
-import com.example.fish.Model.Test
-import com.example.fish.Model.formatTime
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.Class
+import com.example.fish.Database.Test
+import com.example.fish.Database.formatTime
+import com.example.fish.Database.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -33,10 +33,10 @@ fun DisplayInfo(classInfo : Class , testInfo:Test , onclick : ()->Unit)
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
     ) {
-        OneLine(title = "Tên Lớp", content = classInfo.NameClass)
-        OneLine(title = "Bài Kiểm Tra", content = testInfo.TestName)
-        OneLine(title = "Số Câu Hỏi", content = testInfo.NumberQues.toString())
-        OneLine(title = "Thời Gian", content = formatTime(testInfo.Time) )
+        OneLine(title = "Tên Lớp", content = classInfo.nameClass)
+        OneLine(title = "Bài Kiểm Tra", content = testInfo.testName)
+        OneLine(title = "Số Câu Hỏi", content = testInfo.numberQues.toString())
+        OneLine(title = "Thời Gian", content = formatTime(testInfo.time) )
         OneLine(title = "Số Lần Làm", content = "0")
         OneLine(title = "Kết Quả", content = "")
         Row(

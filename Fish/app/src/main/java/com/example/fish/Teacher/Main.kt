@@ -38,7 +38,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.fish.Model.goTo
+import com.example.fish.Database.goTo
 import com.example.fish.Student.AccountScreen
 import com.example.fish.Student.ChangePassword
 import com.example.fish.Student.ClassScreen

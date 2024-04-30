@@ -1,8 +1,8 @@
-package com.example.fish.Model
+package com.example.fish.Database
 
 object DemoData {
     val UserInfo = User(
-        1 ,
+        "1" ,
         "Lê Sỹ Anh Tấn" ,
         "anhtan3332@gmail.com" ,
         "anhtan2223" ,
@@ -10,7 +10,7 @@ object DemoData {
         1
     )
     val UserInfo2 = User(
-        2 ,
+        "2" ,
         "Lê Sỹ Anh Tấn" ,
         "anhtan3332@gmail.com" ,
         "anhtan2223" ,
@@ -19,7 +19,7 @@ object DemoData {
     )
     val ListUser = listOf<User>(
         User(
-            1 ,
+            "1" ,
             "Giáo Viên" ,
             "anhtan3332@gmail.com" ,
             "anhtan2223" ,
@@ -27,7 +27,7 @@ object DemoData {
             2
         ) ,
         User(
-            2 ,
+            "2" ,
             "Tôn Ðình Phúc" ,
             "user1@gmail.com" ,
             "anhtan2223" ,
@@ -35,7 +35,7 @@ object DemoData {
             1
         ) ,
         User(
-            3 ,
+            "3" ,
             "Nguyễn Triệu Thái" ,
             "user2@gmail.com" ,
             "anhtan2223" ,
@@ -43,7 +43,7 @@ object DemoData {
             1
         ) ,
         User(
-            4 ,
+            "4" ,
             "Lý Ðắc Trọng" ,
             "user3@gmail.com" ,
             "anhtan2223" ,
@@ -51,7 +51,7 @@ object DemoData {
             1
         ) ,
         User(
-            5 ,
+            "5" ,
             "Lê Sỹ Anh Tấn" ,
             "anhtan3332@gmail.com" ,
             "anhtan2223" ,
@@ -59,7 +59,7 @@ object DemoData {
             1
         ) ,
         User(
-            6 ,
+            "6" ,
             "Vũ Huy Lĩnh" ,
             "user6@gmail.com" ,
             "anhtan2223" ,
@@ -67,7 +67,7 @@ object DemoData {
             1
         ) ,
         User(
-            7 ,
+            "7" ,
             "Bùi Huyền Trân" ,
             "user7@gmail.com" ,
             "anhtan2223" ,
@@ -75,7 +75,7 @@ object DemoData {
             1
         ) ,
         User(
-            8 ,
+            "8" ,
             "Hoàng Diệu Ngọc" ,
             "user8@gmail.com" ,
             "anhtan2223" ,
@@ -198,13 +198,13 @@ object DemoData {
         Document(
             0 ,
             "Đây Là Tiêu Đề Cho Một Tài Liệu Để Tải Về" ,
-            1 ,
+            "Word" ,
             3
         ) ,
         Document(
             2,
             "Một Tài Liệu Sẽ Như Thế Này" ,
-            1 ,
+            "Word" ,
             4
         ) ,
         Test(

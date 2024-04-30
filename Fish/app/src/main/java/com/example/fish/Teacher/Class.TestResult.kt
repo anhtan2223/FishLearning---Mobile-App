@@ -24,10 +24,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.Class
-import com.example.fish.Model.Test
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.Class
+import com.example.fish.Database.Test
+import com.example.fish.Database.goTo
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneLine
 import com.example.fish.ui.theme.DisplayUI
@@ -44,10 +44,10 @@ fun Teacher_DisplayInfo(nav : NavController, view: DisplayUI , classInfo : Class
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
     ) {
-        OneLine(title = "Tên Lớp", content = classInfo.NameClass)
-        OneInputBasic(title = "Bài Kiểm Tra", content = testInfo.TestName)
-        OneLine(title = "Số Câu Hỏi", content = testInfo.NumberQues.toString())
-        InputTime(view , title = "Thời Gian", time = testInfo.Time )
+        OneLine(title = "Tên Lớp", content = classInfo.nameClass)
+        OneInputBasic(title = "Bài Kiểm Tra", content = testInfo.testName)
+        OneLine(title = "Số Câu Hỏi", content = testInfo.numberQues.toString())
+        InputTime(view , title = "Thời Gian", time = testInfo.time )
         OneLine(title = "Người Tham Dự", content = "0")
         Row(
             horizontalArrangement = Arrangement.Center,

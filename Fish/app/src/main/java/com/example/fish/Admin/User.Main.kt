@@ -24,10 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.User
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.User
+import com.example.fish.Database.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -68,18 +68,18 @@ fun OneUser_Admin(info : User , onClick : ()->Unit )
             .fillMaxWidth() ,
 //            colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
-            val nameRole = when(info.RoleID)
+            val nameRole = when(info.roleid)
             {
                 3 -> "Admin"
                 2 -> "Người Dạy"
                 else -> "Người Học"
             }
-            Text(text = info.Name ,
+            Text(text = info.name ,
                 style = MaterialTheme.typography.titleMedium ,
                 fontSize = 18.sp,
                 modifier = Modifier
                     .padding(start = 18.dp  , bottom = 6.dp , top = 18.dp) )
-            Text(text = info.Email ,
+            Text(text = info.email ,
                 style = MaterialTheme.typography.labelMedium ,
                 fontSize = 12.sp ,
                 modifier = Modifier

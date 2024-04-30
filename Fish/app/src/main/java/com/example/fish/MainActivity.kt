@@ -2,7 +2,6 @@ package com.example.fish
 
 import android.os.Build
 import android.os.Bundle
-import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -21,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,12 +29,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Admin.AdminView
-import com.example.fish.Model.goTo
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneLineChange
 import com.example.fish.Student.StudentView
 import com.example.fish.Teacher.TeacherView
-import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.ui.theme.FishTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     val nav:NavHostController = rememberNavController()
                     NavHost(
                         navController = nav,
-                        startDestination = "Login")
+                        startDestination = "Test")
                     {
                         composable("Student")
                         { StudentView(navFather = nav) }

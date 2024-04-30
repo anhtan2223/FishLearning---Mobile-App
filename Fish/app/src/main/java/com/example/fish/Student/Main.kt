@@ -37,7 +37,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.fish.Model.goTo
+import com.example.fish.Database.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 data class NavItem(

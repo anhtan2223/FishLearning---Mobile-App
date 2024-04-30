@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.User
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -27,7 +27,7 @@ fun CardInfoChangePass(modifier: Modifier = Modifier, info: User)
             .padding(20.dp)
             .wrapContentWidth(Alignment.CenterHorizontally) )
     {
-        OneLineChange(title = "Tài Khoản", content = info.Username , true)
+        OneLineChange(title = "Tài Khoản", content = info.username , true)
         OneLineChange(title = "Nhập Mậu Khẩu Cũ", content = "Nhập Mật Khẩu Cũ" , false)
         OneLineChange(title = "Mật Khẩu Mới", content = "Nhập Mật Khẩu Mới" , false)
         OneLineChange(title = "Nhập Lại Mật Khẩu Mới", content = "Xác Nhận Mật Khẩu Mới" , false)

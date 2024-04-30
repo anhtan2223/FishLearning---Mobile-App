@@ -21,10 +21,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.User
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.User
+import com.example.fish.Database.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -69,7 +69,7 @@ fun ClassInfoView(nav : NavController, view : DisplayUI)
 @Composable
 fun OneUser_Student(info : User, onRemove: ()->Unit = {})
 {
-    val role = when(info.RoleID){
+    val role = when(info.roleid){
         1 -> "Người Học"
         2 -> "Người Giảng Dạy"
         else -> "Admin"
@@ -83,7 +83,7 @@ fun OneUser_Student(info : User, onRemove: ()->Unit = {})
         ) {
             Text(
                 modifier = Modifier.padding(vertical = 5.dp),
-                text = info.Name ,
+                text = info.name ,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold ,
                     fontSize = 16.sp
@@ -91,7 +91,7 @@ fun OneUser_Student(info : User, onRemove: ()->Unit = {})
             )
             Text(
                 modifier = Modifier.padding(vertical = 2.dp),
-                text = info.Email ,
+                text = info.email ,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold ,
                     fontSize = 12.sp

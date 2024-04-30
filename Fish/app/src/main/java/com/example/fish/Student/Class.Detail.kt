@@ -27,14 +27,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Model.Back
-import com.example.fish.Model.Class
-import com.example.fish.Model.DemoData
-import com.example.fish.Model.Document
-import com.example.fish.Model.Test
-import com.example.fish.Model.TextBox
-import com.example.fish.Model.Topic
-import com.example.fish.Model.goTo
+import com.example.fish.Database.Back
+import com.example.fish.Database.Class
+import com.example.fish.Database.DemoData
+import com.example.fish.Database.Document
+import com.example.fish.Database.Test
+import com.example.fish.Database.TextBox
+import com.example.fish.Database.Topic
+import com.example.fish.Database.goTo
 import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 
@@ -77,9 +77,9 @@ fun InfoClass(info : Class , onClick : () -> Unit = {})
                 Text(text = "Thông Tin Lớp Học" , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
             }
         }
-        OneLine(title = "Tên Lớp", content = info.NameClass)
-        OneLine(title = "Giảng Viên", content = info.TeacherID)
-        OneLine(title = "Ngày Tạo", content = info.DateCreate)
+        OneLine(title = "Tên Lớp", content = info.nameClass)
+        OneLine(title = "Giảng Viên", content = info.teacherID)
+        OneLine(title = "Ngày Tạo", content = info.dateCreate)
     }
 }
 @Composable
@@ -97,16 +97,16 @@ fun TopicView(info:Topic , nav:NavController , view: DisplayUI)
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = info.Title ,
+                text = info.title ,
                 style = TextStyle(fontWeight = FontWeight.Bold ,
                 fontSize = 18.sp))
         }
         for(i in DemoData.InsideTopic)
         {
             when(i) {
-                is TextBox  -> if (i.TopicID == info.TopicID) TextBoxView(info = i)
-                is Document -> if (i.TopicID == info.TopicID) DocumentView(info = i)
-                is Test     -> if (i.TopicID == info.TopicID) TestView(info = i , nav , view)
+                is TextBox  -> if (i.topicID == info.topicID) TextBoxView(info = i)
+                is Document -> if (i.topicID == info.topicID) DocumentView(info = i)
+                is Test     -> if (i.topicID == info.topicID) TestView(info = i , nav , view)
             }
         }
     }
@@ -121,7 +121,7 @@ fun TextBoxView(info:TextBox)
             modifier = Modifier.padding(start = 15.dp)
         )
         Text(
-            text = info.Content ,
+            text = info.content ,
             style = MaterialTheme.typography.bodyLarge ,
             modifier = Modifier.padding(bottom = 20.dp)
         )
@@ -140,7 +140,7 @@ fun DocumentView(info:Document)
                 .size(20.dp)
         )
         Text(
-            text = info.Discribe ,
+            text = info.discribe ,
             style = MaterialTheme.typography.bodyLarge ,
             modifier = Modifier.padding(start = 5.dp , bottom = 20.dp)
         )
@@ -160,7 +160,7 @@ fun TestView(info:Test , nav:NavController , view: DisplayUI , destination:Strin
                 .rotate(270F)
         )
         Text(
-            text = info.TestName ,
+            text = info.testName ,
             style = MaterialTheme.typography.bodyLarge ,
             modifier = Modifier
                 .padding(start = 5.dp, bottom = 20.dp)

@@ -1,6 +1,8 @@
-package com.example.fish.Model
+package com.example.fish.Database
 
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.fish.ui.theme.DisplayUI
@@ -26,6 +28,7 @@ fun formatTime(seconds: Int): String {
     val remainingSeconds = seconds % 60
     return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds)
 }
+@RequiresApi(Build.VERSION_CODES.O)
 fun getToday():String{
     val today = LocalDate.now()
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
