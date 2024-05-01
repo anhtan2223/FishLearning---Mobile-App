@@ -1,5 +1,6 @@
 package com.example.fish.Student
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,9 +26,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.DemoData
-import com.example.fish.Database.User
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
@@ -44,7 +45,7 @@ fun CardInfoChange(modifier: Modifier = Modifier, info: User)
     }
 }
 @Composable
-fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:() -> Unit = {} , visual:VisualTransformation = VisualTransformation.None)
+fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:(String) -> Unit = {} , visual:VisualTransformation = VisualTransformation.None)
 {
     Row(
         modifier = Modifier.fillMaxWidth() ,
@@ -63,7 +64,7 @@ fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:()
             placeholder = { Text(content) } ,
             readOnly = readOnly ,
             visualTransformation = visual,
-            onValueChange = { value = it ; onChange() } ,
+            onValueChange = { value = it ; Log.d("Test","Input : $it") ; onChange(value) } ,
             modifier = Modifier.weight(8f) , singleLine = true)
     }
 }

@@ -1,13 +1,8 @@
-package com.example.fish.Service
+package com.example.fish.Model
 
 import android.util.Log
-import com.example.fish.Database.MyDB
-import com.example.fish.Database.User
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import com.example.fish.Untils.MyDB
+import com.example.fish.Untils.User
 
 class HandleUser {
     companion object{

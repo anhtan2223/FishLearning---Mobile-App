@@ -27,14 +27,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.Class
-import com.example.fish.Database.DemoData
-import com.example.fish.Database.Document
-import com.example.fish.Database.Test
-import com.example.fish.Database.TextBox
-import com.example.fish.Database.Topic
-import com.example.fish.Database.goTo
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.Class
+import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.Document
+import com.example.fish.Untils.Test
+import com.example.fish.Untils.TextBox
+import com.example.fish.Untils.Topic
+import com.example.fish.Untils.goTo
 import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 

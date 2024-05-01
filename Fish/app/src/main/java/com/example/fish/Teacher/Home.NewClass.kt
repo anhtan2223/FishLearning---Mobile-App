@@ -9,10 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.DemoData
-import com.example.fish.Database.getToday
-import com.example.fish.Database.goTo
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.getToday
+import com.example.fish.Untils.goTo
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneLineChange
 import com.example.fish.ui.theme.DisplayUI

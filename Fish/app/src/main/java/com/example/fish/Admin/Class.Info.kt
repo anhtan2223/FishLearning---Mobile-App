@@ -20,9 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.DemoData
-import com.example.fish.Database.goTo
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.goTo
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneUser_Student
 import com.example.fish.ui.theme.DisplayUI

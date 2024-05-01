@@ -1,4 +1,4 @@
-package com.example.fish.Database
+package com.example.fish.Untils
 
 object DemoData {
     val UserInfo = User(

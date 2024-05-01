@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import com.example.fish.Database.Class
-import com.example.fish.Database.Test
-import com.example.fish.Database.User
+import com.example.fish.Untils.Class
+import com.example.fish.Untils.Test
+import com.example.fish.Untils.User
 
 data class NavItem(
     val title : String,

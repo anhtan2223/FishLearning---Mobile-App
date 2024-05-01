@@ -1,4 +1,4 @@
-package com.example.fish.Database
+package com.example.fish.Untils
 
 data class Role(
     val roleID : Int ,
@@ -6,11 +6,11 @@ data class Role(
 )
 data class User(
     val uid : String = "Init",
-    val name : String = "",
-    val email : String = "",
-    val username : String = "",
-    val password : String = "",
-    val roleid: Int = 3
+    var name : String = "",
+    var email : String = "",
+    var username : String = "",
+    var password : String = "",
+    var roleid: Int = 3
     // 1 Student
     // 2 Teacher
     // 3 Manager

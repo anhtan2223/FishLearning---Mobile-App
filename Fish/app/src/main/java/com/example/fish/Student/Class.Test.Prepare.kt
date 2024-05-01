@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.Class
-import com.example.fish.Database.Test
-import com.example.fish.Database.formatTime
-import com.example.fish.Database.goTo
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.Class
+import com.example.fish.Untils.Test
+import com.example.fish.Untils.formatTime
+import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

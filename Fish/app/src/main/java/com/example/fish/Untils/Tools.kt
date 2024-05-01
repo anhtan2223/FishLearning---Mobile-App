@@ -1,6 +1,7 @@
-package com.example.fish.Database
+package com.example.fish.Untils
 
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -33,4 +34,8 @@ fun getToday():String{
     val today = LocalDate.now()
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     return formatter.format(today)
+}
+
+fun appendMessage(context:android.content.Context , message:String ){
+    Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
 }

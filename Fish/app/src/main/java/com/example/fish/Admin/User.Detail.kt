@@ -16,9 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Database.Back
-import com.example.fish.Database.User
-import com.example.fish.Database.goTo
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.User
+import com.example.fish.Untils.goTo
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneLineChange
 import com.example.fish.ui.theme.DisplayUI

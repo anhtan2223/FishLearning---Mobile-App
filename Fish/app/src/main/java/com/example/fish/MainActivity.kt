@@ -2,6 +2,7 @@ package com.example.fish
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -18,8 +19,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,6 +34,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Admin.AdminView
+import com.example.fish.Controller.registerUser
+import com.example.fish.Untils.User
+import com.example.fish.Untils.appendMessage
 import com.example.fish.Student.ButtonNav
 import com.example.fish.Student.OneLineChange
 import com.example.fish.Student.StudentView
@@ -49,7 +57,7 @@ class MainActivity : ComponentActivity() {
                     val nav:NavHostController = rememberNavController()
                     NavHost(
                         navController = nav,
-                        startDestination = "Test")
+                        startDestination = "Login")
                     {
                         composable("Student")
                         { StudentView(navFather = nav) }
@@ -73,6 +81,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LoginView(nav:NavController)
 {
+    var context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.Center ,
         horizontalAlignment =  Alignment.CenterHorizontally
@@ -122,6 +131,10 @@ fun LoginView(nav:NavController)
 @Composable
 fun SignInView(nav:NavController)
 {
+    val info by remember {
+      mutableStateOf(User())
+    }
+    val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.Center ,
         horizontalAlignment =  Alignment.CenterHorizontally
@@ -138,11 +151,26 @@ fun SignInView(nav:NavController)
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.padding(bottom = 5.dp))
-            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false )
-            OneLineChange(title = "Mật Khẩu", content = "Mật Khẩu Đăng Nhập", readOnly = false  )
-            OneLineChange(title = "Nhập Lại Mật Khẩu", content = "Xác nhận Mật Khẩu", readOnly = false  )
-            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn", readOnly = false  )
-            OneLineChange(title = "Email", content = "Email Đăng Ký", readOnly = false  )
+
+            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false , onChange = {
+                info.username = it
+                Log.d("TAG", "SignInView: ${info}")
+            })
+            OneLineChange(title = "Mật Khẩu", content = "Mật Khẩu Đăng Nhập", readOnly = false , onChange = {
+                info.password = it
+                Log.d("TAG", "SignInView: ${info}")
+
+            })
+            OneLineChange(title = "Nhập Lại Mật Khẩu", content = "Xác nhận Mật Khẩu", readOnly = false , onChange = {
+                if (it != info.username)
+                    Log.d("Error" , "Wrong Password")
+            })
+            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn", readOnly = false , onChange = {
+                info.name = it
+            } )
+            OneLineChange(title = "Email", content = "Email Đăng Ký", readOnly = false , onChange = {
+                info.email = it
+            } )
             Spacer(modifier = Modifier.padding(top = 20.dp))
             Text(
                 text = "Đã Có Tài Khoản ? Đăng Nhập Ngay !" ,
@@ -158,17 +186,13 @@ fun SignInView(nav:NavController)
             horizontalArrangement = Arrangement.SpaceAround ,
             modifier = Modifier.padding(top = 10.dp)
         ) {
-            ButtonNav(onClick = { /*TODO*/ }, content = "Đăng Ký")
+            ButtonNav(onClick =
+            {
+//                Log.d("Test", "SignInView: ${info}")
+//                Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
+                appendMessage(context , "Success")
+                registerUser(info)
+            }, content = "Đăng Ký")
         }
     }
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    FishTheme {
-//        Surface(Modifier.fillMaxSize()) {
-//            ClassScreen()
-//        }
-////        FishLearning()
-//    }
-//}

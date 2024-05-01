@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
-import com.example.fish.Database.Answer
-import com.example.fish.Database.Back
-import com.example.fish.Database.DemoData
-import com.example.fish.Database.Question
+import com.example.fish.Untils.Answer
+import com.example.fish.Untils.Back
+import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.Question
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
