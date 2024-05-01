@@ -33,14 +33,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.fish.Admin.AdminView
-import com.example.fish.Controller.registerUser
+import com.example.fish.Controllers.registerUser
 import com.example.fish.Untils.User
 import com.example.fish.Untils.appendMessage
-import com.example.fish.Student.ButtonNav
-import com.example.fish.Student.OneLineChange
-import com.example.fish.Student.StudentView
-import com.example.fish.Teacher.TeacherView
+import com.example.fish.Views.Admin.AdminView
+import com.example.fish.Views.Student.ButtonNav
+import com.example.fish.Views.Student.OneLineChange
+import com.example.fish.Views.Student.StudentView
+import com.example.fish.Views.Teacher.TeacherView
 import com.example.fish.ui.theme.FishTheme
 
 class MainActivity : ComponentActivity() {

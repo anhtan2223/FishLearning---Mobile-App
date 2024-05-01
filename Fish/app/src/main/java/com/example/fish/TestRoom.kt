@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.User
-import com.example.fish.Model.HandleUser
+import com.example.fish.Models.HandleUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
