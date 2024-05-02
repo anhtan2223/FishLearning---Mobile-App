@@ -31,12 +31,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Controllers.isValidUsername
+import com.example.fish.Controllers.login
 import com.example.fish.Controllers.registerUser
 import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
@@ -47,6 +49,7 @@ import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange
 import com.example.fish.Views.Student.StudentView
 import com.example.fish.Views.Teacher.TeacherView
+import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.ui.theme.FishTheme
 
 val TAG = "TestInMain"
@@ -63,18 +66,19 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val nav:NavHostController = rememberNavController()
+                    val view = viewModel<DisplayUI>()
                     NavHost(
                         navController = nav,
                         startDestination = "Login")
                     {
                         composable("Student")
-                        { StudentView(navFather = nav) }
-                        composable("Teacher")
-                        { TeacherView(navFather = nav) }
-                        composable("Admin")
-                        { AdminView(navFather = nav) }
-                        composable("Login")
-                        { LoginView(nav) }
+                        { StudentView(navFather = nav , viewModel = view) }
+                        composable("Teacher" )
+                        { TeacherView(navFather = nav , viewModel = view) }
+                        composable("Admin" )
+                        { AdminView(navFather = nav , viewModel = view) }
+                        composable("Login" )
+                        { LoginView(nav , view) }
                         composable("SignIn")
                         { SignInView(nav) }
                         composable("Test")
@@ -87,9 +91,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginView(nav:NavController)
+fun LoginView(nav:NavController , view:DisplayUI)
 {
     var context = LocalContext.current
+    var username by remember {
+        mutableStateOf("")
+    }
+    var password by remember {
+        mutableStateOf("")
+    }
     Column(
         verticalArrangement = Arrangement.Center ,
         horizontalAlignment =  Alignment.CenterHorizontally
@@ -106,8 +116,16 @@ fun LoginView(nav:NavController)
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.padding(bottom = 5.dp ))
-            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false )
-            OneLineChange(title = "Mật Khẩu", content = "Tài Khoản Đăng Nhập", readOnly = false , visual = VisualTransformation.None )
+            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false ,
+                onChange = {
+                    username = it
+                }
+                )
+            OneLineChange(title = "Mật Khẩu", content = "Mật Khẩu Đăng Nhập", readOnly = false , visual = PasswordVisualTransformation() ,
+                onChange = {
+                    password = it
+                }
+            )
             Spacer(modifier = Modifier.padding(top = 30.dp))
             Text(
                 text = "Chưa Có Tài Khoản ? Đăng Ký Ngay !" ,
@@ -123,7 +141,30 @@ fun LoginView(nav:NavController)
             horizontalArrangement = Arrangement.SpaceAround ,
             modifier =  Modifier.padding(top = 10.dp)
         ) {
-            ButtonNav(onClick = { /*TODO*/ }, content = "Đăng Nhập")
+            ButtonNav(onClick = {
+                login(
+                    username ,
+                    password ,
+                    onUserFalse = {
+                                  appendMessage(context , "Tài Khoản Không Tồn Tại")
+                    } ,
+                    onUserTrue = { isTrue , info ->
+                            if(isTrue){
+                                var destination = when(info.roleid){
+                                    3 -> "Student"
+                                    2 -> "Teacher"
+                                    1 -> "Admin"
+                                    else -> "Test"
+                                }
+                                appendMessage(context,"Chào Mừng $destination ${info.name} Đã Quay Trở lại")
+                                view.setMyInfo(info)
+                                nav.navigate(destination)
+                            }else
+                                appendMessage(context,"Mật Khẩu Không Đúng")
+                    }
+                    )
+
+            }, content = "Đăng Nhập")
             ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
         }
     }

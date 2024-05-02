@@ -34,53 +34,21 @@ fun TestRoom(){
             Text(text = "Clear Database")
         }
         Button(onClick = {
-            HandleUser.createUser(DemoData.UserInfo)
+            HandleUser.createUser(DemoData.UserInfo.copy(roleid = 1 , username = "admin" , password = "123"))
         }) {
-            Text(text = "Push One User")
+            Text(text = "Push One Admin")
         }
 
         Button(onClick = {
-            HandleUser.createUser(DemoData.UserInfo2)
+            HandleUser.createUser(DemoData.UserInfo2.copy(roleid = 2 , username = "teacher" , password = "123"))
         }) {
-            Text(text = "Update User")
-        }
-
-        var userInfo by remember {
-            mutableStateOf(User())
-        }
-        var message by remember {
-            mutableStateOf("Init State")
+            Text(text = "Push One Teacher")
         }
 
         Button(onClick = {
-            user.child("-NwjasNl0KI-awo2G-_r").addValueEventListener(object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val info = snapshot.getValue<User>()
-                    if (info != null) {
-                        userInfo = info
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    message = "Get value Cancel"
-                }
-            })
+            HandleUser.createUser(DemoData.UserInfo2.copy(roleid = 3 , username = "emca" , password = "123"))
         }) {
-            Text(text="Add Listener Get UserInfo")
-        }
-        Button(onClick = {
-            HandleUser.getUserById("-NwjasNl0KI-awo2G-_r"){
-               message = it.toString()
-            }
-        }) {
-            Text(text = "Get Data By Default")
-        }
-        Text(text = userInfo.toString())
-        Text(text = message)
-
-        Button(onClick = {
-//                HandleUser.checkUsername("emca")
-        }) {
-            Text(text = "Test New Function")
+            Text(text = "Push One Student")
         }
     }
 

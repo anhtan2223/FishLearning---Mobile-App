@@ -31,7 +31,7 @@ fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : Di
             .padding(5.dp)
             .fillMaxSize()
     ) {
-        val infoTest = DemoData.UserInfo
+        val infoTest = view.info
         CardInfo(info = infoTest)
         ButtonNav(onClick = {
             nav.navigate("UpdateInfo") ; view.changePage("UpdateInfo") },

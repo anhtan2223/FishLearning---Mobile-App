@@ -15,8 +15,15 @@ fun getUserList(handle:(DataSnapshot)->Unit){
         handle(it)
     }
 }
-
 fun isValidUsername(username:String , handle:(Boolean)->Unit)
 {
     HandleUser.checkUsername(username , handle )
+}
+fun login(
+    username: String ,
+    password:String ,
+    onUserTrue:(Boolean , User)->Unit ,
+    onUserFalse:()->Unit
+) {
+    HandleUser.Login(username,password,onUserTrue,onUserFalse)
 }

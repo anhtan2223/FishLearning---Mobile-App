@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.example.fish.Untils.Class
+import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.User
 
@@ -16,6 +17,8 @@ data class NavItem(
 )
 
 class DisplayUI : ViewModel(){
+    var info by mutableStateOf( DemoData.UserInfo )
+        private set
     var nowQuestion by mutableStateOf(0)
         private set
     var answerList by mutableStateOf( mutableListOf<Int>() )
@@ -31,6 +34,10 @@ class DisplayUI : ViewModel(){
         private set
     var isTimeout by mutableStateOf(false)
         private set
+    fun setMyInfo(info: User)
+    {
+        this.info = info
+    }
     fun chooseUser(user: User)
     {
         nowUser = user

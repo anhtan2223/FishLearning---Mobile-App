@@ -6,6 +6,7 @@ import com.example.fish.Untils.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 
 class HandleUser {
     companion object{
@@ -40,7 +41,7 @@ class HandleUser {
                 for (i in it.children)
                 {
                     val usn = i.child("username").getValue(String::class.java)
-                    Log.d("TestHere", "checkUsername: $usn $username ${usn == username}")
+//                    Log.d("TestHere", "checkUsername: $usn $username ${usn == username}")
                     if(usn == username) {
                         onSame(true)
                         return@addOnSuccessListener
@@ -49,5 +50,25 @@ class HandleUser {
                 onSame(false)
             }
         }
+
+        fun Login(username: String ,
+                  password:String ,
+                  onUserTrue:(Boolean , User)->Unit ,
+                  onUserFalse:()->Unit
+        ){
+            user.get().addOnSuccessListener {
+                for (i in it.children){
+                    val usn = i.child("username").getValue(String::class.java)
+                    if(username == usn)
+                    {
+                        val pass = i.child("password").getValue(String::class.java)
+                        onUserTrue( pass == password , i.getValue(User::class.java) ?: User() )
+                        return@addOnSuccessListener
+                    }
+                }
+                onUserFalse()
+            }
+        }
+
     }
 }
