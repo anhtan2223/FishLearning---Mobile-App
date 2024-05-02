@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -22,6 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -45,7 +48,14 @@ fun CardInfoChange(modifier: Modifier = Modifier, info: User)
     }
 }
 @Composable
-fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:(String) -> Unit = {} , visual:VisualTransformation = VisualTransformation.None)
+fun OneLineChange(
+    title:String ,
+    content:String ,
+    readOnly:Boolean ,
+    onChange:(String) -> Unit = {} ,
+    onFocusChange:(FocusState) -> Unit = {},
+    visual:VisualTransformation = VisualTransformation.None ,
+    keyboard:KeyboardOptions = KeyboardOptions.Default)
 {
     Row(
         modifier = Modifier.fillMaxWidth() ,
@@ -64,8 +74,14 @@ fun OneLineChange(title:String , content:String , readOnly:Boolean , onChange:(S
             placeholder = { Text(content) } ,
             readOnly = readOnly ,
             visualTransformation = visual,
+            keyboardOptions = keyboard,
             onValueChange = { value = it ; Log.d("Test","Input : $it") ; onChange(value) } ,
-            modifier = Modifier.weight(8f) , singleLine = true)
+            modifier = Modifier
+                .onFocusChanged {
+                    onFocusChange(it)
+                }
+                .weight(8f) , singleLine = true
+        )
     }
 }
 @Composable

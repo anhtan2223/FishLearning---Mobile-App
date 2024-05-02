@@ -22,9 +22,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,15 +36,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fish.Controllers.isValidUsername
 import com.example.fish.Controllers.registerUser
 import com.example.fish.Untils.User
+import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
+import com.example.fish.Untils.goTo
 import com.example.fish.Views.Admin.AdminView
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange
 import com.example.fish.Views.Student.StudentView
 import com.example.fish.Views.Teacher.TeacherView
 import com.example.fish.ui.theme.FishTheme
+
+val TAG = "TestInMain"
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -134,6 +142,18 @@ fun SignInView(nav:NavController)
     val info by remember {
       mutableStateOf(User())
     }
+    val isValid by remember {
+        mutableStateOf(object {
+            var name = false
+            var email = false
+            var password = false
+            var rePassword = false
+            var username = false
+        })
+    }
+    var rePass by remember {
+        mutableStateOf("")
+    }
     val context = LocalContext.current
     Column(
         verticalArrangement = Arrangement.Center ,
@@ -152,25 +172,66 @@ fun SignInView(nav:NavController)
             )
             Spacer(modifier = Modifier.padding(bottom = 5.dp))
 
-            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false , onChange = {
-                info.username = it
-                Log.d("TAG", "SignInView: ${info}")
-            })
-            OneLineChange(title = "Mật Khẩu", content = "Mật Khẩu Đăng Nhập", readOnly = false , onChange = {
-                info.password = it
-                Log.d("TAG", "SignInView: ${info}")
+            OneLineChange(title = "Tài Khoản", content = "Tài Khoản Đăng Nhập", readOnly = false ,
+                onChange = {
+                    info.username = it
+//                    Log.d("TAG", "SignInView: ${info} ${ValidValue.isValidUsername(it)}")
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.username.length !=0)
+                    {
+                        isValidUsername(info.username){
+                            if(it)
+                                appendMessage(context , "Tài Khoản Đã Có Người Khác Đăng Ký")
+                            else if(!ValidValue.isValidUsername(info.username))
+                                appendMessage(context , "Tài Khoản Phải Lớn Hơn 6 Ký tự")
+                        }
+                    }
+                }
+            )
 
-            })
-            OneLineChange(title = "Nhập Lại Mật Khẩu", content = "Xác nhận Mật Khẩu", readOnly = false , onChange = {
-                if (it != info.username)
-                    Log.d("Error" , "Wrong Password")
-            })
-            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn", readOnly = false , onChange = {
-                info.name = it
-            } )
-            OneLineChange(title = "Email", content = "Email Đăng Ký", readOnly = false , onChange = {
+            OneLineChange(title = "Mật Khẩu", content = "Mật Khẩu Đăng Nhập", readOnly = false ,
+                visual = PasswordVisualTransformation(),
+                onChange = {
+                    info.password = it
+                    Log.d("TAG", "SignInView: ${info}")
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.password.length != 0 && !ValidValue.isValidPassword(info.password))
+                        appendMessage(context , "Mật Khẩu Phải Lớn Hơn 8 Ký Tự")
+                }
+             )
+
+            OneLineChange(title = "Nhập Lại Mật Khẩu", content = "Xác nhận Mật Khẩu", readOnly = false ,
+                visual = PasswordVisualTransformation() ,
+                onChange = {
+                           rePass = it
+                    } ,
+                onFocusChange = {
+                    if(!it.isFocused && rePass.length !=0 && info.password != rePass)
+                            appendMessage(context , "Mật Khẩu Nhập Lại Chưa Đúng")
+                }
+            )
+            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn", readOnly = false ,
+                onChange = {
+                    if(it.length == 0)
+                        appendMessage(context , "Không thể để trống Tên")
+                    info.name = it
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.name.isNotEmpty() && !ValidValue.isValidName(info.name) )
+                        appendMessage(context , "Tên Không Vượt Quá 50 Ký tự")
+                }
+            )
+            OneLineChange(title = "Email", content = "Email Đăng Ký", readOnly = false ,
+                onChange = {
                 info.email = it
-            } )
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.email.isNotEmpty() && !ValidValue.isValidEmail(info.email) )
+                        appendMessage(context , "Email Không Hợp Lệ")
+                }
+            )
             Spacer(modifier = Modifier.padding(top = 20.dp))
             Text(
                 text = "Đã Có Tài Khoản ? Đăng Nhập Ngay !" ,
@@ -188,10 +249,33 @@ fun SignInView(nav:NavController)
         ) {
             ButtonNav(onClick =
             {
-//                Log.d("Test", "SignInView: ${info}")
-//                Toast.makeText(context,"Success",Toast.LENGTH_SHORT).show()
-                appendMessage(context , "Success")
+                if( !ValidValue.isValidUsername(info.username) ) {
+                    appendMessage(context , "Tài Khoản Phải Lớn Hơn 6 Ký tự")
+                    isValidUsername(info.username){
+                        if(it)
+                            appendMessage(context , "Tài Khoản Đã Có Người Khác Đăng Ký") ;
+                    }
+                    return@ButtonNav
+                }
+
+                if(!ValidValue.isValidPassword(info.password)){
+                    appendMessage(context , "Mật Khẩu Phải Lớn Hơn 8 Ký Tự")
+                    return@ButtonNav
+                }
+
+                if(info.password != rePass){
+                    appendMessage(context , "Mật Khẩu Nhập Lại Không Hợp Lệ")
+                    return@ButtonNav
+                }
+                if(!ValidValue.isValidPassword(info.email)){
+                    appendMessage(context , "Email Không Hợp Lệ")
+                    return@ButtonNav
+                }
+
                 registerUser(info)
+                appendMessage(context , "Tạo Tài Khoản Thành Công")
+                nav.navigate("Login")
+
             }, content = "Đăng Ký")
         }
     }

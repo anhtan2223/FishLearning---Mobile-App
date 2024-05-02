@@ -76,6 +76,12 @@ fun TestRoom(){
         }
         Text(text = userInfo.toString())
         Text(text = message)
+
+        Button(onClick = {
+//                HandleUser.checkUsername("emca")
+        }) {
+            Text(text = "Test New Function")
+        }
     }
 
 }
