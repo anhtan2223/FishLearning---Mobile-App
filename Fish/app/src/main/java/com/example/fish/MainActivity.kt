@@ -40,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fish.Controllers.isValidUsername
 import com.example.fish.Controllers.login
 import com.example.fish.Controllers.registerUser
+import com.example.fish.Models.HandleUser
 import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
@@ -150,7 +151,7 @@ fun LoginView(nav:NavController , view:DisplayUI)
                     } ,
                     onUserTrue = { isTrue , info ->
                             if(isTrue){
-                                var destination = when(info.roleid){
+                                val destination = when(info.roleid){
                                     3 -> "Student"
                                     2 -> "Teacher"
                                     1 -> "Admin"
@@ -172,9 +173,25 @@ fun LoginView(nav:NavController , view:DisplayUI)
         verticalAlignment = Alignment.Bottom ,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ButtonNav(onClick = { nav.navigate("Student") }, content = "Student")
-        ButtonNav(onClick = { nav.navigate("Teacher") }, content = "Teacher")
-        ButtonNav(onClick = { nav.navigate("Admin") }, content = "Admin")
+        ButtonNav(onClick =
+        {
+            nav.navigate("Student")
+            HandleUser.getUserById("user") {
+                view.setMyInfo(it ?: User())
+            }
+        }, content = "Student")
+        ButtonNav(onClick = {
+            nav.navigate("Teacher")
+            HandleUser.getUserById("teacher") {
+                view.setMyInfo(it ?: User())
+            }
+        }, content = "Teacher")
+        ButtonNav(onClick = {
+            nav.navigate("Admin")
+            HandleUser.getUserById("admin") {
+                view.setMyInfo(it ?: User())
+            }
+        }, content = "Admin")
     }
 }
 @Composable
@@ -182,15 +199,6 @@ fun SignInView(nav:NavController)
 {
     val info by remember {
       mutableStateOf(User())
-    }
-    val isValid by remember {
-        mutableStateOf(object {
-            var name = false
-            var email = false
-            var password = false
-            var rePassword = false
-            var username = false
-        })
     }
     var rePass by remember {
         mutableStateOf("")
@@ -253,7 +261,7 @@ fun SignInView(nav:NavController)
                             appendMessage(context , "Mật Khẩu Nhập Lại Chưa Đúng")
                 }
             )
-            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn", readOnly = false ,
+            OneLineChange(title = "Họ Và Tên", content = "Tên của Bạn",
                 onChange = {
                     if(it.length == 0)
                         appendMessage(context , "Không thể để trống Tên")
@@ -264,9 +272,9 @@ fun SignInView(nav:NavController)
                         appendMessage(context , "Tên Không Vượt Quá 50 Ký tự")
                 }
             )
-            OneLineChange(title = "Email", content = "Email Đăng Ký", readOnly = false ,
+            OneLineChange(title = "Email", content = "Email Đăng Ký",
                 onChange = {
-                info.email = it
+                    info.email = it
                 } ,
                 onFocusChange = {
                     if(!it.isFocused && info.email.isNotEmpty() && !ValidValue.isValidEmail(info.email) )

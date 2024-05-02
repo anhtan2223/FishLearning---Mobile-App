@@ -26,32 +26,91 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.updateUser
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
+import com.example.fish.Untils.ValidValue
+import com.example.fish.Untils.appendMessage
+import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
-
 @Composable
-fun CardInfoChange(modifier: Modifier = Modifier, info: User)
+fun UpdateInfo(nav: NavController ,  view : DisplayUI)
 {
-    Card(
+    val context = LocalContext.current
+    Back(nav = nav , view = view , goTo = "Account")
+    Column(
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
-            .padding(5.dp)
-            .wrapContentWidth(Alignment.CenterHorizontally) )
-    {
-        OneLineChange(title = "Tên", content = info.name , false)
-        OneLineChange(title = "Email", content = info.email , false)
-        OneLineChange(title = "Tài Khoản", content = info.username , true)
+            .fillMaxSize()
+    ) {
+        val info = view.info.copy()
+
+        Card(
+            modifier = Modifier
+                .padding(5.dp)
+                .wrapContentWidth(Alignment.CenterHorizontally) )
+        {
+            OneLineChange(title = "Tên", content = info.name ,
+                onChange = {
+                    if(it.length == 0)
+                        appendMessage(context , "Không thể để trống Tên")
+                    info.name = it
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.name.isNotEmpty() && !ValidValue.isValidName(info.name) )
+                        appendMessage(context , "Tên Không Vượt Quá 50 Ký tự")
+                }
+            )
+            OneLineChange(title = "Email", content = info.email ,
+                onChange = {
+                    info.email = it
+                } ,
+                onFocusChange = {
+                    if(!it.isFocused && info.email.isNotEmpty() && !ValidValue.isValidEmail(info.email) )
+                        appendMessage(context , "Email Không Hợp Lệ")
+                }
+            )
+            OneLineChange(title = "Tài Khoản", content = info.username , )
+        }
+
+        Row(Modifier.fillMaxWidth()) {
+            ButtonNav(onClick = {
+                if(!ValidValue.isValidEmail(info.email)){
+                    appendMessage(context , "Email Không Hợp Lệ")
+                    return@ButtonNav
+                }
+                if(!ValidValue.isValidName(info.name)){
+                    appendMessage(context,"Tên Không Vượt Quá 50 Ký tự")
+                    return@ButtonNav
+                }
+
+                updateUser(info = info)
+                view.setMyInfo(info)
+                appendMessage(context,"Thay Đổi Thông Tin Thành Công")
+                goTo(nav,view,"Account")
+            },
+                content = "Xác Nhận",
+                color = Color(0xFF00FC46),
+                modifier = Modifier.weight(1f))
+            ButtonNav(
+                onClick = { view.changePage("Account") ; nav.popBackStack() },
+                content = "Quay Lại",
+                color = Color(0xFFDC0F0F),
+                contentColor = Color.White,
+                modifier = Modifier.weight(1f))
+        }
     }
 }
 @Composable
 fun OneLineChange(
     title:String ,
     content:String ,
-    readOnly:Boolean ,
+    readOnly:Boolean = false ,
     onChange:(String) -> Unit = {} ,
     onFocusChange:(FocusState) -> Unit = {},
     visual:VisualTransformation = VisualTransformation.None ,
@@ -82,31 +141,6 @@ fun OneLineChange(
                 }
                 .weight(8f) , singleLine = true
         )
-    }
-}
-@Composable
-fun UpdateInfo(nav: NavController ,  view : DisplayUI)
-{
-    Back(nav = nav , view = view , goTo = "Account")
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        val infoTest = DemoData.UserInfo
-        CardInfoChange(info = infoTest)
-        Row(Modifier.fillMaxWidth()) {
-            ButtonNav(onClick = { /*TODO*/ },
-                content = "Xác Nhận",
-                color = Color(0xFF00FC46),
-                modifier = Modifier.weight(1f))
-            ButtonNav(
-                onClick = { view.changePage("Account") ; nav.popBackStack() },
-                content = "Quay Lại",
-                color = Color(0xFFDC0F0F),
-                contentColor = Color.White,
-                modifier = Modifier.weight(1f))
-        }
     }
 }
 @Composable

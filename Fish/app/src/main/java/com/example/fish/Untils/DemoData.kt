@@ -6,7 +6,7 @@ object DemoData {
         "Lê Sỹ Anh Tấn" ,
         "anhtan3332@gmail.com" ,
         "anhtan2223" ,
-        "12345" ,
+        "123" ,
         1
     )
     val UserInfo2 = User(
@@ -14,10 +14,10 @@ object DemoData {
         "Lê Sỹ Anh Tấn" ,
         "anhtan3332@gmail.com" ,
         "anhtan2223" ,
-        "12345" ,
+        "123" ,
         2
     )
-    val ListUser = listOf<User>(
+    val ListUser = mutableListOf<User>(
         User(
             "1" ,
             "Giáo Viên" ,
@@ -30,57 +30,57 @@ object DemoData {
             "2" ,
             "Tôn Ðình Phúc" ,
             "user1@gmail.com" ,
-            "anhtan2223" ,
+            "tdphuc" ,
             "12345" ,
-            1
+            2
         ) ,
         User(
             "3" ,
             "Nguyễn Triệu Thái" ,
             "user2@gmail.com" ,
-            "anhtan2223" ,
+            "ntthai" ,
             "12345" ,
-            1
+            2
         ) ,
         User(
             "4" ,
             "Lý Ðắc Trọng" ,
             "user3@gmail.com" ,
-            "anhtan2223" ,
+            "ldtrong" ,
             "12345" ,
-            1
+            2
         ) ,
         User(
             "5" ,
             "Lê Sỹ Anh Tấn" ,
             "anhtan3332@gmail.com" ,
-            "anhtan2223" ,
+            "lsatan" ,
             "12345" ,
-            1
+            3
         ) ,
         User(
             "6" ,
             "Vũ Huy Lĩnh" ,
             "user6@gmail.com" ,
-            "anhtan2223" ,
+            "cvlinh" ,
             "12345" ,
-            1
+            3
         ) ,
         User(
             "7" ,
             "Bùi Huyền Trân" ,
             "user7@gmail.com" ,
-            "anhtan2223" ,
+            "bhtran" ,
             "12345" ,
-            1
+            3
         ) ,
         User(
             "8" ,
             "Hoàng Diệu Ngọc" ,
             "user8@gmail.com" ,
-            "anhtan2223" ,
+            "hdngoc" ,
             "12345" ,
-            1
+            3
         ) ,
     )
     val ListClass = listOf<Class>(

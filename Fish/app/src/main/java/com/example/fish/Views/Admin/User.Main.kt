@@ -19,11 +19,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
@@ -33,7 +38,12 @@ import com.example.fish.ui.theme.DisplayUI
 @Composable
 fun MainUserView(nav : NavController , view : DisplayUI)
 {
-    val listUser = DemoData.ListUser
+    var listUser by remember {
+        mutableStateOf(mutableListOf<User>())
+    }
+    getUserList {
+        listUser = it
+    }
     Back(nav = nav, view = view)
     LazyColumn()
     {
@@ -70,7 +80,7 @@ fun OneUser_Admin(info : User , onClick : ()->Unit )
         ) {
             val nameRole = when(info.roleid)
             {
-                3 -> "Admin"
+                1 -> "Admin"
                 2 -> "Người Dạy"
                 else -> "Người Học"
             }
