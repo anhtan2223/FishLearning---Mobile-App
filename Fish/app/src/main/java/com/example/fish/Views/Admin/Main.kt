@@ -138,6 +138,7 @@ fun AdminView(
                             val goWhere = when(viewModel.Title)
                             {
                                 "TestPrepare" , "ClassInfo"  -> "DetailClass"
+                                "DetailUser"               -> "User"
                                 else                        -> "Home"
                             }
                             IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
