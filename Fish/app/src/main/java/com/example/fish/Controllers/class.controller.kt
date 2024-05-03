@@ -27,4 +27,10 @@ fun getClass(id:String , value:(Class)->Unit){
         it.getValue(Class::class.java)?.let { it1 -> value(it1) }
     }
 }
+fun deleteClass(id:String){
+    HandleClass.delete(id)
+}
+fun updateClass(id: String,info: Class){
+    HandleClass.update(id, info)
+}
 
