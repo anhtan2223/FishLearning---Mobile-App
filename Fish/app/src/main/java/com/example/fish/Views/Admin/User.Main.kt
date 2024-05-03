@@ -41,9 +41,11 @@ fun MainUserView(nav : NavController , view : DisplayUI)
     var listUser by remember {
         mutableStateOf(mutableListOf<User>())
     }
-    getUserList {
-        listUser = it
-    }
+//    getUserList {
+//        listUser = it
+//    }
+//    view.getUL()
+    listUser = view.userList
     Back(nav = nav, view = view)
     LazyColumn()
     {

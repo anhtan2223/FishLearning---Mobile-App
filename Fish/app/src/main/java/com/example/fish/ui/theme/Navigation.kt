@@ -1,10 +1,12 @@
 package com.example.fish.ui.theme
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
+import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Test
@@ -22,6 +24,9 @@ class DisplayUI : ViewModel(){
     var nowQuestion by mutableStateOf(0)
         private set
     var answerList by mutableStateOf( mutableListOf<Int>() )
+        private set
+    var userList by mutableStateOf(mutableListOf<User>())
+        private set
     var Title by mutableStateOf("Home")
         private set
     var nowClass by mutableStateOf( Class() )
@@ -34,6 +39,21 @@ class DisplayUI : ViewModel(){
         private set
     var isTimeout by mutableStateOf(false)
         private set
+    fun getUL(callback:()->Unit = {}){
+        getUserList {
+            this.userList = it
+            callback()
+        }
+    }
+    fun filterUL(input:String){
+        getUL(){
+            Log.d("TAG", "Reset List")
+            val regexSearchUser = Regex(".*$input.*" , RegexOption.IGNORE_CASE)
+            userList = userList.filter {
+                regexSearchUser.matches(it.name)
+            }.toMutableList()
+        }
+    }
     fun setMyInfo(info: User)
     {
         this.info = info

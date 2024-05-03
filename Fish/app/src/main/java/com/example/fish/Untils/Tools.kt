@@ -39,3 +39,11 @@ fun getToday():String{
 fun appendMessage(context:android.content.Context , message:String ){
     Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
 }
+
+fun filterByUserName(list:MutableList<User> , input:String){
+    val regexSearchUser = Regex(".*$input.*")
+    for( i in list){
+       if(!regexSearchUser.matches(i.name))
+           list.remove(i)
+    }
+}
