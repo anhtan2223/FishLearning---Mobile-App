@@ -10,66 +10,68 @@ data class User(
     var email : String = "",
     var username : String = "",
     var password : String = "",
-    var roleid: Int = 3
+    var roleid: Int = 3 ,
+    var available:Boolean = true
     // 1 Student
     // 2 Teacher
     // 3 Manager
 )
 data class Label(
-    val labelID : Int ,
+    val labelID : String ,
     val description: String
 )
 data class Class(
-    val classID : Int = 0,
-    val nameClass : String = "",
-    val subtitle : String = "",
-    val teacherID : String = "",
-    val dateCreate : String = "15/2/2020",
-    val labelID: Int = 0
+    var classID : String = "0",
+    var nameClass : String = "",
+    var subtitle : String = "",
+    var teacherID : String = "",
+    var dateCreate : String = "15/2/2020",
+    var labelID: Int = 0 ,
+    var available : Boolean = true
 )
 data class Enrollment(
-    val classID : Int ,
-    val studentID : Int ,
+    val classID : String = "" ,
+    val studentID : String = "" ,
     val dateEnroll : String
 );
 data class Topic(
-    val topicID:Int ,
-    val title:String,
-    val classID:Int = 0
+    var topicID : String = "" ,
+    var title:String,
+    var classID:String = "0"
 );
 data class TextBox(
-    val textID:Int ,
-    val content:String,
-    val topicID: Int = 0
+    var textID : String = "",
+    var content : String,
+    var topicID: String = ""
 );
 
 data class Document(
-    val docID : Int ,
-    val discribe : String ,
-    val docType : String ,
-    val topicID: Int = 0
+    var docID : String = "" ,
+    var discribe : String ,
+    var docType : String ,
+    var topicID: String = "0"
 )
 data class Test(
-    val testID:Int = 0,
-    val testName : String = "" ,
-    val numberQues : Int = 0,
-    val time : Int = 0,
-    val topicID :Int = 0,
+    var testID:String  = "",
+    var testName : String = "" ,
+    var numberQues : Int = 0,
+    var time : Int = 0,
+    var topicID :String = "",
 )
 data class Question(
-    val quesID : Int,
-    val detail : String ,
-    val testID : Int
+    var quesID : String = "",
+    var detail : String ,
+    var testID : String
 )
 data class Answer(
-    val ansID : Int = 0,
-    val detail: String ,
-    val isCorrect : Boolean ,
-    val quesID: Int
+    var ansID : String = "",
+    var detail: String ,
+    var isCorrect : Boolean ,
+    var quesID: String = ""
 )
 data class Result(
-    val testID: Int ,
-    val numberCorrect : Int ,
-    val attemp : Int ,
-    val studentID: Int
+    var testID: String = "" ,
+    var numberCorrect : Int ,
+    var attemp : Int ,
+    var studentID: String = ""
 )

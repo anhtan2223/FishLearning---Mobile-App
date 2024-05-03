@@ -151,7 +151,7 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
         }
         items(A) {
             //Answer
-            val isChoose = view.answerList[view.nowQuestion] == it.ansID
+            val isChoose = view.answerList[view.nowQuestion].toString() == it.ansID
             if (Q.quesID == it.quesID) {
                 OneAnswer(
                     nav = nav,
@@ -214,7 +214,7 @@ fun ChooseQuestion(nav: NavController , view : DisplayUI)
                         OneNumber(
                             onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                             content = (it+1).toString() ,
-                            isChoose = view.answerList[it] != -1
+                            isChoose = view.answerList[it] != "-1"
                         )
 //                        Text(text = "${view.answerList[it]}")
                     }

@@ -7,8 +7,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.fish.ui.theme.DisplayUI
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @Composable
 fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
@@ -35,15 +37,14 @@ fun getToday():String{
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     return formatter.format(today)
 }
+fun stringToDate(input:String):Date{
+    return SimpleDateFormat("dd/MM/yyyy").parse(input)
+}
+fun dateToString(input: Date):String{
+//    SimpleDateFormat.getDateInstance()
+    return SimpleDateFormat("dd/MM/yyyy").format(input)
+}
 
 fun appendMessage(context:android.content.Context , message:String ){
     Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
-}
-
-fun filterByUserName(list:MutableList<User> , input:String){
-    val regexSearchUser = Regex(".*$input.*")
-    for( i in list){
-       if(!regexSearchUser.matches(i.name))
-           list.remove(i)
-    }
 }

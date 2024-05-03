@@ -62,11 +62,11 @@ fun DetailResult(nav: NavController , view: DisplayUI)
     {
         items(view.nowTest.numberQues){
             val answer = view.answerList[it]
-            val isTrue = (DemoData.AnswerList.find { it.ansID == answer })?.isCorrect ?: false
+            val isTrue = (DemoData.AnswerList.find { it.ansID == answer.toString() })?.isCorrect ?: false
                 OneRepareAnswer(
                     onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                     content = (it+1).toString() ,
-                    isChoose = answer != -1 ,
+                    isChoose = answer != "-1" ,
                     isTrue = isTrue
                 )
 //                        Text(text = "${view.answerList[it]}")
@@ -110,7 +110,7 @@ fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answ
                 }
             }
              items(A) {
-                 val isChoose = view.answerList[view.nowQuestion] == it.ansID
+                 val isChoose = view.answerList[view.nowQuestion].toString() == it.ansID
                  if (Q.quesID == it.quesID) {
                      RepairOneAnswer(
                          nav = nav,
@@ -150,14 +150,14 @@ fun OneRepareAnswer(onClick : ()-> Unit , content:String , isChoose:Boolean , is
         )
     }
 }
-fun CountNumberCorrect(numberQuestion : Int , answerList : List<Int> ) : String
+fun CountNumberCorrect(numberQuestion : Int , answerList : List<String> ) : String
 {
     var correct = 0
     for(i in answerList)
     {
         for( j in DemoData.AnswerList)
         {
-            if(i == j.ansID){
+            if(i== j.ansID){
                 if(j.isCorrect) correct++
             }
         }

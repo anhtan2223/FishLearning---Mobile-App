@@ -25,10 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -44,7 +42,6 @@ import com.example.fish.Models.HandleUser
 import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
-import com.example.fish.Untils.goTo
 import com.example.fish.Views.Admin.AdminView
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange

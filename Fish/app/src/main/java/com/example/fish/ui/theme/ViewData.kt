@@ -23,7 +23,7 @@ class DisplayUI : ViewModel(){
         private set
     var nowQuestion by mutableStateOf(0)
         private set
-    var answerList by mutableStateOf( mutableListOf<Int>() )
+    var answerList by mutableStateOf( mutableListOf<String>() )
         private set
     var userList by mutableStateOf(mutableListOf<User>())
         private set
@@ -83,7 +83,7 @@ class DisplayUI : ViewModel(){
         isTimeout = false
         answerList.clear()
         for(i in 0 until nowTest.numberQues)
-            answerList.add(-1)
+            answerList.add("-1")
         nowQuestion = 0
 
     }
@@ -93,12 +93,12 @@ class DisplayUI : ViewModel(){
         nowTest = test
         isTimeout = false
         for(i in 0 until nowTest.numberQues ){
-            answerList.add(-1)
+            answerList.add("-1")
         }
     }
-    fun chooseAnswer(answer: Int)
+    fun chooseAnswer(answerId: String)
     {
-        answerList.set(nowQuestion,answer)
+        answerList.set(nowQuestion,answerId)
         moveNextQues()
     }
     fun moveNextQues()

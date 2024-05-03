@@ -39,7 +39,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.fish.Untils.filterByUserName
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
@@ -180,7 +179,7 @@ fun AdminView(
             modifier = Modifier.padding(it)
         ){
             composable("Home")
-            { HomeScreen(nav = navController , view = viewModel) }
+            { AdminHomeView(nav = navController , view = viewModel) }
             composable("User")
             { viewModel.getUL() ; MainUserView(nav = navController , view = viewModel) }
             composable("Account")
