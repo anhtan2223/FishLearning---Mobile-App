@@ -1,13 +1,11 @@
 package com.example.fish.Controllers
 
 import android.util.Log
-import com.example.fish.Models.HandleClass
 import com.example.fish.Models.HandleEnrollment
 import com.example.fish.Models.HandleUser
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.Enrollment
 import com.example.fish.Untils.User
-import com.google.firebase.database.getValue
 
 fun enrollClass(info:Enrollment){
     HandleEnrollment.create(info)

@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.fish.Controllers.getNameUserByID
+import com.example.fish.R
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
@@ -40,7 +41,6 @@ import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.goTo
-import com.example.fish.R
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable

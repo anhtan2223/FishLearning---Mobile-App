@@ -1,10 +1,7 @@
 package com.example.fish.Controllers
 
 import com.example.fish.Models.HandleClass
-import com.example.fish.Models.HandleUser
 import com.example.fish.Untils.Class
-import com.example.fish.Untils.MyDB
-import com.example.fish.Untils.User
 import com.google.firebase.database.getValue
 
 fun createClass(info:Class){

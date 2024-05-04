@@ -1,7 +1,6 @@
 package com.example.fish.Views.Teacher
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +18,6 @@ import androidx.navigation.NavController
 import com.example.fish.Controllers.createClass
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.getToday
 import com.example.fish.Untils.goTo

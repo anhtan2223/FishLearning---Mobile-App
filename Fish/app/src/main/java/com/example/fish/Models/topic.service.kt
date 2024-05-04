@@ -1,8 +1,7 @@
 package com.example.fish.Models
 
-import com.example.fish.Untils.Topic
-
 import com.example.fish.Untils.MyDB
+import com.example.fish.Untils.Topic
 import com.google.firebase.database.DataSnapshot
 
 class HandleTopic{

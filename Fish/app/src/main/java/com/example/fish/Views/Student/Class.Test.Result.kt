@@ -62,7 +62,7 @@ fun DetailResult(nav: NavController , view: DisplayUI)
     {
         items(view.nowTest.numberQues){
             val answer = view.answerList[it]
-            val isTrue = (DemoData.AnswerList.find { it.ansID == answer })?.isCorrect ?: false
+            val isTrue = (DemoData.AnswerList.find { it.ansID == answer.toString() })?.isCorrect ?: false
                 OneRepareAnswer(
                     onClick = { view.changeQuestion(it) ; view.toogleChoose() },
                     content = (it+1).toString() ,

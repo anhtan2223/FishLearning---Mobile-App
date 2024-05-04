@@ -1,6 +1,5 @@
 package com.example.fish.Models
 
-import com.example.fish.Untils.Class
 import com.example.fish.Untils.Enrollment
 import com.example.fish.Untils.MyDB
 import com.google.firebase.database.DataSnapshot

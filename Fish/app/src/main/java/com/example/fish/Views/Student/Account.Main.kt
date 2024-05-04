@@ -17,12 +17,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : DisplayUI , navFather : NavController)
+fun AccountScreen(nav : NavController , view : DisplayUI , navFather : NavController)
 {
     Back(nav = nav, view = view)
     Column(

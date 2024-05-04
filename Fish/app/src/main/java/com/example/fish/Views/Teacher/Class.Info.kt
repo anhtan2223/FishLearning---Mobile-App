@@ -40,15 +40,12 @@ import com.example.fish.Controllers.getNameUserByID
 import com.example.fish.Controllers.getlistUserOfClass
 import com.example.fish.Controllers.updateClass
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange
 import com.example.fish.ui.theme.DisplayUI
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

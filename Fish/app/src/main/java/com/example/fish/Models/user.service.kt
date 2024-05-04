@@ -5,9 +5,6 @@ import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.User
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 
 class HandleUser {
     companion object{

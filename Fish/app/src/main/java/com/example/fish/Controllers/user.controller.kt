@@ -1,9 +1,8 @@
 package com.example.fish.Controllers
 
 import android.util.Log
-import com.example.fish.Untils.User
 import com.example.fish.Models.HandleUser
-import com.google.firebase.database.DataSnapshot
+import com.example.fish.Untils.User
 import com.google.firebase.database.getValue
 
 fun registerUser(info: User)

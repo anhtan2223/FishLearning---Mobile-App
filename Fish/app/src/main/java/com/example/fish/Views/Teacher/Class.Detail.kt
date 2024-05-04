@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.R
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Document
@@ -50,7 +51,6 @@ import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.goTo
-import com.example.fish.R
 import com.example.fish.Views.Student.DocumentView
 import com.example.fish.Views.Student.InfoClass
 import com.example.fish.Views.Student.TestView

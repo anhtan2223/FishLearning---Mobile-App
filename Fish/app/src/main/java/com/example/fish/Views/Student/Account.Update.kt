@@ -32,12 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fish.Controllers.updateUser
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
-import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
+
 @Composable
 fun UpdateInfo(nav: NavController ,  view : DisplayUI)
 {

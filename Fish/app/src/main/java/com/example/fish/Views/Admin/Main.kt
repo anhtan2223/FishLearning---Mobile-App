@@ -44,7 +44,6 @@ import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
 import com.example.fish.Views.Student.DetailClass
-import com.example.fish.Views.Student.HomeScreen
 import com.example.fish.Views.Student.UpdateInfo
 import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.ui.theme.NavItem
