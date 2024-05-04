@@ -107,27 +107,27 @@ object DemoData {
         ) ,
         User(
             "teacher1" ,
-            "Huỳnh Ngọc Thái Anh" , "hntanh@gmail.com" , "hntanh" , "12345678" ,
+            "Huỳnh Ngọc Thái Anh" , "hntanh@gmail.com" , "teacher1" , "12345678" ,
             2
         ) ,
         User(
             "teacher2" ,
-            "Lý Ðắc Trọng" , "ldt@gmail.com" , "ldtrong" , "12345678" ,
+            "Lý Ðắc Trọng" , "ldt@gmail.com" , "teacher2" , "12345678" ,
             2
         ) ,
         User(
             "teacher3" ,
-            "Hoàng Chí Thanh" , "htcthanh@gmail.com" , "hcthanh" , "12345678" ,
+            "Hoàng Chí Thanh" , "htcthanh@gmail.com" , "teacher3" , "12345678" ,
             2
         ) ,
         User(
             "teacher4" ,
-            "Nguyễn Tuấn Việt" , "ntviet@gmail.com" , "ntviet" , "12345678" ,
+            "Nguyễn Tuấn Việt" , "ntviet@gmail.com" , "teacher4" , "12345678" ,
             2
         ) ,
         User(
             "teacher5" ,
-            "Bạch Ðức Hải" , "bdhai@gmail.com" , "bdhai" , "12345678" ,
+            "Bạch Ðức Hải" , "bdhai@gmail.com" , "teacher5" , "12345678" ,
             2
         ) ,
         User(
@@ -176,7 +176,7 @@ object DemoData {
             "1",
             "Cybersecurity Fundamentals" ,
             "Nam 2023-2024" ,
-            "teacher1"
+            "teacher"
         ) ,
         Class(
             "2",
@@ -194,7 +194,7 @@ object DemoData {
             "4",
             "Discrete Mathematics" ,
             "Toán Rời Rạc - 2023-2024" ,
-            "teacher2"
+            "teacher"
         ) ,
         Class(
             "5",

@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fish.Controllers.getAllClass
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
 
@@ -92,6 +93,11 @@ fun StudentView(
                             placeholder = { Text(text = "Find Class" , textAlign = TextAlign.Center) },
                             onValueChange = {
                                 search = it
+                                getAllClass{
+                                    viewModel.getMyClass(it){
+                                        viewModel.filterMyClass(search)
+                                    }
+                                }
                             },
                             shape = CircleShape,
                             modifier = Modifier
@@ -187,7 +193,12 @@ fun StudentView(
             composable("Home")
             { HomeScreen(nav = navController , view = viewModel) }
             composable("Class")
-            { ClassScreen(nav = navController , view = viewModel) }
+            {
+                getAllClass {
+                    viewModel.getMyClass(it)
+                }
+                ClassScreen(nav = navController , view = viewModel)
+            }
             composable("Account")
             { AccountScreen(nav = navController , view = viewModel , navFather = navFather) }
             composable("UpdateInfo")

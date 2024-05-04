@@ -20,6 +20,13 @@ fun getUserList(handle:(MutableList<User>)->Unit){
         handle(listUser)
     }
 }
+fun getNameUserByID(id:String , name:(String)->Unit){
+    HandleUser.getUserById(id){
+        if (it != null) {
+            name(it.name)
+        }
+    }
+}
 fun isValidUsername(username:String , handle:(Boolean)->Unit)
 {
     HandleUser.checkUsername(username , handle )

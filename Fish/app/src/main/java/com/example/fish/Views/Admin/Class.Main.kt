@@ -12,9 +12,9 @@ import com.example.fish.Views.Student.OneClass
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun AdminHomeView(modifier: Modifier = Modifier, nav: NavController, view : DisplayUI)
+fun AdminHomeView(nav: NavController, view : DisplayUI)
 {
-    val listClass = DemoData.ListClass
+    val listClass = view.myClass
     Back(nav = nav, view = view , goTo = "Account")
     LazyColumn()
     {

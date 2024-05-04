@@ -43,7 +43,10 @@ fun AccountScreen(modifier: Modifier = Modifier, nav : NavController , view : Di
             content = "Đổi Mật Khẩu" ,
             color = Color(0xFF00FC46),
             modifier = Modifier.fillMaxWidth())
-        ButtonNav(onClick = { navFather.navigate(("LogIn")) },
+        ButtonNav(onClick = {
+            navFather.navigate(("LogIn"))
+            view.changePage("Home")
+                            },
             content = "Đăng Xuất" ,
             color = Color(0xFFDC0F0F),
             contentColor = Color.White,

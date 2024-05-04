@@ -15,31 +15,44 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getNameUserByID
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
-import com.example.fish.Untils.DemoData
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun ClassScreen(modifier: Modifier = Modifier, search:String="", nav: NavController , view : DisplayUI)
+fun ClassScreen(nav: NavController , view : DisplayUI)
 {
-    val listClass = DemoData.ListClass
+    val listClass = view.myClass
     Back(nav = nav, view = view)
     LazyColumn()
     {
         items(listClass){
-            OneClass(info = it , {nav.navigate("DetailClass") ; view.changePage("DetailClass") ; view.selectClass(it) })
+            OneClass(info = it) {
+                nav.navigate("DetailClass"); view.changePage("DetailClass");
+                view.selectClass(it)
+            }
         }
     }
 }
 @Composable
 fun OneClass(info:Class , onClick: ()->Unit)
 {
+    var nameTeacher by remember {
+        mutableStateOf("")
+    }
+    getNameUserByID(info.teacherID){
+        nameTeacher = it
+    }
     Box(modifier = Modifier)
     {
         Card(modifier = Modifier
@@ -58,7 +71,7 @@ fun OneClass(info:Class , onClick: ()->Unit)
                 modifier = Modifier
                     .padding(start = 18.dp  , bottom = 6.dp)
             )
-            Text(text = info.teacherID ,
+            Text(text = nameTeacher ,
                 style = MaterialTheme.typography.labelLarge ,
                 fontSize = 12.sp ,
                 modifier =  Modifier

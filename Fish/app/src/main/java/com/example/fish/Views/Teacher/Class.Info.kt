@@ -26,14 +26,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.updateClass
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
+import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange
@@ -46,26 +49,50 @@ import java.time.format.DateTimeFormatter
 fun ClassInfoView(nav : NavController , view : DisplayUI)
 {
     Back(nav = nav, view = view , "DetailClass")
+    val infoClass = view.nowClass.copy()
+    val context = LocalContext.current
     Column(
         modifier = Modifier.padding(start = 20.dp , end = 20.dp , top = 10.dp) ,
         horizontalAlignment = Alignment.CenterHorizontally ,
         verticalArrangement = Arrangement.SpaceBetween
 
     ) {
-        val today = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formattedDate = formatter.format(today)
         ListUser(view = view) {
             view.toogleChoose()
         }
-        Spacer(modifier = Modifier.padding(20.dp))
-        OneLineChange(title = "Giảng Viên", content = view.nowClass.teacherID, readOnly = true )
-        OneLineChange(title = "Lớp Học", content = view.nowClass.nameClass , readOnly = false )
-        OneLineChange(title = "Tiêu Đề", content = view.nowClass.subtitle , readOnly = false )
-        OneLineChange(title = "Ngày Tạo", content = formattedDate , readOnly = true )
-
-        ButtonNav(onClick = { goTo(nav , view , "DetailClass") }, content = "Xác Nhận")
+        Spacer(modifier = Modifier.padding(25.dp))
+        Card(
+            modifier = Modifier.fillMaxWidth(0.99f)
+        ) {
+            Spacer(modifier = Modifier.padding(5.dp))
+            OneLineChange(title = "Giảng Viên", content = infoClass.teacherID, readOnly = true )
+            OneLineChange(title = "Lớp Học", content = infoClass.nameClass ,
+                onChange = {
+                    if(it.isEmpty())
+                        appendMessage(context,"Không Thể Để Trống Tên Lớp Học")
+                    infoClass.nameClass = it
+                }
+            )
+            OneLineChange(title = "Tiêu Đề", content = infoClass.subtitle ,
+                onChange = {
+                    infoClass.subtitle = it
+                }
+            )
+            OneLineChange(title = "Ngày Tạo", content = infoClass.dateCreate , readOnly = true )
+            Spacer(modifier = Modifier.padding(10.dp))
+        }
         Spacer(modifier = Modifier.padding(10.dp))
+        ButtonNav(onClick = {
+            if(infoClass.nameClass.isEmpty()){
+                appendMessage(context , "Không Thể Để Tên Lớp Học Trống")
+                return@ButtonNav
+            }
+
+            updateClass(infoClass)
+            appendMessage(context,"Cập Nhật Thông Tin Lớp Học Thành Công")
+            goTo(nav , view , "DetailClass")
+
+        }, content = "Xác Nhận")
         ButtonNav(
             onClick = { goTo(nav , view , "Home") },
             content = "Giải Tán Lớp" ,

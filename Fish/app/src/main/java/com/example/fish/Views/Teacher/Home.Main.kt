@@ -22,16 +22,17 @@ import com.example.fish.Views.Student.OneClass
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
-fun TeacherHomeScreen(modifier: Modifier = Modifier, nav: NavController, view : DisplayUI)
+fun TeacherHomeScreen( nav: NavController, view : DisplayUI)
 {
-    val listClass = DemoData.myClass
+    val listClass = view.myClass
     Back(nav = nav, view = view , goTo = "Account")
     LazyColumn()
     {
         items(listClass){
-            OneClass(info = it , {
-                goTo(nav , view , "DetailClass")
-                view.selectClass(it) })
+            OneClass(info = it) {
+                goTo(nav, view, "DetailClass")
+                view.selectClass(it)
+            }
         }
     }
     Box(

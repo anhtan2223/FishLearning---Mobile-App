@@ -22,6 +22,15 @@ fun getAllClass(handle:(MutableList<Class>)->Unit){
         handle(list)
     }
 }
+fun getClassByTeacher(teacherID:String , handle:(MutableList<Class>)->Unit){
+    getAllClass {
+        val listClass = it.filter {
+            it.teacherID == teacherID
+        }.toMutableList()
+        handle(listClass)
+    }
+}
+
 fun getClass(id:String , value:(Class)->Unit){
     HandleClass.getById(id){
         it.getValue(Class::class.java)?.let { it1 -> value(it1) }
@@ -33,4 +42,5 @@ fun deleteClass(id:String){
 fun updateClass(id: String,info: Class){
     HandleClass.update(id, info)
 }
+
 

@@ -39,6 +39,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fish.Controllers.getAllClass
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
@@ -94,6 +95,12 @@ fun AdminView(
                                 search = it
                                 if(text == "Find User"){
                                     viewModel.filterUL(it)
+                                } else{
+                                    getAllClass{
+                                        viewModel.getMyClass(it){
+                                            viewModel.filterMyClass(search)
+                                        }
+                                    }
                                 }
                             },
                             shape = CircleShape,
@@ -179,7 +186,12 @@ fun AdminView(
             modifier = Modifier.padding(it)
         ){
             composable("Home")
-            { AdminHomeView(nav = navController , view = viewModel) }
+            {
+                getAllClass {
+                    viewModel.getMyClass(it)
+                }
+                AdminHomeView(nav = navController , view = viewModel)
+            }
             composable("User")
             { viewModel.getUL() ; MainUserView(nav = navController , view = viewModel) }
             composable("Account")

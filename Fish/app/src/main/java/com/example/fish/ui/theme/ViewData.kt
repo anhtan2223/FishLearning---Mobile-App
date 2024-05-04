@@ -27,6 +27,8 @@ class DisplayUI : ViewModel(){
         private set
     var userList by mutableStateOf(mutableListOf<User>())
         private set
+    var myClass by mutableStateOf(mutableListOf<Class>())
+        private set
     var Title by mutableStateOf("Home")
         private set
     var nowClass by mutableStateOf( Class() )
@@ -39,6 +41,16 @@ class DisplayUI : ViewModel(){
         private set
     var isTimeout by mutableStateOf(false)
         private set
+    fun getMyClass(list: MutableList<Class> , handle:()->Unit = {}){
+        myClass = list
+        handle()
+    }
+    fun filterMyClass(input: String){
+        val regexSearchUser = Regex(".*$input.*" , RegexOption.IGNORE_CASE)
+        myClass = myClass.filter {
+            regexSearchUser.matches(it.nameClass)
+        }.toMutableList()
+    }
     fun getUL(callback:()->Unit = {}){
         getUserList {
             this.userList = it

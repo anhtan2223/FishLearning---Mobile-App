@@ -38,6 +38,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fish.Controllers.getAllClass
+import com.example.fish.Controllers.getClassByTeacher
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
@@ -83,8 +85,22 @@ fun TeacherView(
                             TextField(
                                 value = search,
                                 placeholder = { Text(text = "Find Class" , textAlign = TextAlign.Center) },
-                                onValueChange = {
-                                    search = it
+                                onValueChange = { values ->
+                                    search = values
+                                    if(viewModel.Title == "Home"){
+                                        getClassByTeacher(viewModel.info.uid){
+                                            viewModel.getMyClass(it){
+                                                viewModel.filterMyClass(values)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        getAllClass{
+                                            viewModel.getMyClass(it){
+                                                viewModel.filterMyClass(values)
+                                            }
+                                        }
+                                    }
                                 },
                                 shape = CircleShape,
                                 modifier = Modifier
@@ -167,9 +183,19 @@ fun TeacherView(
                 modifier = Modifier.padding(it)
             ){
                 composable("Home")
-                { TeacherHomeScreen(nav = navController , view = viewModel) }
+                {
+                    getClassByTeacher(viewModel.info.uid){
+                        viewModel.getMyClass(it)
+                    }
+                    TeacherHomeScreen(nav = navController , view = viewModel)
+                }
                 composable("Class")
-                { ClassScreen(nav = navController , view = viewModel) }
+                {
+                    getAllClass(){
+                        viewModel.getMyClass(it)
+                    }
+                    ClassScreen(nav = navController , view = viewModel)
+                }
                 composable("Account")
                 { AccountScreen(nav = navController , view = viewModel , navFather = navFather) }
                 composable("UpdateInfo")
