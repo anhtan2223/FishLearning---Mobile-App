@@ -1,6 +1,7 @@
 package com.example.fish.Untils
 
 import com.example.fish.Controllers.createClass
+import com.example.fish.Controllers.enrollClass
 import com.example.fish.Controllers.updateClass
 import com.example.fish.Controllers.updateUser
 import com.example.fish.Models.HandleClass
@@ -11,10 +12,12 @@ class InitValue {
         fun resetAll(){
             resetUser()
             resetClass()
+            resetEnrollment()
         }
         fun initFirebase(){
             initUser()
             addListClass()
+            addListEnrollment()
         }
         fun initUser(){
             addListStudent()
@@ -22,6 +25,12 @@ class InitValue {
         }
         fun resetUser(){
             MyDB.user.removeValue()
+        }
+        fun resetEnrollment(){
+            MyDB.enrollment.removeValue()
+        }
+        fun resetClass(){
+            MyDB.classInfo.removeValue()
         }
         fun pushListStudent(){
             for(i in DemoData.ListUserPush)
@@ -31,12 +40,15 @@ class InitValue {
             for(i in DemoData.ListUser)
                 updateUser(i)
         }
-        fun resetClass(){
-            MyDB.classInfo.removeValue()
-        }
         fun addListClass(){
             for(i in DemoData.ListClass)
                 updateClass(i)
         }
+        fun addListEnrollment(){
+            for(i in DemoData.ListEnrollment){
+                enrollClass(i)
+            }
+        }
+
     }
 }

@@ -18,6 +18,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -27,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getNameUserByID
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
@@ -45,7 +50,7 @@ fun DetailClass(nav:NavController , view:DisplayUI)
     val listTopic = DemoData.Topic
     LazyColumn(modifier = Modifier){
         item {
-            InfoClass(info = view.nowClass , { goTo(nav, view , "ClassInfo") })
+            InfoClass(view , info = view.nowClass) { goTo(nav, view, "ClassInfo") }
         }
         items(listTopic)
         {
@@ -54,8 +59,14 @@ fun DetailClass(nav:NavController , view:DisplayUI)
     }
 }
 @Composable
-fun InfoClass(info : Class , onClick : () -> Unit = {})
+fun InfoClass(view: DisplayUI , info : Class , onClick : () -> Unit = {})
 {
+    var nameTeacher by remember {
+        mutableStateOf("")
+    }
+    getNameUserByID(view.nowClass.teacherID){
+        nameTeacher = it
+    }
     Card(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()) {
@@ -78,7 +89,7 @@ fun InfoClass(info : Class , onClick : () -> Unit = {})
             }
         }
         OneLine(title = "Tên Lớp", content = info.nameClass)
-        OneLine(title = "Giảng Viên", content = info.teacherID)
+        OneLine(title = "Giảng Viên", content = nameTeacher)
         OneLine(title = "Ngày Tạo", content = info.dateCreate)
     }
 }

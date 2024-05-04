@@ -63,7 +63,7 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
     val listTopic = DemoData.Topic
     LazyColumn(modifier = Modifier){
         item {
-            InfoClass(info = view.nowClass , { goTo(nav, view , "ClassInfo") })
+            InfoClass(view , info = view.nowClass) { goTo(nav, view, "ClassInfo") }
         }
         items(listTopic)
         {

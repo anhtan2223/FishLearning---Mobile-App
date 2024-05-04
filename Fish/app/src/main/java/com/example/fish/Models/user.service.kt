@@ -1,6 +1,7 @@
 package com.example.fish.Models
 
 import android.util.Log
+import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.User
 import com.google.firebase.database.DataSnapshot
@@ -20,7 +21,15 @@ class HandleUser {
             user.child(uid).get().addOnSuccessListener {
                 val value = it.getValue(User::class.java)
                 onSuccess(value)
-                Log.d("Test", value.toString())
+            }
+        }
+        fun getListUserByListId(list: List<String> , onGet:(MutableList<User>)->Unit = {}){
+            getUserList(){
+                val listUser = it.filter {
+                    it.uid in list
+                }.toMutableList()
+                Log.d("TAG", "getListUserByListId: $listUser")
+                onGet(listUser)
             }
         }
         fun getAllUser(onGetAllValue:(DataSnapshot)->Unit){
@@ -69,6 +78,5 @@ class HandleUser {
                 onUserFalse()
             }
         }
-
     }
 }

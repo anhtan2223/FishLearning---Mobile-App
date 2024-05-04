@@ -3,6 +3,9 @@ package com.example.fish.Untils
 data class Role(
     val roleID : Int ,
     val description : String
+    // 1 Student
+    // 2 Teacher
+    // 3 Manager
 )
 data class User(
     val uid : String = "Init",
@@ -12,9 +15,6 @@ data class User(
     var password : String = "",
     var roleid: Int = 3 ,
     var available:Boolean = true
-    // 1 Student
-    // 2 Teacher
-    // 3 Manager
 )
 data class Label(
     val labelID : String ,
@@ -32,7 +32,7 @@ data class Class(
 data class Enrollment(
     val classID : String = "" ,
     val studentID : String = "" ,
-    val dateEnroll : String
+    val dateEnroll : String = "25/8/2023"
 );
 data class Topic(
     var topicID : String = "" ,

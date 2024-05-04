@@ -23,6 +23,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +36,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getNameUserByID
+import com.example.fish.Controllers.getlistUserOfClass
 import com.example.fish.Controllers.updateClass
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
@@ -51,6 +57,12 @@ fun ClassInfoView(nav : NavController , view : DisplayUI)
     Back(nav = nav, view = view , "DetailClass")
     val infoClass = view.nowClass.copy()
     val context = LocalContext.current
+    var nameTeacher by remember {
+        mutableStateOf("")
+    }
+    getNameUserByID(view.nowClass.teacherID){
+        nameTeacher = it
+    }
     Column(
         modifier = Modifier.padding(start = 20.dp , end = 20.dp , top = 10.dp) ,
         horizontalAlignment = Alignment.CenterHorizontally ,
@@ -65,7 +77,7 @@ fun ClassInfoView(nav : NavController , view : DisplayUI)
             modifier = Modifier.fillMaxWidth(0.99f)
         ) {
             Spacer(modifier = Modifier.padding(5.dp))
-            OneLineChange(title = "Giảng Viên", content = infoClass.teacherID, readOnly = true )
+            OneLineChange(title = "Giảng Viên", content = nameTeacher , readOnly = true )
             OneLineChange(title = "Lớp Học", content = infoClass.nameClass ,
                 onChange = {
                     if(it.isEmpty())
@@ -104,6 +116,13 @@ fun ClassInfoView(nav : NavController , view : DisplayUI)
 @Composable
 fun ListUser(view: DisplayUI , onClick:()->Unit )
 {
+    var listUser by remember {
+        mutableStateOf(mutableListOf<User>())
+    }
+    getlistUserOfClass(view.nowClass.classID){
+        listUser = it
+    }
+
     Card(
         modifier = Modifier.clickable { onClick() }
     ) {
@@ -128,7 +147,7 @@ fun ListUser(view: DisplayUI , onClick:()->Unit )
         //LazyHere
         if(view.isChoose)
             LazyColumn {
-                items(DemoData.ListUser){
+                items(listUser){
                     Divider(
                         color = Color.White ,
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -142,7 +161,7 @@ fun ListUser(view: DisplayUI , onClick:()->Unit )
 fun OneUser(info : User , onRemove: ()->Unit = {})
 {
     val role = when(info.roleid){
-        1 -> "Người Học"
+        3 -> "Người Học"
         2 -> "Người Giảng Dạy"
         else -> "Admin"
     }

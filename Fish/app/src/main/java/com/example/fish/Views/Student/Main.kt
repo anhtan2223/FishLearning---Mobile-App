@@ -38,6 +38,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fish.Controllers.getAllClass
+import com.example.fish.Controllers.getListClassOfUser
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
 
@@ -191,7 +192,12 @@ fun StudentView(
             modifier = Modifier.padding(it)
         ){
             composable("Home")
-            { HomeScreen(nav = navController , view = viewModel) }
+            {
+                getListClassOfUser(viewModel.info.uid){
+                    viewModel.getMyClass(it)
+                }
+                HomeScreen(nav = navController , view = viewModel)
+            }
             composable("Class")
             {
                 getAllClass {

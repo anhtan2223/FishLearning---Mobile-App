@@ -9,14 +9,7 @@ object DemoData {
         "123" ,
         1
     )
-    val UserInfo2 = User(
-        "2" ,
-        "Lê Sỹ Anh Tấn" ,
-        "anhtan3332@gmail.com" ,
-        "anhtan2223" ,
-        "123" ,
-        2
-    )
+
     val ListUserPush = listOf<User>(
         User(
             "~" ,
@@ -176,92 +169,159 @@ object DemoData {
             "1",
             "Cybersecurity Fundamentals" ,
             "Nam 2023-2024" ,
-            "teacher"
+            "teacher" ,
+            "10/2/2023"
         ) ,
         Class(
             "2",
             "Machine Learning" ,
             "HK2 - Nam Hoc 2023-2024" ,
-            "teacher3"
+            "teacher3",
+            "15/2/2023"
         ) ,
         Class(
             "3",
             "OOP" ,
             "Nam 2023-2024" ,
-            "teacher4"
+            "teacher4",
+            "20/2/2023"
         ) ,
         Class(
             "4",
             "Discrete Mathematics" ,
             "Toán Rời Rạc - 2023-2024" ,
-            "teacher"
+            "teacher",
+            "25/2/2023"
         ) ,
         Class(
             "5",
             "Graph Theory" ,
             "Nam 2023-2024" ,
-            "teacher5"
+            "teacher5",
+            "1/3/2023"
         ) ,
         Class(
             "6",
             "Big Data Analytics" ,
             "Niên Khoá 2023-2024" ,
-            "teacher1"
+            "teacher1",
+            "2/3/2023"
         ) ,
         Class(
             "7",
             "Cloud Computing" ,
             "Học Kỳ 1 - Năm Học 2023-2024" ,
-            "teacher3"
+            "teacher3",
+            "1/1/2023"
         ) ,
         Class(
             "8",
             "Data Visualization" ,
             "Niên Khoá Kỳ 1 Năm 2022-2023" ,
-            "teacher4"
+            "teacher4",
+            "15/2/2023"
         ) ,
         Class(
             "9",
             "Game Development with Unity" ,
             "Nam 2023-2024" ,
-            "teacher1"
+            "teacher1",
+            "12/2/2023"
         ) ,
         Class(
             "10",
             "Natural Language Processing" ,
             "Năm 2023-2024" ,
-            "teacher3"
+            "teacher3",
+            "13/2/2023"
         ) ,
         Class(
             "11",
             "Digital Image Analysis" ,
             "Năm 2022-2023" ,
-            "teacher2"
+            "teacher2",
+            "9/2/2023"
         ) ,
         Class(
             "12",
             "Internet of Things (IoT)" ,
             "Năm 2023-2024" ,
-            "teacher4"
+            "teacher4",
+            "10/5/2023"
         ) ,
         Class(
             "13",
             "Speech Recognition" ,
             "Năm 2023-2024" ,
-            "teacher1"
+            "teacher1",
+            "10/4/2023"
         ) ,
         Class(
             "14",
             "Computer Architecture" ,
             "Năm 2023-2024" ,
-            "teacher3"
+            "teacher3",
+            "10/6/2023"
         ) ,
         Class(
             "15",
             "Biomedical Signal Processing" ,
             "Năm 2023-2024" ,
-            "teacher2"
+            "teacher2",
+            "12/4/2023"
         ) ,
+    )
+    val ListEnrollment = listOf<Enrollment>(
+        Enrollment("1" , "student1" , "24/5/2023") ,
+        Enrollment("1" , "student2" , "24/5/2023") ,
+        Enrollment("1" , "student3" , "24/5/2023") ,
+        Enrollment("1" , "student4" , "24/5/2023") ,
+        Enrollment("1" , "student5" , "24/5/2023") ,
+        Enrollment("2" , "student1" ) ,
+        Enrollment("2" , "student3" ) ,
+        Enrollment("2" , "student5" ) ,
+        Enrollment("3" , "student1" ) ,
+        Enrollment("3" , "student2" ) ,
+        Enrollment("3" , "student3" ) ,
+        Enrollment("3" , "student4" ) ,
+        Enrollment("3" , "student5" ) ,
+        Enrollment("4" , "student1" ) ,
+        Enrollment("4" , "student2" ) ,
+        Enrollment("4" , "student4" ) ,
+        Enrollment("5" , "student1" ) ,
+        Enrollment("5" , "student2" ) ,
+        Enrollment("5" , "student3" ) ,
+        Enrollment("6" , "student2" ) ,
+        Enrollment("6" , "student4" ) ,
+        Enrollment("6" , "student5" ) ,
+        Enrollment("7" , "student1" ) ,
+        Enrollment("7" , "student2" ) ,
+        Enrollment("7" , "student3" ) ,
+        Enrollment("7" , "user" ) ,
+        Enrollment("7" , "student5" ) ,
+        Enrollment("8" , "student1" ) ,
+        Enrollment("8" , "user" ) ,
+        Enrollment("8" , "student3" ) ,
+        Enrollment("8" , "student4" ) ,
+        Enrollment("8" , "student5" ) ,
+        Enrollment("9" , "student1" ) ,
+        Enrollment("9" , "student2" ) ,
+        Enrollment("9" , "student3" ) ,
+        Enrollment("9" , "student4" ) ,
+        Enrollment("9" , "user" ) ,
+        Enrollment("10" , "student1" ) ,
+        Enrollment("10" , "user" ) ,
+        Enrollment("10" , "student3" ) ,
+        Enrollment("10" , "student4" ) ,
+        Enrollment("10" , "student5" ) ,
+        Enrollment("11" , "student1" ) ,
+        Enrollment("11" , "student2" ) ,
+        Enrollment("12" , "student1" ) ,
+        Enrollment("12" , "student3" ) ,
+        Enrollment("12" , "student5" ) ,
+        Enrollment("13" , "user" ) ,
+        Enrollment("14" , "student3" ) ,
+        Enrollment("15" , "student5" ) ,
     )
     val myClass = listOf<Class>(
         Class(
