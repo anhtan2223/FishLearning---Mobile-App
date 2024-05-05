@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.fish.Controllers.getlistUserOfClass
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.User
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav

@@ -43,7 +43,6 @@ import com.example.fish.Controllers.getClassByTeacher
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
-import com.example.fish.Views.Student.ClassScreen
 import com.example.fish.Views.Student.NavItem
 import com.example.fish.Views.Student.UpdateInfo
 import com.example.fish.ui.theme.DisplayUI

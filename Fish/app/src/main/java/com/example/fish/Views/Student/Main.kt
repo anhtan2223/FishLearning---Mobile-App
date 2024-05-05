@@ -1,5 +1,7 @@
 package com.example.fish.Views.Student
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -53,6 +55,7 @@ data class UserInfo(
     val Username:String ,
     val Password:String
 )
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StudentView(
