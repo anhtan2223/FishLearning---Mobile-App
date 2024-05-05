@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -36,9 +37,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.deleteClass
+import com.example.fish.Controllers.deleteEnrollment
 import com.example.fish.Controllers.getNameUserByID
 import com.example.fish.Controllers.getlistUserOfClass
 import com.example.fish.Controllers.updateClass
+import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.User
 import com.example.fish.Untils.appendMessage
@@ -102,12 +106,32 @@ fun ClassInfoView(nav : NavController , view : DisplayUI)
             goTo(nav , view , "DetailClass")
 
         }, content = "Xác Nhận")
+        var isShow by remember {
+            mutableStateOf(false)
+        }
+        AddAlert(
+            isShow = isShow ,
+            title = "Xác Nhận Xoá Lớp Học",
+            content = infoClass.nameClass ,
+            onCancel = { isShow = false} ,
+            onConfirm = {
+                isShow = false
+                deleteClass(infoClass.classID)
+                appendMessage(context , "Xoá Lớp Học Thành Công")
+                goTo(nav , view , "Home")
+            }
+        )
         ButtonNav(
-            onClick = { goTo(nav , view , "Home") },
+            onClick = {
+                  isShow = true
+//                goTo(nav , view , "Home")
+            },
             content = "Giải Tán Lớp" ,
             color = Color(0xFFDC0F0F) ,
             contentColor = Color.White
             )
+
+
     }
 }
 @Composable
@@ -119,6 +143,7 @@ fun ListUser(view: DisplayUI , onClick:()->Unit )
     getlistUserOfClass(view.nowClass.classID){
         listUser = it
     }
+    val context = LocalContext.current
 
     Card(
         modifier = Modifier.clickable { onClick() }
@@ -141,6 +166,29 @@ fun ListUser(view: DisplayUI , onClick:()->Unit )
                 Text(text = "Danh Sách Thành Viên" , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
             }
         }
+        var isShow by remember {
+            mutableStateOf(false)
+        }
+        var info by remember {
+            mutableStateOf(User())
+        }
+        AddAlert(
+            isShow = isShow ,
+            title = "Bạn Chắc Chắn Xoá",
+            content = info.name,
+            onCancel = {
+                isShow = false
+            } ,
+            onConfirm = {
+                isShow = false
+                deleteEnrollment(view.nowClass.classID , info.uid)
+                getlistUserOfClass(view.nowClass.classID){
+                    listUser = it
+                }
+                appendMessage(context , "Đã Xoá ${info.name}")
+            }
+        )
+
         //LazyHere
         if(view.isChoose)
             LazyColumn {
@@ -149,7 +197,10 @@ fun ListUser(view: DisplayUI , onClick:()->Unit )
                         color = Color.White ,
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
-                    OneUser(info = it)
+                    OneUser(info = it){
+                        info = it
+                        isShow = true
+                    }
                 }
             }
     }
@@ -206,3 +257,4 @@ fun OneUser(info : User , onRemove: ()->Unit = {})
         }
     }
 }
+

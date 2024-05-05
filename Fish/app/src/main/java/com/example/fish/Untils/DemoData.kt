@@ -163,6 +163,54 @@ object DemoData {
             "12345678" ,
             3
         ) ,
+        User(
+            "student6" ,
+            "Võ Hương Thu" ,
+            "vhthu@gmail.com" ,
+            "vhthu" ,
+            "12345678" ,
+            3
+        ) ,
+        User(
+            "student7" ,
+            "Mai Lê Quỳnh" ,
+            "mlquynh@gmail.com" ,
+            "mlquynh" ,
+            "12345678" ,
+            3
+        ) ,
+        User(
+            "student8" ,
+            "Huỳnh Nhật Huy" ,
+            "hnhuy@gmail.com" ,
+            "hnhuy" ,
+            "12345678" ,
+            3
+        ) ,
+        User(
+            "student9" ,
+            "Huỳnh Bảo Thái" ,
+            "hbthai@gmail.com" ,
+            "hbthai" ,
+            "12345678" ,
+            3
+        ) ,
+        User(
+            "student10" ,
+            "Vũ Hoàng Khang" ,
+            "vhkhang@gmail.com" ,
+            "vhkhang" ,
+            "12345678" ,
+            3
+        ) ,
+        User(
+            "student5" ,
+            "Tạ Minh Triệu" ,
+            "tmtrieu@gmail.com" ,
+            "tmtrieu" ,
+            "12345678" ,
+            3
+        ) ,
     )
     val ListClass = listOf<Class>(
         Class(
@@ -277,77 +325,88 @@ object DemoData {
         Enrollment("1" , "student3" , "24/5/2023") ,
         Enrollment("1" , "student4" , "24/5/2023") ,
         Enrollment("1" , "student5" , "24/5/2023") ,
+        Enrollment("1" , "student8" , "24/5/2023") ,
+        Enrollment("1" , "student9" , "24/5/2023") ,
+        Enrollment("1" , "user" , "24/5/2023") ,
+
         Enrollment("2" , "student1" ) ,
         Enrollment("2" , "student3" ) ,
         Enrollment("2" , "student5" ) ,
+        Enrollment("2" , "student6" ) ,
+        Enrollment("2" , "student7" ) ,
+        Enrollment("2" , "student8" ) ,
+
         Enrollment("3" , "student1" ) ,
         Enrollment("3" , "student2" ) ,
         Enrollment("3" , "student3" ) ,
         Enrollment("3" , "student4" ) ,
         Enrollment("3" , "student5" ) ,
+        Enrollment("3" , "student6" ) ,
+        Enrollment("3" , "student7" ) ,
+        Enrollment("3" , "student8" ) ,
+        Enrollment("3" , "student9" ) ,
+        Enrollment("3" , "student10" ) ,
+        Enrollment("3" , "user" ) ,
+
+
         Enrollment("4" , "student1" ) ,
         Enrollment("4" , "student2" ) ,
         Enrollment("4" , "student4" ) ,
+        Enrollment("4" , "student7" ) ,
+        Enrollment("4" , "student8" ) ,
+        Enrollment("4" , "student9" ) ,
+        Enrollment("4" , "student3" ) ,
+        Enrollment("4" , "student10" ) ,
+        Enrollment("4" , "user" ) ,
+
         Enrollment("5" , "student1" ) ,
         Enrollment("5" , "student2" ) ,
         Enrollment("5" , "student3" ) ,
         Enrollment("6" , "student2" ) ,
         Enrollment("6" , "student4" ) ,
         Enrollment("6" , "student5" ) ,
+
         Enrollment("7" , "student1" ) ,
         Enrollment("7" , "student2" ) ,
         Enrollment("7" , "student3" ) ,
         Enrollment("7" , "user" ) ,
         Enrollment("7" , "student5" ) ,
+
         Enrollment("8" , "student1" ) ,
         Enrollment("8" , "user" ) ,
         Enrollment("8" , "student3" ) ,
         Enrollment("8" , "student4" ) ,
         Enrollment("8" , "student5" ) ,
+
         Enrollment("9" , "student1" ) ,
         Enrollment("9" , "student2" ) ,
         Enrollment("9" , "student3" ) ,
         Enrollment("9" , "student4" ) ,
         Enrollment("9" , "user" ) ,
+
         Enrollment("10" , "student1" ) ,
         Enrollment("10" , "user" ) ,
         Enrollment("10" , "student3" ) ,
         Enrollment("10" , "student4" ) ,
         Enrollment("10" , "student5" ) ,
+
         Enrollment("11" , "student1" ) ,
         Enrollment("11" , "student2" ) ,
+
         Enrollment("12" , "student1" ) ,
         Enrollment("12" , "student3" ) ,
         Enrollment("12" , "student5" ) ,
+
         Enrollment("13" , "user" ) ,
+
         Enrollment("14" , "student3" ) ,
+
         Enrollment("15" , "student5" ) ,
-    )
-    val myClass = listOf<Class>(
-        Class(
-            "2",
-            "Machine Learning" ,
-            "HK2 - Nam Hoc 2023-2024" ,
-            "Nguyễn Tuấn Việt"
-        ),
-        Class(
-            "3",
-            "OOP" ,
-            "Nam 2023-2024" ,
-            "Lý Trọng Dũng"
-        ) ,
-        Class(
-            "5",
-            "Graph Theory" ,
-            "Nam 2023-2024" ,
-            "Nguyễn Minh Thông"
-        )
     )
     val Topic = listOf<Topic>(
         Topic(
             "1",
             "Chủ Đề Số 1" ,
-            "0"
         ) ,
         Topic(
             "2",

@@ -4,6 +4,9 @@ import com.example.fish.Models.HandleTopic
 import com.example.fish.Untils.Topic
 import com.google.firebase.database.getValue
 
+fun addTopicToClass(info: Topic){
+    HandleTopic.create(info)
+}
 fun getAllTopic(handle:(MutableList<Topic>)->Unit){
     HandleTopic.getAll{
         val list = mutableListOf<Topic>()
@@ -18,9 +21,12 @@ fun getTopic(id:String , value:(Topic)->Unit){
         it.getValue(Topic::class.java)?.let { it1 -> value(it1) }
     }
 }
-fun updateTopic(id: String , info:Topic){
-    HandleTopic.update(id,info)
+fun updateTopic(info:Topic){
+    HandleTopic.updateInfo(info)
 }
-fun deleteTopic(id:String){
-    HandleTopic.delete(id)
+fun deleteTopic(classId:String , id:String){
+    HandleTopic.deleteTopic(classId,id)
+}
+fun addItemToTopic(classId: String , info:Any){
+    HandleTopic.addToTopic(classId , info)
 }

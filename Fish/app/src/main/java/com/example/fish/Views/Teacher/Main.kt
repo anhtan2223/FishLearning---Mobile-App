@@ -194,7 +194,7 @@ fun TeacherView(
                     getAllClass(){
                         viewModel.getMyClass(it)
                     }
-                    ClassScreen(nav = navController , view = viewModel)
+                    ClassScreen_Teacher(nav = navController , view = viewModel)
                 }
                 composable("Account")
                 { AccountScreen(nav = navController , view = viewModel , navFather = navFather) }

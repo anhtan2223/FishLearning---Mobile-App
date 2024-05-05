@@ -12,6 +12,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,8 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getlistUserOfClass
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.User
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneUser_Student
@@ -30,6 +36,12 @@ import com.example.fish.ui.theme.DisplayUI
 @Composable
 fun ClassInfoView_Admin(nav : NavController, view : DisplayUI)
 {
+    var listUser by remember {
+        mutableStateOf(mutableListOf<User>())
+    }
+    getlistUserOfClass(view.nowClass.classID){
+        listUser = it
+    }
     Back(nav = nav, view = view , "DetailClass")
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -47,12 +59,18 @@ fun ClassInfoView_Admin(nav : NavController, view : DisplayUI)
                         Text(text = "Danh Sách Thành Viên" , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
                     }
                 }
-                items(DemoData.ListUser){
+                items(listUser){
                     Divider(
                         color = Color.White ,
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
                     OneUser_Student(info = it)
+                }
+                item{
+                    Divider(
+                        color = Color.White ,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
                 }
             }
         }

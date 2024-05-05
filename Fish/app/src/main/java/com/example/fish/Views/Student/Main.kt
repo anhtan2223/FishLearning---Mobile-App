@@ -138,9 +138,10 @@ fun StudentView(
                         title = {
                             val text = when(viewModel.Title)
                             {
-                                "DetailClass" -> "Lớp Học"
-                                "TestPrepare" -> "Bài Kiểm Tra"
-                                "Result"      -> "Chi Tiết Bài Kiểm Tra"
+                                "DetailClass"   -> "Lớp Học"
+                                "TestPrepare"   -> "Bài Kiểm Tra"
+                                "Result"        -> "Chi Tiết Bài Kiểm Tra"
+                                "RegisterClass" -> "Đăng Kí Lớp Học"
                                 else -> " "
                             }
                             Text(
@@ -154,6 +155,7 @@ fun StudentView(
                             {
                                 "TestPrepare"   -> "DetailClass"
                                 "Result"        -> "TestPrepare"
+                                "RegisterClass" -> "Class"
                                 else            -> "Home"
                             }
                             IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
@@ -221,6 +223,8 @@ fun StudentView(
             { ResultView(nav = navController, view = viewModel) }
             composable("ClassInfo")
             { ClassInfoView(nav = navController, view = viewModel) }
+            composable("RegisterClass")
+            { EnterClassView(navController , viewModel) }
         }
     }
 }

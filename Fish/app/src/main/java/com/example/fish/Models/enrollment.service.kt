@@ -22,12 +22,17 @@ class HandleEnrollment{
         fun deleteByClass(id: String){
             ref.child(id).removeValue()
         }
-        fun deleteByUID(info: Enrollment){
-            ref.child(info.classID).child(info.studentID).removeValue()
+        fun deleteByUID(classId: String , studentID:String ){
+            ref.child(classId).child(studentID).removeValue()
         }
         fun getlistUserByClass(classId:String , onGet:(DataSnapshot)->Unit){
             ref.child(classId).get().addOnSuccessListener {
                 onGet(it)
+            }
+        }
+        fun checkClassHasUser(classId: String , uid:String , onCheck:(Boolean)->Unit){
+            ref.child(classId).child(uid).get().addOnSuccessListener{
+                onCheck(it.exists())
             }
         }
 

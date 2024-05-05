@@ -1,11 +1,14 @@
 package com.example.fish.Controllers
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.fish.Models.HandleEnrollment
 import com.example.fish.Models.HandleUser
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.Enrollment
 import com.example.fish.Untils.User
+import com.example.fish.Untils.getToday
 
 fun enrollClass(info:Enrollment){
     HandleEnrollment.create(info)
@@ -38,5 +41,18 @@ fun getListClassOfUser(uid:String , handle:(MutableList<Class>)->Unit = {}){
                 it.classID in listClass
             }.toMutableList())
         }
+    }
+}
+fun deleteEnrollment(classId: String , uid: String){
+    HandleEnrollment.deleteByUID(classId,uid)
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun registerClass(classId: String, uid: String){
+    HandleEnrollment.create(Enrollment(classId , uid , getToday()))
+}
+
+fun isInClass(classId: String , uid: String , onCheck:(Boolean)->Unit){
+    HandleEnrollment.checkClassHasUser(classId , uid){
+        onCheck(it)
     }
 }

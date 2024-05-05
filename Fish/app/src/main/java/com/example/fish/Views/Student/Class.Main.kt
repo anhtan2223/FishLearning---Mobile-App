@@ -38,7 +38,8 @@ fun ClassScreen(nav: NavController , view : DisplayUI)
     {
         items(listClass){
             OneClass(info = it) {
-                nav.navigate("DetailClass"); view.changePage("DetailClass");
+                nav.navigate("RegisterClass");
+                view.changePage("RegisterClass");
                 view.selectClass(it)
             }
         }
