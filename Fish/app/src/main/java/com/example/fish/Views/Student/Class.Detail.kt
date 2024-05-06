@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.fish.Controllers.getNameUserByID
+import com.example.fish.Controllers.getTopicByClass
 import com.example.fish.R
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
@@ -40,19 +43,25 @@ import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
+import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
 
 @Composable
 fun DetailClass(nav:NavController , view:DisplayUI)
 {
+    var topicOfClass by remember {
+        mutableStateOf(mutableListOf<getTopic>())
+    }
+    getTopicByClass(view.nowClass.classID){
+        topicOfClass = it
+    }
     Back(nav , view)
-    val listTopic = DemoData.Topic
     LazyColumn(modifier = Modifier){
         item {
             InfoClass(view , info = view.nowClass) { goTo(nav, view, "ClassInfo") }
         }
-        items(listTopic)
+        items(topicOfClass)
         {
             TopicView(info = it , nav , view)
         }
@@ -91,37 +100,40 @@ fun InfoClass(view: DisplayUI , info : Class , onClick : () -> Unit = {})
         OneLine(title = "Tên Lớp", content = info.nameClass)
         OneLine(title = "Giảng Viên", content = nameTeacher)
         OneLine(title = "Ngày Tạo", content = info.dateCreate)
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
     }
 }
 @Composable
-fun TopicView(info:Topic , nav:NavController , view: DisplayUI)
+fun TopicView(info:getTopic, nav:NavController , view: DisplayUI)
 {
-    //Get More Topic Element By Query IN SQL
     Card(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()) {
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(10.dp)
                 .fillMaxWidth() ,
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = info.title ,
+                text = info.info.title ,
                 style = TextStyle(fontWeight = FontWeight.Bold ,
-                fontSize = 18.sp))
+                fontSize = 20.sp))
         }
-        for(i in DemoData.InsideTopic)
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        for(i in info.detail)
         {
             when(i) {
-                is TextBox  -> if (i.topicID == info.topicID) TextBoxView(info = i)
-                is Document -> if (i.topicID == info.topicID) DocumentView(info = i)
-                is Test     -> if (i.topicID == info.topicID) TestView(info = i , nav , view)
+                is TextBox  -> TextBoxView(info = i)
+                is Document -> DocumentView(info = i)
+                is Test     -> TestView(info = i , nav , view)
             }
         }
     }
 }
+
 @Composable
 fun TextBoxView(info:TextBox)
 {

@@ -404,67 +404,107 @@ object DemoData {
         Enrollment("15" , "student5" ) ,
     )
     val Topic = listOf<Topic>(
-        Topic(
-            "1",
-            "Chủ Đề Số 1" ,
-        ) ,
-        Topic(
-            "2",
-            "Chủ Đề 2" ,
-        ) ,
-        Topic(
-            "3",
-            "Chủ Đề Số 3" ,
-        ) ,
-        Topic(
-            "4",
-            "Chủ Đề 4"
-        ) ,
+        Topic("1", "Introduction to Cybersecurity", "1"),
+        Topic("2", "Network Security", "1"),
+        Topic("3", "Cryptography", "1"),
+        Topic("4", "Cyber Threats and Attacks", "1"),
+        Topic("5", "Security Policies and Procedures", "1"),
+        Topic("6", "Incident Response and Management", "1"),
+
+        Topic("7", "Introduction to Machine Learning", "2"),
+        Topic("8", "Supervised Learning", "2"),
+        Topic("9", "Unsupervised Learning", "2"),
+        Topic("10", "Machine Learning Algorithms", "2"),
+        Topic("11", "Regression and Classification", "2"),
+        Topic("12", "Neural Networks", "2"),
+
+        Topic("13", "Introduction to Object-Oriented Programming", "3"),
+        Topic("14", "Classes and Objects", "3"),
+        Topic("15", "Inheritance and Polymorphism", "3"),
+        Topic("16", "Encapsulation", "3"),
+        Topic("17", "Abstraction", "3"),
+        Topic("18", "Interfaces and Abstract Classes", "3"),
+
+        Topic("46", "Introduction to Discrete Mathematics", "4"),
+        Topic("47", "Logic and Propositional Calculus", "4"),
+        Topic("48", "Sets and Relations", "4"),
+        Topic("49", "Functions and Sequences", "4"),
+        Topic("50", "Combinatorics", "4"),
+        Topic("51", "Graph Theory", "4"),
+
+//        Topic("1", "Chủ Đề Số 1" , ) ,
+//        Topic("2", "Chủ Đề 2" , ) ,
+//        Topic("3", "Chủ Đề Số 3" , ) ,
+//        Topic("4", "Chủ Đề 4", ) ,
     )
+
     val InsideTopic = listOf<Any>(
-        TextBox(
-            "0" ,
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." ,
-            "1"
-            ) ,
-        TextBox(
-            "1" ,
-            "Một Đoạn Văn Bản Sẽ Hiển Thị Như Trên" ,
-            "2"
-        ) ,
-        Document(
-            "0" ,
-            "Đây Là Tiêu Đề Cho Một Tài Liệu Để Tải Về" ,
-            "Word" ,
-            "3"
-        ) ,
-        Document(
-            "2",
-            "Một Tài Liệu Sẽ Như Thế Này" ,
-            "Word" ,
-            "4"
-        ) ,
-        Test(
-            "0",
-            "Tên Của Bài Kiểm Tra" ,
-            6 ,
-            1800 ,
-            "1"
-        ) ,
-        Test(
-            "1" ,
-            "Kiểm Tra Giữa Kỳ" ,
-            5 ,
-            5 ,
-            "3"
-        ) ,
-        Test(
-            "2" ,
-            "TOEIC" ,
-            200 ,
-            120 ,
-            "1"
-        )
+        TextBox("1", "Introduction to Cybersecurity", "1"),
+        TextBox("2", "Basic principles of cryptography", "3"),
+        TextBox("3", "Network Security Protocols", "2"),
+        TextBox("4", "Cyber Threats: Types and Examples", "4"),
+        TextBox("5", "Security Policies: Implementation and Enforcement", "5"),
+        TextBox("6", "Incident Response Plan: Steps and Procedures", "6"),
+        Document("7", "Introduction to Cybersecurity", "PDF", "1"),
+        Document("8", "Network Security Basics", "PDF", "3"),
+        Document("9", "Public Key Infrastructure (PKI) Explained", "PDF", "3"),
+        Document("10", "Types of Cyber Threats", "PDF", "4"),
+        Document("11", "Sample Security Policies", "PDF", "5"),
+        Document("12", "Incident Response Plan Template", "PDF", "6"),
+        Test("13", "Introduction to Cybersecurity Quiz", 10, 20, "1"),
+        Test("14", "Network Security Test", 15, 30, "2"),
+
+        TextBox("15", "Introduction to Machine Learning", "7"),
+        TextBox("16", "Supervised Learning", "8"),
+        TextBox("17", "Unsupervised Learning", "9"),
+        TextBox("18", "Machine Learning Algorithms", "10"),
+        TextBox("19", "Regression and Classification", "11"),
+        TextBox("20", "Neural Networks", "12"),
+        Document("21", "Introduction to Machine Learning", "PDF", "7"),
+        Document("22", "Supervised Learning Techniques", "PDF", "8"),
+        Document("23", "Unsupervised Learning Methods", "PDF", "9"),
+        Document("24", "Machine Learning Algorithms Overview", "PDF", "10"),
+        Document("25", "Regression Analysis in Machine Learning", "PDF", "11"),
+        Document("26", "Neural Networks Fundamentals", "PDF", "12"),
+        Test("27", "Introduction to Machine Learning Quiz", 10, 20, "7"),
+        Test("28", "Supervised Learning Test", 15, 30, "8"),
+
+        TextBox("29", "Introduction to Object-Oriented Programming", "13"),
+        TextBox("30", "Understanding Classes and Objects", "14"),
+        TextBox("31", "Inheritance and Polymorphism Concepts", "15"),
+        TextBox("32", "Encapsulation in OOP", "16"),
+        TextBox("33", "Abstraction and its Importance", "17"),
+        TextBox("34", "Interfaces vs. Abstract Classes", "18"),
+        Document("35", "Introduction to Object-Oriented Programming", "PDF", "13"),
+        Document("36", "Classes and Objects Basics", "PDF", "14"),
+        Document("37", "Inheritance and Polymorphism Overview", "PDF", "15"),
+        Document("38", "Encapsulation Principles", "PDF", "16"),
+        Document("39", "Abstraction Concepts Explained", "PDF", "17"),
+        Test("40", "Introduction to OOP Quiz", 10, 20, "13"),
+        Test("41", "Classes and Objects Test", 15, 30, "14"),
+        Test("42", "Inheritance and Polymorphism Exam", 20, 40, "15"),
+        Test("43", "Encapsulation Assessment", 15, 30, "16"),
+        Test("44", "Abstraction Quiz", 10, 20, "17"),
+        Test("45", "Interfaces vs. Abstract Classes Test", 15, 30, "18"),
+
+        TextBox("46", "Introduction to Discrete Mathematics", "46"),
+        TextBox("47", "Basic Logic and Propositional Calculus", "47"),
+        TextBox("48", "Sets and Relations Explained", "48"),
+        TextBox("49", "Functions and Sequences Overview", "49"),
+        TextBox("50", "Fundamentals of Combinatorics", "50"),
+        TextBox("51", "Introduction to Graph Theory", "51"),
+        Document("52", "Introduction to Discrete Mathematics", "PDF", "46"),
+        Document("53", "Logic and Propositional Calculus Basics", "PDF", "47"),
+        Document("54", "Sets and Relations in Mathematics", "PDF", "48"),
+        Document("55", "Functions and Sequences Handbook", "PDF", "49"),
+        Document("56", "Combinatorics Fundamentals", "PDF", "50"),
+        Document("57", "Graph Theory Primer", "PDF", "51"),
+        Test("58", "Introduction to Discrete Mathematics Quiz", 10, 20, "46"),
+        Test("59", "Logic and Propositional Calculus Test", 15, 30, "47"),
+        Test("60", "Sets and Relations Exam", 20, 40, "48"),
+        Test("61", "Functions and Sequences Assessment", 15, 30, "49"),
+        Test("62", "Combinatorics Quiz", 10, 20, "50"),
+        Test("63", "Graph Theory Test", 15, 30, "51"),
     )
     val QuestionList = listOf<Question>(
         Question(

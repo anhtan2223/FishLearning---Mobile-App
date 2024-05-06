@@ -3,6 +3,7 @@ package com.example.fish.Untils
 import com.example.fish.Controllers.addItemToTopic
 import com.example.fish.Controllers.enrollClass
 import com.example.fish.Controllers.updateClass
+import com.example.fish.Controllers.updateDetailTopic
 import com.example.fish.Controllers.updateTopic
 import com.example.fish.Controllers.updateUser
 import com.example.fish.Models.HandleUser
@@ -20,7 +21,6 @@ class InitValue {
             addListClass()
             addListEnrollment()
             addListTopic()
-            addItemsTopic()
         }
         fun initUser(){
             addListStudent()
@@ -58,13 +58,25 @@ class InitValue {
         fun addListTopic(){
             for(i in DemoData.Topic){
                 updateTopic(i)
+                for(j in DemoData.InsideTopic){
+                    when(j){
+                        is TextBox -> {
+                            if(j.topicID == i.topicID)
+                                updateDetailTopic(i.classID , j)
+                        }
+                        is Document -> {
+                            if(j.topicID == i.topicID)
+                                updateDetailTopic(i.classID , j)
+                        }
+                        is Test -> {
+                            if(j.topicID == i.topicID)
+                                updateDetailTopic(i.classID , j)
+                        }
+                    }
+                }
             }
         }
-        fun addItemsTopic(){
-            for(i in DemoData.InsideTopic){
-                addItemToTopic("1" , i)
-            }
-        }
+
 
     }
 }

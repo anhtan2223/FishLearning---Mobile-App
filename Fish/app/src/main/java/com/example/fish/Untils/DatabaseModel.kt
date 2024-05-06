@@ -36,28 +36,30 @@ data class Enrollment(
 );
 data class Topic(
     var topicID : String = "" ,
-    var title:String,
+    var title:String = "",
     var classID:String = "1"
 );
+
+sealed class ItemTopic
 data class TextBox(
     var textID : String = "",
-    var content : String,
+    var content : String = "",
     var topicID: String = ""
-);
+) : ItemTopic()
 
 data class Document(
     var docID : String = "" ,
-    var discribe : String ,
-    var docType : String ,
+    var discribe : String = "" ,
+    var docType : String = "" ,
     var topicID: String = "0"
-)
+) : ItemTopic()
 data class Test(
     var testID:String  = "",
     var testName : String = "" ,
     var numberQues : Int = 0,
     var time : Int = 0,
     var topicID :String = "",
-)
+) : ItemTopic()
 data class Question(
     var quesID : String = "",
     var detail : String ,
@@ -74,4 +76,9 @@ data class Result(
     var numberCorrect : Int ,
     var attemp : Int ,
     var studentID: String = ""
+)
+
+data class getTopic(
+    var info : Topic ,
+    var detail : MutableList<ItemTopic>
 )

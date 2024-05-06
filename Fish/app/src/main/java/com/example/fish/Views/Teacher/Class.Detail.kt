@@ -43,13 +43,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getTopicByClass
 import com.example.fish.R
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
-import com.example.fish.Untils.Topic
+import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.DocumentView
 import com.example.fish.Views.Student.InfoClass
@@ -60,7 +60,12 @@ import com.example.fish.ui.theme.DisplayUI
 fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
 {
     Back(nav , view)
-    val listTopic = DemoData.Topic
+    var listTopic by remember {
+        mutableStateOf(mutableListOf<getTopic>())
+    }
+    getTopicByClass(view.nowClass.classID){
+        listTopic = it
+    }
     LazyColumn(modifier = Modifier){
         item {
             InfoClass(view , info = view.nowClass) { goTo(nav, view, "ClassInfo") }
@@ -95,7 +100,7 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
     }
 }
 @Composable
-fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
+fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
 {
     //Get More Topic Element By Query IN SQL
     Card(modifier = Modifier
@@ -127,10 +132,10 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 var content by remember {
-                    mutableStateOf(info.title)
+                    mutableStateOf(info.info.title)
                 }
                 if(!isSetting)
-                    Text(text = info.title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
+                    Text(text = info.info.title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
                 else
                     BasicTextField(
                         value =  content,
@@ -139,14 +144,12 @@ fun Teacher_TopicView(info:Topic , nav:NavController , view: DisplayUI)
                     )
             }
         }
-        for(i in DemoData.InsideTopic)
+        for(i in info.detail)
         {
             when(i) {
-                is TextBox  -> if (i.topicID == info.topicID) CorrectText(info = i)
-                is Test     -> if (i.topicID == info.topicID) TestView(info = i , nav , view ,"TestResult")
-//                is TextBox  -> if (i.TopicID == info.TopicID) TextBoxView(info = i)
-                is Document -> if (i.topicID == info.topicID) DocumentView(info = i)
-//                is Test     -> if (i.TopicID == info.TopicID) TestView(info = i , nav , view ,"TestResult")
+                is TextBox  -> CorrectText(info = i)
+                is Test     -> TestView(info = i , nav , view ,"TestResult")
+                is Document -> DocumentView(info = i)
             }
         }
         if(isSetting)
