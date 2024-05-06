@@ -37,18 +37,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.addItemToTopic
+import com.example.fish.Controllers.deleteItemTopic
+import com.example.fish.Controllers.deleteTopic
 import com.example.fish.Controllers.getTopicByClass
+import com.example.fish.Controllers.newTopic
+import com.example.fish.Controllers.updateItemTopic
+import com.example.fish.Controllers.updateTopic
 import com.example.fish.R
+import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
+import com.example.fish.Untils.Topic
+import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.DocumentView
@@ -60,6 +70,7 @@ import com.example.fish.ui.theme.DisplayUI
 fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
 {
     Back(nav , view)
+    val context = LocalContext.current
     var listTopic by remember {
         mutableStateOf(mutableListOf<getTopic>())
     }
@@ -72,7 +83,14 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
         }
         items(listTopic)
         {
-            Teacher_TopicView(info = it , nav , view)
+            Teacher_TopicView(info = it , nav , view ,
+                onUpdate = {
+                    getTopicByClass(view.nowClass.classID){
+                        listTopic = it
+                    }
+                }
+
+            )
         }
         item {
             //Add New Topic
@@ -88,7 +106,13 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
                             BorderStroke(3.dp, Color(0xFFF57C00)),
                             shape = CircleShape
                         ) ,
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        newTopic(Topic(classID = view.nowClass.classID , title = "Chủ Đề Mới"))
+                        getTopicByClass(view.nowClass.classID){
+                            listTopic = it
+                        }
+                        appendMessage(context , "Thêm Topic Mới Thành Công")
+                    }
                 ) {
                     Icon(
                         tint = Color(0xFFF57C00),
@@ -100,13 +124,34 @@ fun Teacher_DetailClass(nav:NavController , view:DisplayUI)
     }
 }
 @Composable
-fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
+fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI , onUpdate:()->Unit = {})
 {
+    var context = LocalContext.current
+    var isDeleteTopic by remember {
+        mutableStateOf(false)
+    }
+
+    AddAlert(
+        isShow = isDeleteTopic ,
+        content = "Xác Nhận Xoá Chủ Đề ${info.info.title}" ,
+        onCancel = { isDeleteTopic = false } ,
+        onConfirm = {
+            deleteTopic(view.nowClass.classID , info.info.topicID)
+            appendMessage(context , "Đã Xoá Chủ Đề Thành Công")
+            onUpdate()
+            isDeleteTopic = false
+        }
+    )
+
+
     //Get More Topic Element By Query IN SQL
     Card(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()) {
 
+        var content by remember {
+            mutableStateOf(info.info.title)
+        }
         var isSetting by remember {
             mutableStateOf(false)
         }
@@ -116,11 +161,13 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
         )
         {
             Row {
-                if(isSetting)
-                    IconButton(onClick = {  } ) {
-                      Icon(imageVector = Icons.Filled.Delete , contentDescription = null)
+                if(isSetting){
+                    IconButton(onClick = { isDeleteTopic = true } ) {
+                        Icon(imageVector = Icons.Filled.Delete , contentDescription = null)
                     }
-                IconButton(onClick = { isSetting = !isSetting }) {
+                }
+
+                IconButton(onClick = { isSetting = !isSetting ; content = info.info.title }) {
                     Icon(imageVector = Icons.Filled.Settings, contentDescription = null)
                 }
             }
@@ -131,25 +178,26 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                var content by remember {
-                    mutableStateOf(info.info.title)
-                }
                 if(!isSetting)
                     Text(text = info.info.title , style = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp))
                 else
                     BasicTextField(
                         value =  content,
                         textStyle = TextStyle(fontWeight = FontWeight.Bold , fontSize = 18.sp , color = Color.White) ,
-                        onValueChange = { content = it }
+                        onValueChange = {
+                            content = it
+                            info.info.title = it
+                            updateTopic(info.info)
+                        }
                     )
             }
         }
         for(i in info.detail)
         {
             when(i) {
-                is TextBox  -> CorrectText(info = i)
+                is TextBox  -> CorrectText(info = i , view , info.info , onUpdate = onUpdate)
                 is Test     -> TestView(info = i , nav , view ,"TestResult")
-                is Document -> DocumentView(info = i)
+                is Document -> DocumentView(info = i){ view.setDocument(i) ;  goTo(nav,view,"DocumentDetail") }
             }
         }
         if(isSetting)
@@ -168,7 +216,10 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
                             BorderStroke(3.dp, Color(0xFF00E5FF)),
                             shape = CircleShape
                         ) ,
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        addItemToTopic(view.nowClass.classID , Document(topicID = info.info.topicID , discribe = "New Document"))
+                        onUpdate()
+                    }
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.file_regular),
@@ -187,7 +238,10 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
                             BorderStroke(3.dp, Color(0xFF00E5FF)),
                             shape = CircleShape
                         ) ,
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        addItemToTopic(view.nowClass.classID , TextBox(topicID = info.info.topicID , content = "New Text") )
+                        onUpdate()
+                    }
                 ) {
                     Icon(
                         tint = Color(0xFF00E5FF),
@@ -203,7 +257,10 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
                             BorderStroke(3.dp, Color(0xFF00E5FF)),
                             shape = CircleShape
                         ) ,
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        addItemToTopic(view.nowClass.classID , Test(topicID = info.info.topicID , testName = "New Test" ) )
+                        onUpdate()
+                    }
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.pencil_solid),
@@ -219,21 +276,41 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI)
     }
 }
 @Composable
-fun CorrectText(info : TextBox)
+fun CorrectText(info : TextBox , view: DisplayUI , infoTopic:Topic , onUpdate: () -> Unit)
 {
-    var setting by remember {
+    var isDeleteTopic by remember {
+        mutableStateOf(false)
+    }
+    var context = LocalContext.current
+
+    var content by remember {
         mutableStateOf(info.content)
     }
     var isCorrect by remember {
         mutableStateOf(false)
     }
+    AddAlert(
+        isShow = isDeleteTopic ,
+        content = "Xác Nhận Xoá Mục Văn Bản" ,
+        onCancel = { isDeleteTopic = false } ,
+        onConfirm = {
+            deleteItemTopic(view.nowClass.classID , infoTopic.topicID , info.textID)
+            appendMessage(context , "Xoá Văn Bản Thành Công")
+            onUpdate()
+            isDeleteTopic = false
+            isCorrect = false
+        }
+    )
     Row {
         Icon(
             imageVector = if(isCorrect) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowRight,
             contentDescription = null ,
             modifier = Modifier
                 .padding(start = 15.dp, top = 8.dp)
-                .clickable { isCorrect = !isCorrect }
+                .clickable {
+                    content = info.content
+                    isCorrect = !isCorrect
+                }
         )
         if(isCorrect)
             Column {
@@ -245,7 +322,10 @@ fun CorrectText(info : TextBox)
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                             .size(25.dp)
-                            .clickable { isCorrect = !isCorrect }
+                            .clickable {
+                                updateItemTopic(view.nowClass.classID , info.copy(content = content))
+                                isCorrect = !isCorrect
+                            }
                     )
                     Spacer(modifier = Modifier.padding(horizontal = 5.dp))
                     Icon(
@@ -254,7 +334,10 @@ fun CorrectText(info : TextBox)
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                             .size(25.dp)
-                            .clickable { isCorrect = !isCorrect }
+                            .clickable {
+                                content = info.content
+                                isCorrect = !isCorrect
+                            }
                     )
                     Spacer(modifier = Modifier.padding(horizontal = 5.dp))
                     Icon(
@@ -263,13 +346,15 @@ fun CorrectText(info : TextBox)
                         modifier = Modifier
                             .padding(vertical = 8.dp)
                             .size(25.dp)
-                            .clickable { isCorrect = !isCorrect }
+                            .clickable { isDeleteTopic = true }
                     )
                 }
                 BasicTextField(
                     modifier = Modifier.padding(bottom = 20.dp),
-                    value = setting ,
-                    onValueChange = { setting = it } ,
+                    value = content ,
+                    onValueChange = {
+                        content = it
+                    } ,
                     textStyle = TextStyle(
                         color = Color.White ,
                         fontSize = 15.sp
@@ -278,7 +363,7 @@ fun CorrectText(info : TextBox)
             }
         else
             Text(
-                text = info.content ,
+                text = content ,
                 style = MaterialTheme.typography.bodyLarge ,
                 modifier = Modifier
                     .padding(bottom = 20.dp, top = 8.dp)

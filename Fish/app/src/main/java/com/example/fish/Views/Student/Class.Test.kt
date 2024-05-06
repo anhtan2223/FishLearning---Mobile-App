@@ -69,7 +69,7 @@ fun TestView(modifier: Modifier = Modifier ,  nav: NavController, view : Display
     QNA(nav = nav, view = view , listQ[view.nowQuestion] , listA , goBack = {  view.timeOut() } )
 }
 @Composable
-fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Boolean ,  onlick: () -> Unit )
+fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Boolean ,  onClick: () -> Unit )
 {
     val CardColors = if(isChoose) Color(0xFFFFAB40) else Color(0xFF444444)
     val TextColor = if(isChoose) Color.Black else Color.White
@@ -78,7 +78,7 @@ fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Bool
         Modifier
             .padding(top = 20.dp)
             .fillMaxWidth(0.9f)
-            .clickable { onlick() }
+            .clickable { onClick() }
     ) {
         Text(
             modifier = Modifier
@@ -128,7 +128,6 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
 
         }
         item {
-            //Question
             Card(
                 Modifier
                     .padding(bottom = 40.dp, top = 50.dp)
@@ -158,7 +157,7 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
                     view = view,
                     A = it,
 //                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
-                    onlick = { view.chooseAnswer(it.ansID) } , isChoose = isChoose)
+                    onClick = { view.chooseAnswer(it.ansID) } , isChoose = isChoose)
             }
         }
     }
@@ -216,7 +215,6 @@ fun ChooseQuestion(nav: NavController , view : DisplayUI)
                             content = (it+1).toString() ,
                             isChoose = view.answerList[it] != "-1"
                         )
-//                        Text(text = "${view.answerList[it]}")
                     }
                 }
                 ButtonNav(
@@ -232,7 +230,7 @@ fun ChooseQuestion(nav: NavController , view : DisplayUI)
 fun Timer(time:Int , goBack : () -> Unit)
 {
     var remainTime by remember {
-        mutableStateOf(time)
+        mutableStateOf(time*60)
     }
     val corountine = rememberCoroutineScope()
 

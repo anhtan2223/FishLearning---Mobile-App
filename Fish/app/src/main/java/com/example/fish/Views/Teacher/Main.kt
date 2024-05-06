@@ -133,6 +133,7 @@ fun TeacherView(
                                     "DetailClass" -> "Lớp Học"
                                     "TestResult" -> "Kết Quả Kiểm Tra"
                                     "NewClass" -> "Tạo Lớp Mới"
+                                    "DocumentDetail" -> "Thông Tin Tài Liệu"
                                     else -> " "
                                 }
                                 Text(
@@ -144,7 +145,7 @@ fun TeacherView(
                             navigationIcon = {
                                 val goWhere = when(viewModel.Title)
                                 {
-                                    "TestResult" , "ClassInfo"  -> "DetailClass"
+                                    "TestResult" , "ClassInfo" ,"DocumentDetail"  -> "DetailClass"
                                     else                        -> "Home"
                                 }
                                 IconButton(onClick = { goTo(navController , viewModel , goWhere) }) {
@@ -213,6 +214,8 @@ fun TeacherView(
                 { ChangeQuestionView(nav = navController, view = viewModel) }
                 composable("SumTest")
                 { SummaryTestView(nav = navController, view = viewModel) }
+                composable("DocumentDetail")
+                { DocumentDetailView(nav = navController, view = viewModel) }
             }
         }
     }

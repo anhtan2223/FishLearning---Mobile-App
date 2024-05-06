@@ -151,7 +151,7 @@ fun TextBoxView(info:TextBox)
     }
 }
 @Composable 
-fun DocumentView(info:Document)
+fun DocumentView(info:Document , onClick:()->Unit = {})
 {
     Row(
         modifier = Modifier.padding(start = 15.dp)
@@ -165,7 +165,9 @@ fun DocumentView(info:Document)
         Text(
             text = info.discribe ,
             style = MaterialTheme.typography.bodyLarge ,
-            modifier = Modifier.padding(start = 5.dp , bottom = 20.dp)
+            modifier = Modifier.padding(start = 5.dp , bottom = 20.dp).clickable{
+                onClick()
+            }
         )
     }
 }

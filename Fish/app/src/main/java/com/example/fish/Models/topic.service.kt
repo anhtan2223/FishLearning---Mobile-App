@@ -24,10 +24,8 @@ class HandleTopic{
         fun updateInfo(info:Topic){
             ref.child(info.classID).child(info.topicID).child("info").setValue(info)
         }
-        fun updateTitle(info:Topic){
-            ref.child(info.classID).child(info.topicID).child("info").child("title").setValue(info.title)
-        }
-        fun addToTopic(classId: String ,  info:Any){
+
+        fun addToTopic(classId: String ,  info:ItemTopic){
             when(info){
                 is TextBox -> {
                     val newRef = ref.child(classId).child(info.topicID).child("detail").push()
@@ -47,7 +45,7 @@ class HandleTopic{
             }
         }
 
-        fun updateDetail(classId: String , info: Any){
+        fun updateDetail(classId: String , info: ItemTopic){
             when(info){
                 is TextBox -> {
                     ref.child(classId).child(info.topicID).child("detail").child(info.textID).setValue(info)
@@ -60,8 +58,14 @@ class HandleTopic{
                 }
             }
         }
+        fun deleteItemTopic(classId: String , topicId: String , itemId : String){
+            ref.child("$classId/$topicId/detail/$itemId").removeValue()
+        }
         fun deleteTopic(classId:String , id:String){
             ref.child(classId).child(id).removeValue()
+        }
+        fun deleteTopicOfClass(classId: String){
+            ref.child(classId).removeValue()
         }
         fun getTopicOfClass(classId: String , onGet:(MutableList<getTopic>)->Unit){
             ref.child(classId).get().addOnSuccessListener {
@@ -75,7 +79,6 @@ class HandleTopic{
                         if      (j.child("textID").exists())     value = j.getValue<TextBox>()!!
                         else if (j.child("docID").exists())      value = j.getValue<Document>()!!
                         else if (j.child("testID").exists())     value = j.getValue<Test>()!!
-
 //                        Log.d(TAG, "TestRoom() returned: $value")
                         listItems.add(value)
                     }

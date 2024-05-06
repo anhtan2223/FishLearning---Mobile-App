@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.User
 
@@ -24,6 +25,8 @@ class DisplayUI : ViewModel(){
     var nowQuestion by mutableStateOf(0)
         private set
     var answerList by mutableStateOf( mutableListOf<String>() )
+        private set
+    var nowDocument by mutableStateOf(Document())
         private set
     var userList by mutableStateOf(mutableListOf<User>())
         private set
@@ -41,6 +44,9 @@ class DisplayUI : ViewModel(){
         private set
     var isTimeout by mutableStateOf(false)
         private set
+    fun setDocument(doc:Document){
+        nowDocument = doc
+    }
     fun getMyClass(list: MutableList<Class> , handle:()->Unit = {}){
         myClass = list
         handle()
