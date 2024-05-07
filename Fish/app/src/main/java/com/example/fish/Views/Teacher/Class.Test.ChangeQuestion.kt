@@ -59,7 +59,6 @@ import com.example.fish.Controllers.deleteItemTopic
 import com.example.fish.Controllers.deleteOneAnswer
 import com.example.fish.Controllers.deleteOneQuestion
 import com.example.fish.Controllers.getAnswerByQuestion
-import com.example.fish.Controllers.getList
 import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.Controllers.toggleCorrectAnswer
 import com.example.fish.Controllers.updateAnswer
@@ -68,13 +67,18 @@ import com.example.fish.R
 import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Question
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneNumber
 import com.example.fish.ui.theme.DisplayUI
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -118,7 +122,9 @@ fun ChangeQuestionView(nav : NavController , view : DisplayUI)
             getQuestionByTest(view.nowTest.testID){
                 listQ = it
             }
-            appendMessage(context , "Add New Question")
+            appendMessage(context , "Thêm Câu Hỏi Mới Thành Công")
+            view.changeQuestion(view.nowTest.numberQues-1)
+
         }
     )
 }
@@ -138,6 +144,7 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
     var listA by remember {
         mutableStateOf(mutableListOf<Answer>())
     }
+
     getAnswerByQuestion(Q.quesID){
         listA = it
     }
@@ -209,12 +216,11 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                 isChoose = isChange ,
                 isSetting = isSetting ,
                 onDeleteAnswer = {id ->
-                    runBlocking {
-                        listA.clear()
                         deleteOneAnswer(id)
-                        getAnswerByQuestion(Q.quesID){ listA = it }
-                    }
-
+                        listA = listA.filter {
+                            it.ansID != id
+                        }.toMutableList()
+                    isSetting = !isSetting
                 } ,
                 onUpdate = {value ->
                     it.detail = value
@@ -233,17 +239,11 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                     ) ,
                 onClick = {
                     runBlocking {
-                        launch {
-                            listA.clear()
-                        }
-                        launch {
-                            onNewAnswer()
-                        }
-                        launch {
-                            getAnswerByQuestion(Q.quesID){
+                        onNewAnswer()
+                        getAnswerByQuestion(Q.quesID){
                                 listA = it
-                            }
                         }
+
                     }
                 }
             ) {
@@ -256,7 +256,7 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
     }
 }
 @Composable
-fun MenuQuestion(view : DisplayUI , onChoose:()->Unit = {} , onUpdate:()->Unit)
+fun MenuQuestion(view : DisplayUI , onChoose:()->Unit = {} , onUpdate:()->Unit )
 {
     Dialog( onDismissRequest = {  })
     {
@@ -281,7 +281,7 @@ fun MenuQuestion(view : DisplayUI , onChoose:()->Unit = {} , onUpdate:()->Unit)
                             onChoose()
                         },
                         content = (it+1).toString() ,
-                        isChoose = false
+                        isChoose = (view.nowIndexQuestion == it)
                     )
                 }
             }
@@ -309,9 +309,6 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                   onUpdate: (String) -> Unit = {} ,
                   onDeleteAnswer:(String)->Unit)
 {
-    var content by remember {
-        mutableStateOf(A.detail)
-    }
     var context = LocalContext.current
 
     val CardColors = if(isChoose) Color(0xFF23DC2D) else Color(0xFF444444)
@@ -345,7 +342,7 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                     .clickable { toogleResult() }
 
                 ,
-                text = content ,
+                text = A.detail ,
                 style = MaterialTheme.typography.labelMedium ,
                 fontSize = 16.sp ,
                 textAlign = TextAlign.Center ,
@@ -353,6 +350,9 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                 color = TextColor
             )
         else{
+            var content by remember {
+                mutableStateOf(A.detail)
+            }
             Row(
                 modifier = Modifier
                     .fillMaxSize()

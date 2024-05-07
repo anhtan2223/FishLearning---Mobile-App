@@ -26,7 +26,7 @@ class HandleAnswer{
             ref.child(id).child("correct").setValue(!nowValue)
         }
 
-       fun getAnswerByQuestion(quesId:String , onGet:(DataSnapshot)->Unit){
+       fun getAnswerByQuestion( onGet:(DataSnapshot)->Unit ){
            ref.get().addOnSuccessListener {
                onGet(it)
            }
