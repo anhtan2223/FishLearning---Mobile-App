@@ -19,6 +19,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getAnswerByQuestion
+import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
@@ -40,10 +46,14 @@ fun ResultView(nav : NavController , view : DisplayUI)
     Back(nav = nav, view = view , goTo = "TestPrepare")
     val classInfo = view.nowClass
     val testInfo = view.nowTest
-    val listQ = DemoData.QuestionList
-    val listA = DemoData.AnswerList
+    var listQ by remember {
+        mutableStateOf(mutableListOf<Question>(Question()))
+    }
+    getQuestionByTest(testInfo.testID){
+        listQ = it
+    }
     if(view.isChoose)
-        showAnswer( nav , view , listQ[view.nowQuestion] , listA )
+        showAnswer(view , listQ[view.nowIndexQuestion] )
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
     ) {
@@ -51,31 +61,42 @@ fun ResultView(nav : NavController , view : DisplayUI)
         OneLine(title = "Bài Kiểm Tra", content = testInfo.testName)
         OneLine(title = "Số Câu Đúng", content = CountNumberCorrect(testInfo.numberQues , view.answerList))
         OneLine(title = "Chi Tiết ", content = "")
-        DetailResult(nav = nav, view = view)
+        DetailResult(view = view)
+        Text(text = "${view.answerList}")
     }
 }
 
 @Composable
-fun DetailResult(nav: NavController , view: DisplayUI)
+fun DetailResult(view: DisplayUI)
 {
     LazyVerticalGrid(columns = GridCells.Adaptive(60.dp) )
     {
         items(view.nowTest.numberQues){
-            val answer = view.answerList[it]
-            val isTrue = (DemoData.AnswerList.find {it.ansID == answer})?.isCorrect ?: false
-                OneRepareAnswer(
-                    onClick = { view.changeQuestion(it) ; view.toogleChoose() },
-                    content = (it+1).toString() ,
-                    isChoose = answer != "-1" ,
-                    isTrue = isTrue
-                )
-//                        Text(text = "${view.answerList[it]}")
+            var answerInfo by remember {
+                mutableStateOf(Answer())
+            }
+            val answerId = view.answerList[it]
+            
+            val isTrue = (DemoData.AnswerList.find {it.ansID == answerId})?.isCorrect ?: false
+            
+            OneRepareAnswer(
+                onClick = { view.changeQuestion(it) ; view.toogleChoose() },
+                content = (it+1).toString() ,
+                isChoose = answerId != "-1" ,
+                isTrue = isTrue
+            )
         }
     }
 }
 @Composable
-fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answer>)
+fun showAnswer(view: DisplayUI , Q:Question )
 {
+    var A by remember {
+        mutableStateOf(mutableListOf<Answer>())
+    }
+    getAnswerByQuestion(Q.quesID){
+        A = it
+    }
     Dialog( onDismissRequest = { /*TODO*/ })
     {
         BackHandler {
@@ -110,12 +131,10 @@ fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answ
                 }
             }
              items(A) {
-                 val isChoose = view.answerList[view.nowQuestion].toString() == it.ansID
+                 val isChoose = view.answerList[view.nowIndexQuestion] == it.ansID
                  if (Q.quesID == it.quesID) {
                      RepairOneAnswer(
-                         nav = nav,
-                         view = view,
-                         A = it,
+                         A = it ,
                          isChoose = isChoose)
                  }
              }
@@ -125,7 +144,7 @@ fun showAnswer(nav :NavController , view: DisplayUI , Q:Question , A : List<Answ
 @Composable
 fun OneRepareAnswer(onClick : ()-> Unit , content:String , isChoose:Boolean , isTrue:Boolean )
 {
-    var borderColor = when(isChoose){
+    val borderColor = when(isChoose){
         true -> if(isTrue) Color(0xFF1CCF39) else Color(0xFFFF2D2D)
         false -> Color.White
     }
@@ -155,9 +174,9 @@ fun CountNumberCorrect(numberQuestion : Int , answerList : List<String> ) : Stri
     var correct = 0
     for(i in answerList)
     {
-        for( j in DemoData.AnswerList)
+        for(j in DemoData.AnswerList)
         {
-            if(i== j.ansID){
+            if(i == j.ansID){
                 if(j.isCorrect) correct++
             }
         }
@@ -165,7 +184,7 @@ fun CountNumberCorrect(numberQuestion : Int , answerList : List<String> ) : Stri
     return "$correct / $numberQuestion"
 }
 @Composable
-fun RepairOneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Boolean )
+fun RepairOneAnswer(A : Answer , isChoose: Boolean )
 {
     val CardColors = if(A.isCorrect)
         Color(0xFF31DB38)

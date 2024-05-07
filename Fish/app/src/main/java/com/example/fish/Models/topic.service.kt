@@ -58,6 +58,22 @@ class HandleTopic{
                 }
             }
         }
+        fun addNewQuestion(classId: String , topicId: String , testId:String){
+            ref.child(classId).child(topicId).child("detail/$testId/numberQues").get().addOnSuccessListener {
+                var numberQues = it.getValue(Int::class.java)
+                if (numberQues != null) {
+                    ref.child(classId).child(topicId).child("detail/$testId/numberQues").setValue(numberQues+1)
+                }
+            }
+        }
+        fun deleteOneQuestion(classId: String , topicId: String , testId:String){
+            ref.child(classId).child(topicId).child("detail/$testId/numberQues").get().addOnSuccessListener {
+                val numberQues = it.getValue(Int::class.java)
+                if (numberQues != null) {
+                    ref.child(classId).child(topicId).child("detail/$testId/numberQues").setValue(numberQues-1)
+                }
+            }
+        }
         fun deleteItemTopic(classId: String , topicId: String , itemId : String){
             ref.child("$classId/$topicId/detail/$itemId").removeValue()
         }

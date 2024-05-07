@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import com.example.fish.Controllers.getQuestionByTest
+import com.example.fish.Models.HandleQuestion
 import com.example.fish.Models.HandleTopic
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Document
@@ -38,9 +40,9 @@ fun TestRoom(){
             Button(onClick = { InitValue.addListClass()}) { Text(text = "Init Class") }
         }
         Button(onClick = {
-            HandleTopic.getTopicOfClass("1"){
-                Log.d(TAG, "TestRoom() returned: $it")
-            }
+
+            HandleTopic.deleteOneQuestion("1" , "1" , "13")
+
         }) {
             Text(text = "Test Function")
         }

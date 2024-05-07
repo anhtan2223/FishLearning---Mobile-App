@@ -54,21 +54,21 @@ data class Document(
     var topicID: String = "0"
 ) : ItemTopic()
 data class Test(
-    var testID:String  = "",
+    var testID:String  = "" ,
     var testName : String = "" ,
-    var numberQues : Int = 0,
-    var time : Int = 0,
-    var topicID :String = "",
+    var numberQues : Int = 0 ,
+    var time : Int = 0 ,
+    var topicID :String = "" ,
 ) : ItemTopic()
 data class Question(
     var quesID : String = "",
-    var detail : String ,
-    var testID : String
+    var detail : String = "" ,
+    var testID : String = ""
 )
 data class Answer(
     var ansID : String = "",
-    var detail: String ,
-    var isCorrect : Boolean ,
+    var detail: String = "",
+    var isCorrect : Boolean = false,
     var quesID: String = ""
 )
 data class Result(

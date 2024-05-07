@@ -432,10 +432,6 @@ object DemoData {
         Topic("50", "Combinatorics", "4"),
         Topic("51", "Graph Theory", "4"),
 
-//        Topic("1", "Chủ Đề Số 1" , ) ,
-//        Topic("2", "Chủ Đề 2" , ) ,
-//        Topic("3", "Chủ Đề Số 3" , ) ,
-//        Topic("4", "Chủ Đề 4", ) ,
     )
 
     val InsideTopic = listOf<Any>(
@@ -451,8 +447,8 @@ object DemoData {
         Document("10", "Types of Cyber Threats", "PDF", "4"),
         Document("11", "Sample Security Policies", "PDF", "5"),
         Document("12", "Incident Response Plan Template", "PDF", "6"),
-        Test("13", "Introduction to Cybersecurity Quiz", 10, 20, "1"),
-        Test("14", "Network Security Test", 15, 30, "2"),
+        Test("13", "Introduction to Cybersecurity Quiz", 2, 20, "1"),
+        Test("14", "Network Security Test", 3, 30, "2"),
 
         TextBox("15", "Introduction to Machine Learning", "7"),
         TextBox("16", "Supervised Learning", "8"),
@@ -466,8 +462,8 @@ object DemoData {
         Document("24", "Machine Learning Algorithms Overview", "PDF", "10"),
         Document("25", "Regression Analysis in Machine Learning", "PDF", "11"),
         Document("26", "Neural Networks Fundamentals", "PDF", "12"),
-        Test("27", "Introduction to Machine Learning Quiz", 10, 20, "7"),
-        Test("28", "Supervised Learning Test", 15, 30, "8"),
+        Test("27", "Introduction to Machine Learning Quiz", 5, 20, "7"),
+        Test("28", "Supervised Learning Test", 5, 30, "8"),
 
         TextBox("29", "Introduction to Object-Oriented Programming", "13"),
         TextBox("30", "Understanding Classes and Objects", "14"),
@@ -480,12 +476,12 @@ object DemoData {
         Document("37", "Inheritance and Polymorphism Overview", "PDF", "15"),
         Document("38", "Encapsulation Principles", "PDF", "16"),
         Document("39", "Abstraction Concepts Explained", "PDF", "17"),
-        Test("40", "Introduction to OOP Quiz", 10, 20, "13"),
-        Test("41", "Classes and Objects Test", 15, 30, "14"),
-        Test("42", "Inheritance and Polymorphism Exam", 20, 40, "15"),
-        Test("43", "Encapsulation Assessment", 15, 30, "16"),
-        Test("44", "Abstraction Quiz", 10, 20, "17"),
-        Test("45", "Interfaces vs. Abstract Classes Test", 15, 30, "18"),
+        Test("40", "Introduction to OOP Quiz", 5, 20, "13"),
+        Test("41", "Classes and Objects Test", 5, 30, "14"),
+        Test("42", "Inheritance and Polymorphism Exam", 5, 40, "15"),
+        Test("43", "Encapsulation Assessment", 5, 30, "16"),
+        Test("44", "Abstraction Quiz", 5, 20, "17"),
+        Test("45", "Interfaces vs. Abstract Classes Test", 5, 30, "18"),
 
         TextBox("46", "Introduction to Discrete Mathematics", "46"),
         TextBox("47", "Basic Logic and Propositional Calculus", "47"),
@@ -499,237 +495,234 @@ object DemoData {
         Document("55", "Functions and Sequences Handbook", "PDF", "49"),
         Document("56", "Combinatorics Fundamentals", "PDF", "50"),
         Document("57", "Graph Theory Primer", "PDF", "51"),
-        Test("58", "Introduction to Discrete Mathematics Quiz", 10, 20, "46"),
-        Test("59", "Logic and Propositional Calculus Test", 15, 30, "47"),
-        Test("60", "Sets and Relations Exam", 20, 40, "48"),
-        Test("61", "Functions and Sequences Assessment", 15, 30, "49"),
-        Test("62", "Combinatorics Quiz", 10, 20, "50"),
-        Test("63", "Graph Theory Test", 15, 30, "51"),
+        Test("58", "Introduction to Discrete Mathematics Quiz", 5, 20, "46"),
+        Test("59", "Logic and Propositional Calculus Test", 5, 30, "47"),
+        Test("60", "Sets and Relations Exam", 5, 40, "48"),
+        Test("61", "Functions and Sequences Assessment", 5, 30, "49"),
+        Test("62", "Combinatorics Quiz", 5, 20, "50"),
+        Test("63", "Graph Theory Test", 5, 30, "51"),
     )
     val QuestionList = listOf<Question>(
-        Question(
-            "0" ,
-            "Ví Dụ Của Một Câu Hỏi" ,
-            "0"
-        ) ,
-        Question(
-            "1" ,
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Te enim iudicem aequum puto, modo quae dicat ille bene noris. Apparet statim, quae sint officia, quae actiones" ,
-            "2"
-        ) ,
-        Question(
-            "2" ,
-            "Con Cá Có Mấy Tay" ,
-            "0"
-        ) ,
-        Question(
-            "3" ,
-            "Con Cá Có Mấy Mắt" ,
-            "0"
-        ) ,
-        Question(
-            "4" ,
-            "Con Cá Có Mấy Mắt" ,
-            "0"
-        ) ,
-        Question(
-            "5" ,
-            "Con Cá " ,
-            "0"
-        ) ,
-        Question(
-            "6" ,
-            "Con Cá " ,
-            "0"
-        ) ,
+        Question("Q1", "Cybersecurity là gì?", "13") ,
+        Question("Q2", "Phương thức bảo mật nào sau đây là phương thức không phù hợp?", "13") ,
+
+        Question("Q3", "Phần mềm Firewall là gì?", "14"),
+        Question("Q4", "SSL/TLS được sử dụng để làm gì?", "14"),
+        Question("Q5", "Mục đích chính của mã hóa dữ liệu là gì?", "14") ,
+
+        Question("Q6", "Trong lập trình hướng đối tượng, kế thừa là gì?", "40"),
+        Question("Q7", "Đặc điểm chính của kế thừa là gì?", "40"),
+        Question("Q8", "Trong Java, một lớp có thể kế thừa từ bao nhiêu lớp?", "40"),
+        Question("Q9", "Trong kế thừa, lớp con có thể sử dụng được những thành phần nào của lớp cha?", "40"),
+        Question("Q10", "Trong kế thừa, khi nào ta sử dụng từ khóa 'super'?", "40") ,
+
+        Question("Q11", "Thuật ngữ 'Machine Learning' đề cập đến điều gì?", "27"),
+        Question("Q12", "Supervised Learning là gì?", "27"),
+        Question("Q13", "Unsupervised Learning là gì?", "27"),
+        Question("Q14", "Trong Machine Learning, Bias là gì?", "27"),
+        Question("Q15", "Vấn đề gặp phải thường xuyên trong quá trình huấn luyện mô hình Machine Learning là gì?", "27") ,
+
+        Question("Q16", "Supervised Learning là gì?", "28"),
+        Question("Q17", "Unsupervised Learning là gì?", "28"),
+        Question("Q18", "Trong Machine Learning, Bias là gì?", "28"),
+        Question("Q19", "Vấn đề gặp phải thường xuyên trong quá trình huấn luyện mô hình Machine Learning là gì?", "28"),
+        Question("Q20", "Overfitting là gì?", "28") ,
+
+        Question("Q21", "Discrete Mathematics nghiên cứu về cái gì?", "58"),
+        Question("Q22", "Trong Discrete Mathematics, tập hợp là gì?", "58"),
+        Question("Q23", "Trong Discrete Mathematics, định lý Pigeonhole là gì?", "58"),
+        Question("Q24", "Trong Discrete Mathematics, tại sao tập hợp rỗng được gọi là tập hợp phi?", "58"),
+        Question("Q25", "Trong Discrete Mathematics, một biểu thức hoạt động là gì?", "58") ,
+
+        Question("Q26", "Logic và Calculus Dự đoán làm gì?", "59"),
+        Question("Q27", "Propositional Calculus dựa trên điều gì?", "59"),
+        Question("Q28", "Trong Logic, một phát biểu là gì?", "59"),
+        Question("Q29", "Trong Logic, phép giao hoán là gì?", "59"),
+        Question("Q30", "Trong Logic, phép phân tán là gì?", "59"),
+
+        Question("Q31", "Tập hợp và quan hệ được nghiên cứu trong lĩnh vực nào?", "60"),
+        Question("Q32", "Trong Discrete Mathematics, tập hợp được định nghĩa như thế nào?", "60"),
+        Question("Q33", "Trong Discrete Mathematics, quan hệ là gì?", "60"),
+        Question("Q34", "Trong Discrete Mathematics, quan hệ tương đương là gì?", "60"),
+        Question("Q35", "Trong Discrete Mathematics, quan hệ đối xứng là gì?", "60")
     )
     val AnswerList = listOf<Answer>(
-        Answer(
-            "0" ,
-            "Câu Trả Lời Đúng" ,
-            true ,
-            "0"
-        ) ,
-        Answer(
-            "1" ,
-            "Câu Trả Lời Sẽ Như Thế Này" ,
-            false ,
-            "0"
-        ) ,
-        Answer(
-            "2" ,
-            "Câu Trả Lời Sai" ,
-            false ,
-            "0"
-        ) ,
-        Answer(
-            "3" ,
-            "Và Có Thể Có Số Lượng Câu Trả Lời Đúng Và Sai Là Tuỳ Ý" ,
-            false ,
-            "0"
-        ) ,
-        Answer(
-            "4" ,
-            "0" ,
-            true ,
-            "1"
-        ) ,
-        Answer(
-            "5" ,
-            "1" ,
-            false ,
-            "1"
-        ) ,
-        Answer(
-            "6" ,
-            "2" ,
-            false ,
-            "1"
-        ) ,
-        Answer(
-            "7" ,
-            "3" ,
-            false ,
-            "1"
-        ) ,
-        Answer(
-            "8" ,
-            "0" ,
-            true ,
-            "2"
-        ) ,
-        Answer(
-            "9" ,
-            "1" ,
-            false ,
-            "2"
-        ) ,
-        Answer(
-            "10" ,
-            "2" ,
-            false ,
-            "2"
-        ) ,
-        Answer(
-            "11" ,
-            "3" ,
-            false ,
-            "2"
-        ) ,
-        Answer(
-            "12" ,
-            "0" ,
-            false ,
-            "3"
-        ) ,
-        Answer(
-            "13" ,
-            "1" ,
-            false ,
-            "3"
-        ) ,
-        Answer(
-            "14" ,
-            "2" ,
-            false ,
-            "3"
-        ) ,
-        Answer(
-            "15" ,
-            "3" ,
-            true ,
-            "3"
-        ) ,
-        Answer(
-            "16" ,
-            "4" ,
-            false ,
-            "3"
-        ) ,
-        Answer(
-            "17" ,
-            "5" ,
-            false ,
-            "3"
-        ) ,
-        Answer(
-            "18" ,
-            "3" ,
-            false ,
-            "3"
-        ),
-        Answer(
-            "19" ,
-            "0" ,
-            false ,
-            "4"
-        ) ,
-        Answer(
-            "20" ,
-            "1" ,
-            false ,
-            "4"
-        ) ,
-        Answer(
-            "21" ,
-            "2" ,
-            true ,
-            "4"
-        ) ,
-        Answer(
-            "22" ,
-            "3" ,
-            false ,
-            "4"
-        ) ,
-        Answer(
-            "23" ,
-            "0" ,
-            false ,
-            "5"
-        ) ,
-        Answer(
-            "24" ,
-            "1" ,
-            false ,
-            "5"
-        ) ,
-        Answer(
-            "25" ,
-            "2" ,
-            true ,
-            "5"
-        ) ,
-        Answer(
-            "26" ,
-            "3" ,
-            false ,
-            "5"
-        ) ,
-        Answer(
-            "27" ,
-            "0" ,
-            false ,
-            "6"
-        ) ,
-        Answer(
-            "28" ,
-            "1" ,
-            false ,
-            "6"
-        ) ,
-        Answer(
-            "29" ,
-            "2" ,
-            true ,
-            "6"
-        ) ,
-        Answer(
-            "30" ,
-            "3" ,
-            false ,
-            "6"
-        )
+        Answer("A1", "Cybersecurity là việc bảo vệ hệ thống, mạng và chương trình khỏi các cuộc tấn công số.", true, "Q1") ,
+        Answer("A2", "Cybersecurity liên quan đến việc bảo vệ môi trường.", false, "Q1") ,
+        Answer("A3", "Cybersecurity chỉ tập trung vào việc bảo vệ mạng Internet.", false, "Q1") ,
+        Answer("A4", "Cybersecurity không có liên quan gì đến dữ liệu.", false, "Q1") ,
+
+        Answer("A5", "Sử dụng mật khẩu mạnh.", false, "Q2") ,
+        Answer("A6", "Sử dụng chứng chỉ SSL/TLS.", false, "Q2") ,
+        Answer("A7", "Tắt tường lửa.", true, "Q2") ,
+        Answer("A8", "Sử dụng tường lửa.", false, "Q2") ,
+
+        Answer("A9", "Phần mềm giúp tăng tốc độ Internet.", false, "Q3"),
+        Answer("A10", "Phần mềm giúp tạo ra mạng lưới LAN.", false, "Q3"),
+        Answer("A11", "Phần mềm giúp bảo vệ mạng khỏi các cuộc tấn công trực tuyến.", true, "Q3"),
+        Answer("A12", "Phần mềm giúp tạo ra bản sao lưu của hệ thống.", false, "Q3"),
+
+        Answer("A13", "Chia sẻ tệp tin qua mạng.", false, "Q4"),
+        Answer("A14", "Bảo mật kết nối giữa trình duyệt và máy chủ.", true, "Q4"),
+        Answer("A15", "Tạo ra tên miền mới.", false, "Q4"),
+        Answer("A16", "Bảo vệ máy chủ khỏi virus.", false, "Q4"),
+
+        Answer("A17", "Làm cho dữ liệu trở nên dễ đọc hơn.", false, "Q5"),
+        Answer("A18", "Bảo vệ dữ liệu tránh khỏi truy cập trái phép.", true, "Q5"),
+        Answer("A19", "Tạo ra nhiều bản sao của dữ liệu.", false, "Q5"),
+        Answer("A20", "Tăng tốc độ truy cập vào dữ liệu.", false, "Q5") ,
+
+        Answer("A21", "Kế thừa là khả năng một lớp con kế thừa tất cả các thuộc tính và phương thức của lớp cha.", true, "Q6"),
+        Answer("A2", "Kế thừa là khả năng một lớp cha kế thừa tất cả các thuộc tính và phương thức của lớp con.", false, "Q6"),
+        Answer("A23", "Kế thừa là khả năng một lớp có thể kế thừa từ nhiều lớp khác nhau.", false, "Q6"),
+        Answer("A24", "Kế thừa là khả năng một lớp không thể kế thừa từ lớp khác.", false, "Q6"),
+
+        Answer("A25", "Kế thừa cho phép tái sử dụng code và giảm sự phức tạp của chương trình.", true, "Q7"),
+        Answer("A26", "Kế thừa cho phép một lớp con chia sẻ các thuộc tính và phương thức của lớp cha.", false, "Q7"),
+        Answer("A27", "Kế thừa chỉ cho phép một lớp con sử dụng một phần của lớp cha.", false, "Q7"),
+        Answer("A28", "Kế thừa chỉ áp dụng cho các ngôn ngữ lập trình cụ thể như Java.", false, "Q7"),
+
+        Answer("A29", "Một lớp chỉ có thể kế thừa từ một lớp cha duy nhất.", false, "Q8"),
+        Answer("A30", "Một lớp có thể kế thừa từ nhiều lớp khác nhau.", true, "Q8"),
+        Answer("A31", "Một lớp không thể kế thừa từ lớp khác.", false, "Q8"),
+        Answer("A32", "Một lớp có thể kế thừa từ bất kỳ lớp nào.", false, "Q8"),
+
+        Answer("A33", "Lớp con chỉ có thể sử dụng các phương thức của lớp cha.", false, "Q9"),
+        Answer("A34", "Lớp con chỉ có thể sử dụng các thuộc tính của lớp cha.", false, "Q9"),
+        Answer("A35", "Lớp con có thể sử dụng cả thuộc tính và phương thức của lớp cha.", true, "Q9"),
+        Answer("A36", "Lớp con không thể sử dụng bất kỳ thành phần nào của lớp cha.", false, "Q9"),
+
+        Answer("A37", "Từ khóa 'super' được sử dụng để gọi một phương thức của lớp con.", false, "Q10"),
+        Answer("A38", "Từ khóa 'super' được sử dụng để gọi một phương thức của lớp cha.", true, "Q10"),
+        Answer("A39", "Từ khóa 'super' được sử dụng để gọi một phương thức của lớp cháu.", false, "Q10"),
+        Answer("A40", "Từ khóa 'super' chỉ được sử dụng trong lớp cha.", false, "Q10") ,
+
+        Answer("A41", "Thuật ngữ 'Machine Learning' ám chỉ việc máy tính có khả năng học hỏi từ dữ liệu mà không cần được lập trình cụ thể.", true, "Q11"),
+        Answer("A42", "Thuật ngữ 'Machine Learning' chỉ đề cập đến việc máy tính sử dụng thuật toán tối ưu hóa.", false, "Q11"),
+        Answer("A43", "Thuật ngữ 'Machine Learning' chỉ đơn giản là việc máy tính sử dụng dữ liệu để đưa ra dự đoán.", false, "Q11"),
+        Answer("A44", "Thuật ngữ 'Machine Learning' chỉ đề cập đến việc máy tính tự động tạo ra các mô hình.", false, "Q11"),
+
+        Answer("A45", "Supervised Learning là phương pháp học máy mà trong đó một tập hợp dữ liệu đã được gán nhãn được sử dụng để huấn luyện mô hình.", true, "Q12"),
+        Answer("A46", "Supervised Learning là phương pháp học máy mà không có sự giám sát từ con người.", false, "Q12"),
+        Answer("A47", "Supervised Learning là phương pháp học máy chỉ sử dụng dữ liệu không gán nhãn.", false, "Q12"),
+        Answer("A48", "Supervised Learning là phương pháp học máy chỉ áp dụng cho bài toán phân loại.", false, "Q12"),
+
+        Answer("A49", "Unsupervised Learning là phương pháp học máy mà trong đó không có sự giám sát từ con người.", true, "Q13"),
+        Answer("A50", "Unsupervised Learning là phương pháp học máy mà không cần sử dụng dữ liệu.", false, "Q13"),
+        Answer("A51", "Unsupervised Learning là phương pháp học máy mà chỉ sử dụng dữ liệu gán nhãn.", false, "Q13"),
+        Answer("A52", "Unsupervised Learning là phương pháp học máy chỉ áp dụng cho bài toán phân loại.", false, "Q13"),
+
+        Answer("A53", "Bias trong Machine Learning ám chỉ sự sai lệch giữa dự đoán của mô hình và giá trị thực tế.", true, "Q14"),
+        Answer("A54", "Bias trong Machine Learning là tỉ lệ số lượng mẫu dữ liệu được dùng cho việc kiểm tra và huấn luyện.", false, "Q14"),
+        Answer("A55", "Bias trong Machine Learning ám chỉ sự thiên vị của mô hình về phía các lớp quan trọng hơn.", false, "Q14"),
+        Answer("A56", "Bias trong Machine Learning ám chỉ sự khả năng của mô hình để tự động học từ dữ liệu.", false, "Q14"),
+
+        Answer("A57", "Overfitting là vấn đề gặp phải khi mô hình Machine Learning quá mức khớp với dữ liệu huấn luyện, dẫn đến hiệu suất kém trên dữ liệu mới.", true, "Q15"),
+        Answer("A58", "Underfitting là vấn đề gặp phải khi mô hình Machine Learning quá mức đơn giản, không thể học được các mẫu phức tạp trong dữ liệu.", false, "Q15"),
+        Answer("A59", "Noise là vấn đề gặp phải khi dữ liệu không thể biểu diễn một cách chính xác các quan hệ trong dữ liệu thực tế.", false, "Q15"),
+        Answer("A60", "Chỉ số Accuracy là một thước đo đánh giá hiệu suất của mô hình Machine Learning trên dữ liệu kiểm tra.", false, "Q15") ,
+
+        Answer("A61", "Supervised Learning là phương pháp học máy mà trong đó một tập hợp dữ liệu đã được gán nhãn được sử dụng để huấn luyện mô hình.", true, "Q16"),
+        Answer("A62", "Supervised Learning là phương pháp học máy mà không có sự giám sát từ con người.", false, "Q16"),
+        Answer("A63", "Supervised Learning là phương pháp học máy chỉ sử dụng dữ liệu không gán nhãn.", false, "Q16"),
+        Answer("A64", "Supervised Learning là phương pháp học máy chỉ áp dụng cho bài toán phân loại.", false, "Q16"),
+
+        Answer("A65", "Unsupervised Learning là phương pháp học máy mà trong đó không có sự giám sát từ con người.", true, "Q17"),
+        Answer("A66", "Unsupervised Learning là phương pháp học máy mà không cần sử dụng dữ liệu.", false, "Q17"),
+        Answer("A67", "Unsupervised Learning là phương pháp học máy mà chỉ sử dụng dữ liệu gán nhãn.", false, "Q17"),
+        Answer("A68", "Unsupervised Learning là phương pháp học máy mà chỉ áp dụng cho bài toán phân loại.", false, "Q17"),
+
+        Answer("A69", "Bias trong Machine Learning ám chỉ sự sai lệch giữa dự đoán của mô hình và giá trị thực tế.", true, "Q18"),
+        Answer("A70", "Bias trong Machine Learning là tỉ lệ số lượng mẫu dữ liệu được dùng cho việc kiểm tra và huấn luyện.", false, "Q18"),
+        Answer("A71", "Bias trong Machine Learning ám chỉ sự thiên vị của mô hình về phía các lớp quan trọng hơn.", false, "Q18"),
+        Answer("A72", "Bias trong Machine Learning ám chỉ sự khả năng của mô hình để tự động học từ dữ liệu.", false, "Q18"),
+
+        Answer("A73", "Vấn đề gặp phải khi mô hình Machine Learning quá mức khớp với dữ liệu huấn luyện, dẫn đến hiệu suất kém trên dữ liệu mới là Overfitting.", true, "Q19"),
+        Answer("A74", "Underfitting là vấn đề gặp phải khi mô hình Machine Learning quá mức đơn giản, không thể học được các mẫu phức tạp trong dữ liệu.", false, "Q19"),
+        Answer("A75", "Noise là vấn đề gặp phải khi dữ liệu không thể biểu diễn một cách chính xác các quan hệ trong dữ liệu thực tế.", false, "Q19"),
+        Answer("A76", "Chỉ số Accuracy là một thước đo đánh giá hiệu suất của mô hình Machine Learning trên dữ liệu kiểm tra.", false, "Q19"),
+
+        Answer("A77", "Overfitting là vấn đề gặp phải khi mô hình Machine Learning quá mức khớp với dữ liệu huấn luyện, dẫn đến hiệu suất kém trên dữ liệu mới.", true, "Q20"),
+        Answer("A78", "Underfitting là vấn đề gặp phải khi mô hình Machine Learning quá mức đơn giản, không thể học được các mẫu phức tạp trong dữ liệu.", false, "Q20"),
+        Answer("A79", "Noise là vấn đề gặp phải khi dữ liệu không thể biểu diễn một cách chính xác các quan hệ trong dữ liệu thực tế.", false, "Q20"),
+        Answer("A80", "Chỉ số Accuracy là một thước đo đánh giá hiệu suất của mô hình Machine Learning trên dữ liệu kiểm tra.", false, "Q20") ,
+
+
+        Answer("A81", "Discrete Mathematics nghiên cứu về các đối tượng không liên tục và không giới hạn.", true, "Q21"),
+        Answer("A82", "Discrete Mathematics nghiên cứu về các đối tượng liên tục và vô hạn.", false, "Q21"),
+        Answer("A83", "Discrete Mathematics nghiên cứu về các hàm số liên tục.", false, "Q21"),
+        Answer("A84", "Discrete Mathematics nghiên cứu về các phương trình vi phân.", false, "Q21"),
+
+        Answer("A85", "Trong Discrete Mathematics, tập hợp là một tập hợp các phần tử được tổ chức hoặc xác định theo một quy tắc nhất định.", true, "Q22"),
+        Answer("A86", "Trong Discrete Mathematics, tập hợp là một tập hợp các số thực.", false, "Q22"),
+        Answer("A87", "Trong Discrete Mathematics, tập hợp là một tập hợp các số nguyên.", false, "Q22"),
+        Answer("A88", "Trong Discrete Mathematics, tập hợp là một tập hợp các số phức.", false, "Q22"),
+
+        Answer("A89", "Trong Discrete Mathematics, định lý Pigeonhole là một nguyên lý trong lý thuyết số khẳng định rằng nếu n chiếc quả được đặt trong m khe (n > m), thì ít nhất một khe phải chứa hai hoặc nhiều hơn quả.", true, "Q23"),
+        Answer("A90", "Trong Discrete Mathematics, định lý Pigeonhole là một nguyên lý trong lý thuyết số khẳng định rằng nếu n chiếc quả được đặt trong m khe (n < m), thì ít nhất một khe phải chứa hai hoặc nhiều hơn quả.", false, "Q23"),
+        Answer("A91", "Trong Discrete Mathematics, định lý Pigeonhole là một nguyên lý trong lý thuyết tập hợp khẳng định rằng tập hợp không thể rỗng.", false, "Q23"),
+        Answer("A92", "Trong Discrete Mathematics, định lý Pigeonhole là một nguyên lý trong lý thuyết tập hợp khẳng định rằng tập hợp có thể chứa tất cả các phần tử.", false, "Q23"),
+
+        Answer("A93", "Tập hợp rỗng được gọi là tập hợp phi vì không chứa bất kỳ phần tử nào.", true, "Q24"),
+        Answer("A94", "Tập hợp rỗng được gọi là tập hợp phi vì chứa một phần tử duy nhất là 0.", false, "Q24"),
+        Answer("A95", "Tập hợp rỗng được gọi là tập hợp phi vì chứa vô số phần tử.", false, "Q24"),
+        Answer("A96", "Tập hợp rỗng được gọi là tập hợp phi vì chứa một phần tử không xác định.", false, "Q24"),
+
+        Answer("A97", "Một biểu thức hoạt động là một biểu thức toán học hoặc logic được sử dụng để thể hiện một quy tắc hoặc quan hệ giữa các phần tử của một tập hợp.", true, "Q25"),
+        Answer("A98", "Một biểu thức hoạt động là một biểu thức chỉ gồm toán tử và không có toán hạng.", false, "Q25"),
+        Answer("A99", "Một biểu thức hoạt động là một biểu thức chỉ gồm toán hạng và không có toán tử.", false, "Q25"),
+        Answer("A100", "Một biểu thức hoạt động là một biểu thức chỉ gồm toán tử nhưng không có toán hạng.", false, "Q25") ,
+
+        Answer("A101", "Logic và Calculus Dự đoán kết quả của các quá trình dựa trên quy tắc logic.", true, "Q26"),
+        Answer("A102", "Logic và Calculus Dự đoán kết quả của các quá trình dựa trên quy tắc toán học.", false, "Q26"),
+        Answer("A103", "Logic và Calculus Dự đoán kết quả của các quá trình dựa trên quy tắc vật lý.", false, "Q26"),
+        Answer("A104", "Logic và Calculus Dự đoán kết quả của các quá trình dựa trên quy tắc văn hóa.", false, "Q26"),
+
+        Answer("A105", "Propositional Calculus dựa trên việc phân tích và xử lý các phát biểu đúng/sai (propositions).", true, "Q27"),
+        Answer("A106", "Propositional Calculus dựa trên việc phân tích và xử lý các phát biểu logic (logic statements).", false, "Q27"),
+        Answer("A107", "Propositional Calculus dựa trên việc phân tích và xử lý các phát biểu toán học (mathematical statements).", false, "Q27"),
+        Answer("A108", "Propositional Calculus dựa trên việc phân tích và xử lý các phát biểu văn hóa (cultural statements).", false, "Q27"),
+
+        Answer("A109", "Trong Logic, một phát biểu là một câu khẳng định có thể được đánh giá là đúng hoặc sai.", true, "Q28"),
+        Answer("A110", "Trong Logic, một phát biểu là một câu hỏi có thể được trả lời bằng đúng hoặc sai.", false, "Q28"),
+        Answer("A111", "Trong Logic, một phát biểu là một câu trả lời có thể được đánh giá là đúng hoặc sai.", false, "Q28"),
+        Answer("A112", "Trong Logic, một phát biểu là một câu hỏi có thể được trả lời bằng có hoặc không.", false, "Q28"),
+
+        Answer("A113", "Phép giao hoán là một phép biến đổi mà thay đổi vị trí của hai toán hạng mà không làm thay đổi giá trị của biểu thức.", true, "Q29"),
+        Answer("A114", "Phép giao hoán là một phép biến đổi mà thay đổi giá trị của hai toán hạng mà không làm thay đổi vị trí của chúng.", false, "Q29"),
+        Answer("A115", "Phép giao hoán là một phép biến đổi mà không làm thay đổi giá trị của hai toán hạng hoặc vị trí của chúng.", false, "Q29"),
+        Answer("A116", "Phép giao hoán là một phép biến đổi mà không làm thay đổi giá trị của biểu thức.", false, "Q29"),
+
+        Answer("A117", "Phép phân tán là một phép biến đổi mà phân tán một toán hạng hoặc một nhóm toán hạng qua một phép toán khác.", true, "Q30"),
+        Answer("A118", "Phép phân tán là một phép biến đổi mà tập hợp các toán hạng không thay đổi khi thực hiện phép toán đó.", false, "Q30"),
+        Answer("A119", "Phép phân tán là một phép biến đổi mà kết quả cuối cùng không thay đổi khi thực hiện phép toán đó.", false, "Q30"),
+        Answer("A120", "Phép phân tán là một phép biến đổi mà không làm thay đổi giá trị của biểu thức.", false, "Q30"),
+
+        Answer("A121", "Tập hợp và quan hệ được nghiên cứu trong lĩnh vực lý thuyết tập hợp và lý thuyết quan hệ.", true, "Q31"),
+        Answer("A122", "Tập hợp và quan hệ được nghiên cứu trong lĩnh vực toán học cổ điển.", false, "Q31"),
+        Answer("A123", "Tập hợp và quan hệ được nghiên cứu trong lĩnh vực lý thuyết số.", false, "Q31"),
+        Answer("A124", "Tập hợp và quan hệ được nghiên cứu trong lĩnh vực lý thuyết tổ hợp.", false, "Q31"),
+
+        Answer("A125", "Trong Discrete Mathematics, tập hợp là một tập hợp các phần tử không có sự sắp xếp.", true, "Q32"),
+        Answer("A126", "Trong Discrete Mathematics, tập hợp là một tập hợp các phần tử được sắp xếp theo thứ tự tăng dần.", false, "Q32"),
+        Answer("A127", "Trong Discrete Mathematics, tập hợp là một tập hợp các phần tử được sắp xếp theo thứ tự giảm dần.", false, "Q32"),
+        Answer("A128", "Trong Discrete Mathematics, tập hợp là một tập hợp các phần tử được sắp xếp theo một quy tắc nhất định.", false, "Q32"),
+
+        Answer("A129", "Trong Discrete Mathematics, quan hệ là một tập hợp các phần tử có thứ tự cụ thể.", false, "Q33"),
+        Answer("A130", "Trong Discrete Mathematics, quan hệ là một mối quan hệ giữa các phần tử của tập hợp.", true, "Q33"),
+        Answer("A131", "Trong Discrete Mathematics, quan hệ là một tập hợp các phần tử không có thứ tự cụ thể.", false, "Q33"),
+        Answer("A132", "Trong Discrete Mathematics, quan hệ là một tập hợp các phần tử có thứ tự ngẫu nhiên.", false, "Q33"),
+
+        Answer("A133", "Trong Discrete Mathematics, quan hệ tương đương là một quan hệ đối xứng và có tính luỹ đa thức.", true, "Q34"),
+        Answer("A134", "Trong Discrete Mathematics, quan hệ tương đương là một quan hệ đối xứng và không có tính luỹ đa thức.", false, "Q34"),
+        Answer("A135", "Trong Discrete Mathematics, quan hệ tương đương là một quan hệ không đối xứng và có tính luỹ đa thức.", false, "Q34"),
+        Answer("A136", "Trong Discrete Mathematics, quan hệ tương đương là một quan hệ không đối xứng và không có tính luỹ đa thức.", false, "Q34"),
+
+        Answer("A137", "Trong Discrete Mathematics, quan hệ đối xứng là một quan hệ có tính chất xác định lại khi hoán vị hai phần tử.", true, "Q35"),
+        Answer("A138", "Trong Discrete Mathematics, quan hệ đối xứng là một quan hệ không có tính chất xác định lại khi hoán vị hai phần tử.", false, "Q35"),
+        Answer("A139", "Trong Discrete Mathematics, quan hệ đối xứng là một quan hệ không đối xứng.", false, "Q35"),
+        Answer("A140", "Trong Discrete Mathematics, quan hệ đối xứng là một quan hệ có tính chất xác định lại khi thay đổi hai phần tử.", false, "Q35") ,
+
     )
 //    val InsideTopic = listOf<Any>()
 

@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getAnswerByQuestion
+import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.R
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.DemoData
@@ -56,20 +58,28 @@ import kotlinx.coroutines.launch
 @Composable
 fun TestView(modifier: Modifier = Modifier ,  nav: NavController, view : DisplayUI)
 {
-    val listQ = DemoData.QuestionList
-    val listA = DemoData.AnswerList
+    var listQ by remember {
+        mutableStateOf( mutableListOf(Question()) )
+    }
     BackHandler {
-        //Do Later
             view.toogleChoose()
     }
     if(view.isTimeout)
         goTo(nav , view , "Result")
     if(view.isChoose)
         ChooseQuestion(nav , view)
-    QNA(nav = nav, view = view , listQ[view.nowQuestion] , listA , goBack = {  view.timeOut() } )
+
+    getQuestionByTest(view.nowTest.testID){
+        listQ = it
+    }
+    QNA(
+        view = view ,
+        Q = listQ[view.nowIndexQuestion] ,
+        goBack = {  view.timeOut() }
+    )
 }
 @Composable
-fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Boolean ,  onClick: () -> Unit )
+fun OneAnswer(A:Answer , isChoose:Boolean ,  onClick:() -> Unit )
 {
     val CardColors = if(isChoose) Color(0xFFFFAB40) else Color(0xFF444444)
     val TextColor = if(isChoose) Color.Black else Color.White
@@ -95,8 +105,14 @@ fun OneAnswer(nav: NavController, view : DisplayUI , A : Answer , isChoose: Bool
     }
 }
 @Composable
-fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , goBack: () -> Unit)
+fun QNA(view : DisplayUI , Q:Question ,  goBack:() -> Unit)
 {
+    var listA by remember {
+        mutableStateOf(mutableListOf<Answer>())
+    }
+    getAnswerByQuestion(Q.quesID){
+        listA = it
+    }
     LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally ,
             modifier = Modifier
@@ -125,9 +141,9 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
                 }
 
             }
-
         }
         item {
+            //Question
             Card(
                 Modifier
                     .padding(bottom = 40.dp, top = 50.dp)
@@ -148,17 +164,14 @@ fun QNA(nav: NavController, view : DisplayUI , Q:Question , A: List<Answer> , go
                 )
             }
         }
-        items(A) {
-            //Answer
-            val isChoose = view.answerList[view.nowQuestion].toString() == it.ansID
-            if (Q.quesID == it.quesID) {
+        items(listA) {
+            val isChoose = view.answerList[view.nowIndexQuestion] == it.ansID
                 OneAnswer(
-                    nav = nav,
-                    view = view,
                     A = it,
 //                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
-                    onClick = { view.chooseAnswer(it.ansID) } , isChoose = isChoose)
-            }
+                    onClick = { view.chooseAnswer(it.ansID) } ,
+                    isChoose = isChoose
+                )
         }
     }
 }

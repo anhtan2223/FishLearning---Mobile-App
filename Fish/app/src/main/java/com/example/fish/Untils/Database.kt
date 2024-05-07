@@ -15,7 +15,7 @@ class MyDB(){
         val enrollment  = database.getReference("Enrollment")
         val text        = database.getReference("TextBox")
         val document    = database.getReference("Document")
-        val test        = database.getReference("Test")
+        val test        = database.getReference("DetailTest")
         val question    = database.getReference("Question")
         val answer      = database.getReference("Answer")
         val testResult  = database.getReference("TestResult")

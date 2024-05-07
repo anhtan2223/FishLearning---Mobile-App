@@ -89,7 +89,7 @@ fun Teacher_DisplayInfo(nav : NavController, view: DisplayUI , classInfo : Class
                 .padding(top = 30.dp)
         ) {
             ButtonNav(onClick = { goTo(nav , view , "SumTest") }, content = "Tổng Kết Bài Thi" , color = MaterialTheme.colorScheme.primary , contentColor = Color.Black)
-            ButtonNav(onClick = { goTo(nav , view , "ChangeQues") }, content = "Chỉnh Sửa Bài Thi" , color = MaterialTheme.colorScheme.primary , contentColor = Color.Black)
+            ButtonNav(onClick = { goTo(nav , view , "ChangeQues") ;  view.changeQuestion(0) }, content = "Chỉnh Sửa Bài Thi" , color = MaterialTheme.colorScheme.primary , contentColor = Color.Black)
         }
         Row(
             horizontalArrangement = Arrangement.Center ,

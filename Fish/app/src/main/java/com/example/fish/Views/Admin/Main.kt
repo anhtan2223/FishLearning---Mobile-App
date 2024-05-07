@@ -189,7 +189,7 @@ fun AdminView(
                 getAllClass {
                     viewModel.getMyClass(it)
                 }
-                AdminHomeView(nav = navController , view = viewModel)
+                AdminHomeView( nav = navController , view = viewModel )
             }
             composable("User")
             { viewModel.getUL() ; MainUserView(nav = navController , view = viewModel) }

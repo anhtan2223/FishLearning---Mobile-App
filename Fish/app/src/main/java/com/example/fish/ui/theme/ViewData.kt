@@ -10,6 +10,7 @@ import com.example.fish.Controllers.getUserList
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Document
+import com.example.fish.Untils.Question
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.User
 
@@ -22,7 +23,7 @@ data class NavItem(
 class DisplayUI : ViewModel(){
     var info by mutableStateOf( DemoData.UserInfo )
         private set
-    var nowQuestion by mutableStateOf(0)
+    var nowIndexQuestion by mutableStateOf(0)
         private set
     var answerList by mutableStateOf( mutableListOf<String>() )
         private set
@@ -84,9 +85,9 @@ class DisplayUI : ViewModel(){
     {
         isTimeout = true
     }
-    fun changeQuestion(question : Int)
+    fun changeQuestion(questionIndex : Int)
     {
-        nowQuestion =  question
+        nowIndexQuestion = questionIndex
     }
     fun changePage(title: String)
     {
@@ -102,7 +103,7 @@ class DisplayUI : ViewModel(){
         answerList.clear()
         for(i in 0 until nowTest.numberQues)
             answerList.add("-1")
-        nowQuestion = 0
+        nowIndexQuestion = 0
 
     }
     fun selectTest(test : Test)
@@ -116,20 +117,26 @@ class DisplayUI : ViewModel(){
     }
     fun chooseAnswer(answerId: String)
     {
-        answerList.set(nowQuestion,answerId)
+        answerList.set(nowIndexQuestion,answerId)
         moveNextQues()
     }
     fun moveNextQues()
     {
-        if(nowQuestion == nowTest.numberQues-1)
+        if(nowIndexQuestion == nowTest.numberQues-1)
         {
             toogleChoose()
         }
-        else changeQuestion(nowQuestion+1)
+        else changeQuestion(nowIndexQuestion+1)
     }
     fun toogleChoose()
     {
         isChoose = !isChoose
+    }
+    fun addNewQuestion(){
+        nowTest.numberQues = nowTest.numberQues+1
+    }
+    fun deleteOneQuestion(){
+        nowTest.numberQues = nowTest.numberQues-1
     }
 
 
