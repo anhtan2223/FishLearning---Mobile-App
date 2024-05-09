@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,11 +37,9 @@ import com.example.fish.Controllers.getTopicByClass
 import com.example.fish.R
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Class
-import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
-import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI

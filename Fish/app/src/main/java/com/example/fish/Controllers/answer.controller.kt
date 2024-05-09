@@ -1,11 +1,8 @@
 package com.example.fish.Controllers
 
-import android.util.Log
 import com.example.fish.Models.HandleAnswer
 import com.example.fish.Untils.Answer
 import com.google.firebase.database.getValue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 fun createNewAnswer(info:Answer){
     HandleAnswer.create(info)

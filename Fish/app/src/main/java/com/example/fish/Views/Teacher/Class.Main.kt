@@ -17,8 +17,8 @@ fun ClassScreen_Teacher(nav: NavController, view : DisplayUI)
     {
         items(listClass){
             OneClass(info = it) {
-                nav.navigate("DetailClass");
-                view.changePage("DetailClass");
+                nav.navigate("DetailClass")
+                view.changePage("DetailClass")
                 view.selectClass(it)
             }
         }

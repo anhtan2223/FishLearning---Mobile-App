@@ -2,12 +2,9 @@ package com.example.fish.Controllers
 
 import com.example.fish.Models.HandleQuestion
 import com.example.fish.Models.HandleTopic
-import com.example.fish.Untils.Answer
 import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Question
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 fun createNewQuestion(classId:String , topicId:String ,  info: Question){
     HandleQuestion.createQuestion(info)

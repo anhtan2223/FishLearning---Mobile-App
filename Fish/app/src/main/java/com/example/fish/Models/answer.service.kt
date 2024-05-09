@@ -2,12 +2,9 @@ package com.example.fish.Models
 
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.MyDB
-import com.example.fish.Untils.Question
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.getValue
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class HandleAnswer{
     companion object{

@@ -12,10 +12,6 @@ class HandleResult{
             newRef.setValue(newRef.key?.let { info.copy(resultID = it) })
 //
         }
-        fun update(info: Result){
-            val myRef = ref.child("${info.testID}/${info.studentID}/${info.resultID}")
-                myRef.setValue(info)
-        }
         fun getAllByUser(testId : String , uid : String , onGet:(DataSnapshot)->Unit){
             ref.child(testId).child(uid).get().addOnSuccessListener(onGet)
         }

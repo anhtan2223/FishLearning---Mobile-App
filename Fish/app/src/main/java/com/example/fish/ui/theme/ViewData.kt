@@ -8,15 +8,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.example.fish.Controllers.getDetailTest
 import com.example.fish.Controllers.getUserList
-import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Document
-import com.example.fish.Untils.Question
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.User
-import com.example.fish.Untils.goTo
 
 data class NavItem(
     val title : String,

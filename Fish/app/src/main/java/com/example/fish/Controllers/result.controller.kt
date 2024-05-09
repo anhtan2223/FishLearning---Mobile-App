@@ -6,9 +6,7 @@ import com.example.fish.Untils.Result
 fun addResult(info:Result){
     HandleResult.create(info)
 }
-fun updateResult(info:Result){
-    HandleResult.update(info)
-}
+
 fun getResultByUser(testId:String , uid:String , onGet:(MutableList<Result>)->Unit){
     HandleResult.getAllByUser(testId , uid){
         var listResult = mutableListOf<Result>()

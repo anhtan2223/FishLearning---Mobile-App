@@ -30,19 +30,12 @@ fun getClassByTeacher(teacherID:String , handle:(MutableList<Class>)->Unit){
     }
 }
 
-fun getClass(id:String , value:(Class)->Unit){
-    HandleClass.getById(id){
-        it.getValue(Class::class.java)?.let { it1 -> value(it1) }
-    }
-}
 
 fun deleteClass(classid:String){
     HandleClass.delete(classid)
     HandleEnrollment.deleteByClass(classid)
     HandleTopic.deleteTopicOfClass(classid)
 }
-fun updateClass(id: String,info: Class){
-    HandleClass.update(id, info)
-}
+
 
 

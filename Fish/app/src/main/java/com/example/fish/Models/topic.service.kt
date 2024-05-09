@@ -1,7 +1,5 @@
 package com.example.fish.Models
 
-import android.util.Log
-import com.example.fish.TAG
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.ItemTopic
 import com.example.fish.Untils.MyDB
@@ -9,7 +7,6 @@ import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.getValue
 
 class HandleTopic{

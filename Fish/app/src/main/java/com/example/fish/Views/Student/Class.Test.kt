@@ -45,17 +45,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import com.example.fish.Controllers.addResult
-import com.example.fish.Controllers.getAnswerByQuestion
-import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.R
 import com.example.fish.Untils.Answer
-import com.example.fish.Untils.DemoData
-import com.example.fish.Untils.Question
 import com.example.fish.Untils.Result
 import com.example.fish.Untils.formatTime
 import com.example.fish.Untils.getToday
 import com.example.fish.Untils.goTo
-import com.example.fish.Untils.runDispatcherDefault
 import com.example.fish.ui.theme.DisplayUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

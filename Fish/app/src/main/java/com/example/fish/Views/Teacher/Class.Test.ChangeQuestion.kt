@@ -1,6 +1,5 @@
 package com.example.fish.Views.Teacher
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -11,12 +10,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -26,8 +23,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
@@ -37,7 +32,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,7 +49,6 @@ import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import com.example.fish.Controllers.createNewAnswer
 import com.example.fish.Controllers.createNewQuestion
-import com.example.fish.Controllers.deleteItemTopic
 import com.example.fish.Controllers.deleteOneAnswer
 import com.example.fish.Controllers.deleteOneQuestion
 import com.example.fish.Controllers.getAnswerByQuestion
@@ -67,22 +60,13 @@ import com.example.fish.R
 import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.DemoData
-import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Question
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneNumber
 import com.example.fish.ui.theme.DisplayUI
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 @Composable
 fun ChangeQuestionView(nav : NavController , view : DisplayUI)

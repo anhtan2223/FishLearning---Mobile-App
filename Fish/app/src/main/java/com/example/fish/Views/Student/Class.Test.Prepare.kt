@@ -27,9 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.fish.Controllers.getResultByUser
 import com.example.fish.Untils.Back
-import com.example.fish.Untils.Class
 import com.example.fish.Untils.Result
-import com.example.fish.Untils.Test
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.formatTime
 import com.example.fish.Untils.goTo

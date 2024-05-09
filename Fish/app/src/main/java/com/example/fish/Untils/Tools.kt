@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.fish.Controllers.getDetailTest
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.ui.theme.DisplayUI
 import kotlinx.coroutines.Dispatchers
