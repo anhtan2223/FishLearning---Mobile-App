@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -40,9 +41,12 @@ import com.example.fish.Untils.Class
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
+import com.example.fish.Untils.appendMessage
+import com.example.fish.Untils.downloadPDF
 import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
+import com.google.firebase.ktx.Firebase
 
 @Composable
 fun DetailClass(nav:NavController , view:DisplayUI)
@@ -119,12 +123,20 @@ fun TopicView(info:getTopic, nav:NavController , view: DisplayUI)
                 style = TextStyle(fontWeight = FontWeight.Bold ,
                 fontSize = 20.sp))
         }
+        var context = LocalContext.current
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
         for(i in info.detail)
         {
             when(i) {
                 is TextBox  -> TextBoxView(info = i)
-                is Document -> DocumentView(info = i)
+                is Document -> DocumentView(info = i){
+                    if(i.link == "")
+                        appendMessage(context , "Chưa Có Tài Liệu Vui Lòng Liên Hệ Giảng Viên")
+                    else{
+                        downloadPDF(context , i.link)
+                    }
+
+                }
                 is Test     -> TestView(info = i , nav , view)
             }
         }

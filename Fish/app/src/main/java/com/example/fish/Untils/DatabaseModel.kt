@@ -51,7 +51,8 @@ data class Document(
     var docID : String = "" ,
     var discribe : String = "" ,
     var docType : String = "" ,
-    var topicID: String = "0"
+    var topicID: String = "0",
+    var link : String = ""
 ) : ItemTopic()
 data class Test(
     var testID:String  = "" ,
@@ -83,8 +84,6 @@ data class DetailResult(
     var question : String = "",
     var answer : MutableList<Answer> = mutableListOf()
 )
-
-
 data class getTopic(
     var info : Topic ,
     var detail : MutableList<ItemTopic>

@@ -1,5 +1,11 @@
 package com.example.fish.Untils
 
+import android.app.Activity
+import android.app.Dialog
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -21,17 +27,21 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.ui.theme.DisplayUI
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
+import java.util.UUID
 
 @Composable
 fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
@@ -143,4 +153,28 @@ fun WaitingScreen(content: String){
             fontSize = 20.sp
         )
     }
+}
+
+fun selectPDF(activity: Activity){
+    val intent = Intent(Intent.ACTION_GET_CONTENT)
+    intent.setType("application/pdf")
+    intent.addCategory(Intent.CATEGORY_OPENABLE)
+    activity.startActivityForResult(Intent.createChooser(intent , "Select PDF File") , 123)
+}
+fun uploadPDF(data : Uri ){
+    var storeRef = Firebase.storage.reference
+    var pdf = storeRef.child("pdf/${UUID.randomUUID()}.pdf")
+    pdf.putFile(data)
+        .addOnSuccessListener {
+            val uriTask = it.storage.downloadUrl
+            while (!uriTask.isComplete) ;
+            val uri = uriTask.getResult()
+            MyDB.document.setValue(uri.toString())
+        }
+}
+fun downloadPDF(context: Context ,  URL:String){
+//    var ref = Firebase.storage.reference
+    var uri = Uri.parse(URL)
+    val intent = Intent(Intent.ACTION_VIEW , uri)
+    context.startActivity(intent)
 }

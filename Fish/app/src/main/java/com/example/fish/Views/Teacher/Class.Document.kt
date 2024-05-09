@@ -1,5 +1,6 @@
 package com.example.fish.Views.Teacher
 
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.changeDocument
 import com.example.fish.Controllers.deleteItemTopic
 import com.example.fish.Controllers.updateItemTopic
 import com.example.fish.Untils.AddAlert
@@ -25,16 +27,20 @@ import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLine
 import com.example.fish.ui.theme.DisplayUI
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 @Composable
-fun DocumentDetailView(nav:NavController , view:DisplayUI){
+fun DocumentDetailView(nav:NavController , view:DisplayUI , getContent: ActivityResultLauncher<String>){
     Back(nav = nav, view = view , "DetailClass")
     Spacer(modifier = Modifier.padding(vertical = 25.dp))
-    DocumentInfo_Teacher(nav = nav, view = view)
+    DocumentInfo_Teacher(nav = nav, view = view){
+            getContent.launch("application/pdf")
+    }
 }
 
 @Composable
-fun DocumentInfo_Teacher(nav : NavController, view: DisplayUI)
+fun DocumentInfo_Teacher(nav : NavController, view: DisplayUI , onUpdate:()->Unit)
 {
     val context = LocalContext.current
     var isDelete by remember {
@@ -62,8 +68,9 @@ fun DocumentInfo_Teacher(nav : NavController, view: DisplayUI)
             }
             updateItemTopic(view.nowClass.classID , view.nowDocument.copy(discribe = it))
         }
-        OneLine(title = "Tài Liệu", content = "Document in Here")
+//        OneLine(title = "Tài Liệu", content = "Document in Here")
 
+        Spacer(modifier = Modifier.padding(15.dp))
         Row(
             horizontalArrangement = Arrangement.Center ,
             modifier = Modifier
@@ -71,14 +78,39 @@ fun DocumentInfo_Teacher(nav : NavController, view: DisplayUI)
         ) {
             ButtonNav(
                 onClick = {
-                    isDelete = true
+                    onUpdate()
                 } ,
-                content = "Xoá Tài Liệu" ,
-                color = Color(0xFFDC0F0F) ,
+                content = if(view.nowDocument.link == "") "Tải Tài Liệu Mới" else "Cập Nhật Tài Liệu",
+                color = Color(0xFF00FC46)
+            )
+        }
+        Row(
+            horizontalArrangement = Arrangement.Center ,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            ButtonNav(
+                onClick = {
+                    changeDocument(view.nowClass.classID , view.nowDocument)
+                    appendMessage(context , "Cập Nhật Tài Liệu Thành Công")
+                } ,
+                content = "Xác Nhận Cập Nhật Tài Liệu",
+                color = Color(0xFF00FC46)
+            )
+        }
+        Row(
+            horizontalArrangement = Arrangement.Center ,
+            modifier = Modifier
+                .fillMaxWidth()
+            ) {
+            ButtonNav(
+                onClick = {
+                    isDelete = true
+                },
+                content = "Xoá Tài Liệu",
+                color = Color(0xFFDC0F0F),
                 contentColor = Color.White
             )
-
         }
-
     }
 }

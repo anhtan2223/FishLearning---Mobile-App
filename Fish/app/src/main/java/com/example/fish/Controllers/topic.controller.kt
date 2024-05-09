@@ -1,9 +1,12 @@
 package com.example.fish.Controllers
 
 import com.example.fish.Models.HandleTopic
+import com.example.fish.Untils.Document
 import com.example.fish.Untils.ItemTopic
+import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
+import kotlinx.coroutines.runBlocking
 
 fun newTopic(info: Topic){
     HandleTopic.create(info)
@@ -27,5 +30,12 @@ fun updateItemTopic(classId:String, item:ItemTopic){
 fun getTopicByClass(classId: String , onGet:(MutableList<getTopic>)->Unit ){
     HandleTopic.getTopicOfClass(classId){
         onGet(it)
+    }
+}
+fun changeDocument(classId: String , info:Document ){
+//    var uri: String
+    HandleTopic.getLink {
+        HandleTopic.addDocument(classId , info.topicID , info.docID , it)
+        MyDB.document.removeValue()
     }
 }

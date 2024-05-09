@@ -1,10 +1,13 @@
 package com.example.fish
 
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,9 +42,11 @@ import com.example.fish.Controllers.isValidUsername
 import com.example.fish.Controllers.login
 import com.example.fish.Controllers.registerUser
 import com.example.fish.Models.HandleUser
+import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
+import com.example.fish.Untils.uploadPDF
 import com.example.fish.Views.Admin.AdminView
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.Views.Student.OneLineChange
@@ -56,6 +61,7 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val activity = this
         setContent {
             FishTheme {
                 // A surface container using the 'background' color from the theme
@@ -70,9 +76,9 @@ class MainActivity : ComponentActivity() {
                         startDestination = "Login")
                     {
                         composable("Student")
-                        { StudentView(navFather = nav , viewModel = view) }
+                        { StudentView(navFather = nav , viewModel = view ) }
                         composable("Teacher" )
-                        { TeacherView(navFather = nav , viewModel = view) }
+                        { TeacherView(navFather = nav , viewModel = view , getContent = getContent) }
                         composable("Admin" )
                         { AdminView(navFather = nav , viewModel = view) }
                         composable("Login" )
@@ -80,12 +86,29 @@ class MainActivity : ComponentActivity() {
                         composable("SignIn")
                         { SignInView(nav) }
                         composable("Test")
-                        { TestRoom() }
+                        { TestRoom(activity , getContent) }
                     }
                 }
             }
         }
+
+//        getContent.launch("application/pdf")
     }
+
+    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
+        if (it != null) {
+            uploadPDF(it)
+        }
+    }
+//    val getPDF = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+//        if(it.resultCode == Activity.RESULT_OK){
+//            val intent = it.data
+//            if (intent != null) {
+//                intent.data?.let { it1 -> uploadPDF(it1) }
+//            }
+//        }
+//    }
+
 }
 
 @Composable

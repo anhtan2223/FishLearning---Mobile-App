@@ -1,6 +1,7 @@
 package com.example.fish.Views.Teacher
 
 import android.os.Build
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -54,7 +55,8 @@ fun TeacherView(
     modifier: Modifier = Modifier.fillMaxSize(),
     navController : NavHostController = rememberNavController(),
     viewModel: DisplayUI =  viewModel<DisplayUI>(),
-    navFather : NavController
+    navFather : NavController ,
+    getContent: ActivityResultLauncher<String>
 )
     {
         val item = listOf<NavItem>(
@@ -215,7 +217,7 @@ fun TeacherView(
                 composable("SumTest")
                 { SummaryTestView(nav = navController, view = viewModel) }
                 composable("DocumentDetail")
-                { DocumentDetailView(nav = navController, view = viewModel) }
+                { DocumentDetailView(nav = navController, view = viewModel , getContent = getContent) }
             }
         }
     }

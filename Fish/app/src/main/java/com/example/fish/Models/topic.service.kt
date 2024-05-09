@@ -8,6 +8,7 @@ import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
 import com.google.firebase.database.getValue
+import kotlinx.coroutines.tasks.await
 
 class HandleTopic{
     companion object{
@@ -69,6 +70,14 @@ class HandleTopic{
                 if (numberQues != null) {
                     ref.child(classId).child(topicId).child("detail/$testId/numberQues").setValue(numberQues-1)
                 }
+            }
+        }
+        fun addDocument( classId: String , topicId: String,docId:String , Uri:String){
+            ref.child(classId).child(topicId+"/detail").child(docId).child("link").setValue(Uri)
+        }
+        fun getLink(onGet:(String)->Unit){
+            MyDB.document.get().addOnSuccessListener {
+                it.getValue<String>()?.let { it1 -> onGet(it1) }
             }
         }
         fun deleteItemTopic(classId: String , topicId: String , itemId : String){
