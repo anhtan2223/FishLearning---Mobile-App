@@ -18,6 +18,7 @@ class InitValue {
             resetTopic()
             resetAnswer()
             resetQuestion()
+            resetResult()
         }
         fun initFirebase(){
             initUser()
@@ -33,6 +34,9 @@ class InitValue {
         }
         fun resetUser(){
             MyDB.user.removeValue()
+        }
+        fun resetResult(){
+            MyDB.testResult.removeValue()
         }
         fun resetQuestion(){
             MyDB.question.removeValue()

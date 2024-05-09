@@ -32,13 +32,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getAnswerByListAnswer
 import com.example.fish.Controllers.getAnswerByQuestion
 import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Question
 import com.example.fish.ui.theme.DisplayUI
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun ResultView(nav : NavController , view : DisplayUI)
@@ -46,57 +49,58 @@ fun ResultView(nav : NavController , view : DisplayUI)
     Back(nav = nav, view = view , goTo = "TestPrepare")
     val classInfo = view.nowClass
     val testInfo = view.nowTest
-    var listQ by remember {
-        mutableStateOf(mutableListOf<Question>(Question()))
+
+    var question by remember {
+        mutableStateOf(view.listDetailResult[view.nowIndexQuestion].question)
     }
-    getQuestionByTest(testInfo.testID){
-        listQ = it
+    var listAnswer by remember {
+        mutableStateOf(view.listDetailResult[view.nowIndexQuestion].answer)
     }
     if(view.isChoose)
-        showAnswer(view , listQ[view.nowIndexQuestion] )
+        ShowAnswer(view , question , listAnswer ){
+            question = view.listDetailResult[view.nowIndexQuestion].question
+            listAnswer = view.listDetailResult[view.nowIndexQuestion].answer
+        }
     Column(
         modifier = Modifier.padding(start = 20.dp , top = 50.dp)
     ) {
         OneLine(title = "Tên Lớp", content = classInfo.nameClass)
         OneLine(title = "Bài Kiểm Tra", content = testInfo.testName)
-        OneLine(title = "Số Câu Đúng", content = CountNumberCorrect(testInfo.numberQues , view.answerList))
-        OneLine(title = "Chi Tiết ", content = "")
-        DetailResult(view = view)
-        Text(text = "${view.answerList}")
+        OneLine(title = "Số Câu Đúng", content = CountNumberCorrect(testInfo.numberQues , view.listDetailResult))
+        OneLine(title = "Chi Tiết Bài Làm", content = "")
+        DetailResult(view = view){
+            question = view.listDetailResult[view.nowIndexQuestion].question
+            listAnswer = view.listDetailResult[view.nowIndexQuestion].answer
+        }
     }
 }
 
 @Composable
-fun DetailResult(view: DisplayUI)
+fun DetailResult(view: DisplayUI , onChoose:()->Unit)
 {
     LazyVerticalGrid(columns = GridCells.Adaptive(60.dp) )
     {
         items(view.nowTest.numberQues){
-            var answerInfo by remember {
-                mutableStateOf(Answer())
-            }
-            val answerId = view.answerList[it]
-            
-            val isTrue = (DemoData.AnswerList.find {it.ansID == answerId})?.isCorrect ?: false
+            val nowDetailResult = view.listDetailResult[it]
+            val isTrue = nowDetailResult.chooseAnswer == (nowDetailResult.answer
+                                                            .find { it.isCorrect == true }?.ansID ?: false)
             
             OneRepareAnswer(
-                onClick = { view.changeQuestion(it) ; view.toogleChoose() },
+                onClick = {
+                    view.changeQuestion(it) ;
+                    view.toogleChoose()
+                    onChoose()
+                },
                 content = (it+1).toString() ,
-                isChoose = answerId != "-1" ,
+                isChoose = nowDetailResult.chooseAnswer != "-1" ,
                 isTrue = isTrue
             )
         }
     }
 }
 @Composable
-fun showAnswer(view: DisplayUI , Q:Question )
+fun ShowAnswer(view: DisplayUI , Q:String , listAnswer: MutableList<Answer> , onChoose:()->Unit)
 {
-    var A by remember {
-        mutableStateOf(mutableListOf<Answer>())
-    }
-    getAnswerByQuestion(Q.quesID){
-        A = it
-    }
     Dialog( onDismissRequest = { /*TODO*/ })
     {
         BackHandler {
@@ -114,14 +118,14 @@ fun showAnswer(view: DisplayUI , Q:Question )
                     Modifier
                         .padding(bottom = 40.dp, top = 50.dp)
                         .fillMaxWidth(0.9f)
-                        .clickable { view.moveNextQues() } ,
+                        .clickable { view.moveNextQues() ; onChoose() } ,
                     colors = CardDefaults.cardColors(Color(0xFF6D6D6D))
                 ) {
                     Text(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(20.dp) ,
-                        text = Q.detail,
+                        text = Q,
                         style = MaterialTheme.typography.labelMedium,
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
@@ -130,13 +134,9 @@ fun showAnswer(view: DisplayUI , Q:Question )
                     )
                 }
             }
-             items(A) {
+             items(listAnswer) {
                  val isChoose = view.answerList[view.nowIndexQuestion] == it.ansID
-                 if (Q.quesID == it.quesID) {
-                     RepairOneAnswer(
-                         A = it ,
-                         isChoose = isChoose)
-                 }
+                 RepairOneAnswer(A = it , isChoose = isChoose)
              }
         }
     }
@@ -169,18 +169,17 @@ fun OneRepareAnswer(onClick : ()-> Unit , content:String , isChoose:Boolean , is
         )
     }
 }
-fun CountNumberCorrect(numberQuestion : Int , answerList : List<String> ) : String
+fun CountNumberCorrect(
+    numberQuestion:Int,
+    answerList:List<DetailResult>
+) : String
 {
     var correct = 0
-    for(i in answerList)
-    {
-        for(j in DemoData.AnswerList)
-        {
-            if(i == j.ansID){
-                if(j.isCorrect) correct++
-            }
-        }
+    for(i in answerList){
+        if(i.chooseAnswer == (i.answer.find { it.isCorrect }?.ansID ?: false))
+            correct++
     }
+
     return "$correct / $numberQuestion"
 }
 @Composable

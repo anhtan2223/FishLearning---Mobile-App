@@ -4,7 +4,9 @@ import com.example.fish.Untils.Answer
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Question
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.getValue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class HandleAnswer{
@@ -26,11 +28,25 @@ class HandleAnswer{
             ref.child(id).child("correct").setValue(!nowValue)
         }
 
-       fun getAnswerByQuestion( onGet:(DataSnapshot)->Unit ){
+       fun getAll( onGet:(DataSnapshot)->Unit ){
            ref.get().addOnSuccessListener {
                onGet(it)
            }
        }
+       suspend fun getAnswerByQID(QID:String): MutableList<Answer> {
+           val snapshot = ref.get().await()
+           val listAnswer = mutableListOf<Answer>()
+           for(i in snapshot.children){
+               var answer = i.getValue<Answer>()
+               if (answer != null) {
+                   if(answer.quesID == QID){
+                        listAnswer.add(answer)
+                   }
+               }
+           }
+           return listAnswer
+       }
+
 
 
 

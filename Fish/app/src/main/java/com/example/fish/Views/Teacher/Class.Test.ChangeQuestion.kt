@@ -66,6 +66,7 @@ import com.example.fish.Controllers.updateQuestion
 import com.example.fish.R
 import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Answer
+import com.example.fish.Untils.Back
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Question
@@ -96,37 +97,79 @@ fun ChangeQuestionView(nav : NavController , view : DisplayUI)
     BackHandler {
         view.toogleChoose()
     }
-
-    val nowQuestion = listQ[view.nowIndexQuestion]
-
-    QNA_Correct(nav = nav , view = view , nowQuestion ,
-        onDelete = {
-            getQuestionByTest(view.nowTest.testID){ listQ = it }
-        } ,
-        onNewAnswer = {
-            createNewAnswer(
-                Answer(detail = "New Answer" , quesID = nowQuestion.quesID )
-            )
-        } ,
-        onChangeQuestion = {
-            nowQuestion.detail = it
-            updateQuestion(nowQuestion)
-        } ,
-        onUpdateMenu = {
+    if(listQ.isEmpty()){
+        EmptyList(nav , view){
             createNewQuestion(
                 view.nowClass.classID ,
                 view.nowTest.topicID ,
                 Question(detail = "New Question" , testID = view.nowTest.testID )
             )
             view.addNewQuestion()
-            getQuestionByTest(view.nowTest.testID){
-                listQ = it
-            }
+            getQuestionByTest(view.nowTest.testID){ listQ = it }
             appendMessage(context , "Thêm Câu Hỏi Mới Thành Công")
             view.changeQuestion(view.nowTest.numberQues-1)
-
         }
-    )
+
+    }
+    else{
+        val nowQuestion = listQ[view.nowIndexQuestion]
+        QNA_Correct(nav = nav , view = view , nowQuestion ,
+            onDelete = {
+                if(view.nowTest.numberQues == 0)
+                    listQ = mutableListOf()
+                else
+                    getQuestionByTest(view.nowTest.testID){ listQ = it }
+            } ,
+            onNewAnswer = {
+                createNewAnswer(
+                    Answer(detail ="New Answer" , quesID = nowQuestion.quesID )
+                )
+            } ,
+            onChangeQuestion = {
+                nowQuestion.detail = it
+                updateQuestion(nowQuestion)
+            } ,
+            onUpdateMenu = {
+                createNewQuestion(
+                    view.nowClass.classID ,
+                    view.nowTest.topicID ,
+                    Question(detail = "New Question" , testID = view.nowTest.testID )
+                )
+                view.addNewQuestion()
+                getQuestionByTest(view.nowTest.testID){
+                    listQ = it
+                }
+                appendMessage(context , "Thêm Câu Hỏi Mới Thành Công")
+                view.changeQuestion(view.nowTest.numberQues-1)
+            }
+        )
+    }
+}
+@Composable
+fun EmptyList(nav: NavController, view : DisplayUI , addNew:()->Unit){
+    Back(nav = nav, view = view , "TestResult")
+    Column(
+        Modifier.fillMaxSize() ,
+        verticalArrangement = Arrangement.Center ,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Vui Lòng Thêm Câu Hỏi Mới" ,
+            fontSize = 25.sp ,
+            style = MaterialTheme.typography.labelSmall
+        )
+        IconButton(
+            modifier = Modifier
+                .padding(10.dp)
+                .border(BorderStroke(3.dp, Color(0xFFF57C00)), shape = CircleShape) ,
+            onClick = { addNew() }
+        ) {
+            Icon(
+                tint = Color(0xFFF57C00),
+                imageVector = Icons.Default.Add ,
+                contentDescription = null)
+        }
+    }
 }
 
 @Composable
@@ -167,10 +210,11 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
             deleteOneQuestion(view.nowClass.classID , view.nowTest.topicID , Q)
             appendMessage(context , "Xoá Câu Hỏi Thành Công")
             view.deleteOneQuestion()
-            if(view.nowIndexQuestion == view.nowTest.numberQues){
-                view.changeQuestion(view.nowTest.numberQues-1)
-            }
             isDelete = false
+            if(view.nowIndexQuestion == view.nowTest.numberQues){
+                if(view.nowTest.numberQues != 0)
+                    view.changeQuestion(view.nowTest.numberQues-1)
+            }
             onDelete()
         }
     )
@@ -220,7 +264,8 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                         listA = listA.filter {
                             it.ansID != id
                         }.toMutableList()
-                    isSetting = !isSetting
+                        isSetting = !isSetting
+                        isChange = false
                 } ,
                 onUpdate = {value ->
                     it.detail = value
@@ -276,9 +321,9 @@ fun MenuQuestion(view : DisplayUI , onChoose:()->Unit = {} , onUpdate:()->Unit )
                 items(view.nowTest.numberQues){
                     OneNumber(
                         onClick = {
-                            view.changeQuestion(it) ;
-                            view.toogleChoose()  ;
                             onChoose()
+                            view.toogleChoose()
+                            view.changeQuestion(it)
                         },
                         content = (it+1).toString() ,
                         isChoose = (view.nowIndexQuestion == it)
@@ -340,7 +385,6 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                     .background(CardColors)
                     .padding(10.dp)
                     .clickable { toogleResult() }
-
                 ,
                 text = A.detail ,
                 style = MaterialTheme.typography.labelMedium ,

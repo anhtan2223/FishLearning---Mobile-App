@@ -6,13 +6,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
+import com.example.fish.Controllers.getDetailTest
 import com.example.fish.Controllers.getUserList
+import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Class
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.Question
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.User
+import com.example.fish.Untils.goTo
 
 data class NavItem(
     val title : String,
@@ -33,6 +37,9 @@ class DisplayUI : ViewModel(){
         private set
     var myClass by mutableStateOf(mutableListOf<Class>())
         private set
+    var listDetailResult by mutableStateOf(mutableListOf<DetailResult>())
+        private set
+
     var Title by mutableStateOf("Home")
         private set
     var nowClass by mutableStateOf( Class() )
@@ -97,28 +104,44 @@ class DisplayUI : ViewModel(){
     {
         nowClass = selectedClass
     }
+    fun chooseDetailResult(input: MutableList<DetailResult>){
+        listDetailResult = input
+        answerList.clear()
+        for(i in input){
+            answerList.add(i.chooseAnswer)
+        }
+    }
     fun resetTest()
     {
         isTimeout = false
         answerList.clear()
-        for(i in 0 until nowTest.numberQues)
+        listDetailResult.clear()
+        for(i in 0 until nowTest.numberQues){
             answerList.add("-1")
+//            listDetailResult.add(DetailResult(chooseAnswer = "-1"))
+        }
         nowIndexQuestion = 0
-
     }
     fun selectTest(test : Test)
     {
         answerList.clear()
+        listDetailResult.clear()
         nowTest = test
         isTimeout = false
         for(i in 0 until nowTest.numberQues ){
             answerList.add("-1")
+//            listDetailResult.add(DetailResult(chooseAnswer = "-1"))
         }
     }
     fun chooseAnswer(answerId: String)
     {
-        answerList.set(nowIndexQuestion,answerId)
+        answerList.set(nowIndexQuestion , answerId)
+        listDetailResult[nowIndexQuestion].chooseAnswer = answerId
         moveNextQues()
+    }
+
+    fun initDetailResult(testId:String){
+        listDetailResult = getDetailTest(testId)
     }
     fun moveNextQues()
     {
@@ -138,7 +161,5 @@ class DisplayUI : ViewModel(){
     fun deleteOneQuestion(){
         nowTest.numberQues = nowTest.numberQues-1
     }
-
-
 
 }

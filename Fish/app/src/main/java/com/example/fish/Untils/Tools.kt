@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
@@ -16,14 +17,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.Controllers.getDetailTest
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.ui.theme.DisplayUI
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -116,5 +121,27 @@ fun AddAlert(
                 }
             }
         }
+    }
+}
+@Composable
+fun runDispatcherDefault(handle:()->Unit){
+    LaunchedEffect(Unit){
+        launch(Dispatchers.Default) {
+            handle()
+        }
+    }
+}
+@Composable
+fun WaitingScreen(content: String){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally ,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(
+            text = content ,
+            style = MaterialTheme.typography.titleSmall ,
+            fontSize = 20.sp
+        )
     }
 }

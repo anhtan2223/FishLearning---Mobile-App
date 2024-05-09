@@ -72,11 +72,18 @@ data class Answer(
     var quesID: String = ""
 )
 data class Result(
-    var testID: String = "" ,
-    var numberCorrect : Int ,
-    var attemp : Int ,
-    var studentID: String = ""
+    var testID: String = "",
+    var studentID: String = "",
+    var resultID : String = "" ,
+    var dateCreate : String = "" ,
+    var result: MutableList<DetailResult> = mutableListOf()
 )
+data class DetailResult(
+    var chooseAnswer : String = "-1",//AnsId = "
+    var question : String = "",
+    var answer : MutableList<Answer> = mutableListOf()
+)
+
 
 data class getTopic(
     var info : Topic ,

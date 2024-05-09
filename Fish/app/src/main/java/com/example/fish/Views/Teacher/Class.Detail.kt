@@ -258,7 +258,7 @@ fun Teacher_TopicView(info:getTopic , nav:NavController , view: DisplayUI , onUp
                             shape = CircleShape
                         ) ,
                     onClick = {
-                        addItemToTopic(view.nowClass.classID , Test(topicID = info.info.topicID , testName = "New Test" ) )
+                        addItemToTopic(view.nowClass.classID , Test(topicID = info.info.topicID , testName = "New Test" , time = 5 ) )
                         onUpdate()
                     }
                 ) {

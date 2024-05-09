@@ -52,7 +52,7 @@ fun Teacher_DisplayInfo(nav : NavController, view: DisplayUI , classInfo : Class
     }
     AddAlert(
         isShow = isDelete ,
-        content = "Xác Nhận Xoá Lớp Học ${testInfo.testName}" ,
+        content = "Xác Nhận Xoá Bài Kiểm Tra ${testInfo.testName}" ,
         onCancel = { isDelete = false } ,
         onConfirm = {
             appendMessage(context , "Xoá Bài Kiểm Tra Thành Công")
@@ -81,7 +81,7 @@ fun Teacher_DisplayInfo(nav : NavController, view: DisplayUI , classInfo : Class
             }
             updateItemTopic(view.nowClass.classID , testInfo.copy(time = it.toInt()))
         }
-        OneLine(title = "Người Tham Dự", content = "0")
+//        OneLine(title = "Người Tham Dự", content = "0")
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier

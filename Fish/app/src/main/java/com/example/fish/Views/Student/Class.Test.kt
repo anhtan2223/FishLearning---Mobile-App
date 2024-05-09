@@ -1,6 +1,8 @@
 package com.example.fish.Views.Student
 
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -42,44 +44,50 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import com.example.fish.Controllers.addResult
 import com.example.fish.Controllers.getAnswerByQuestion
 import com.example.fish.Controllers.getQuestionByTest
 import com.example.fish.R
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.DemoData
 import com.example.fish.Untils.Question
+import com.example.fish.Untils.Result
 import com.example.fish.Untils.formatTime
+import com.example.fish.Untils.getToday
 import com.example.fish.Untils.goTo
+import com.example.fish.Untils.runDispatcherDefault
 import com.example.fish.ui.theme.DisplayUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun TestView(modifier: Modifier = Modifier ,  nav: NavController, view : DisplayUI)
+fun TestView( nav: NavController, view : DisplayUI)
 {
-    var listQ by remember {
-        mutableStateOf( mutableListOf(Question()) )
-    }
-    BackHandler {
-            view.toogleChoose()
-    }
-    if(view.isTimeout)
-        goTo(nav , view , "Result")
-    if(view.isChoose)
-        ChooseQuestion(nav , view)
+    BackHandler { view.toogleChoose() }
 
-    getQuestionByTest(view.nowTest.testID){
-        listQ = it
+    if(view.isTimeout)
+    {
+        view.toogleChoose() ;
+        addResult(
+            Result(
+                studentID = view.info.uid ,
+                testID = view.nowTest.testID ,
+                result = view.listDetailResult ,
+                dateCreate = getToday()
+            )
+        )
+        goTo(nav , view , "Result")
     }
     QNA(
+        nav = nav ,
         view = view ,
-        Q = listQ[view.nowIndexQuestion] ,
         goBack = {  view.timeOut() }
     )
 }
 @Composable
-fun OneAnswer(A:Answer , isChoose:Boolean ,  onClick:() -> Unit )
+fun OneAnswer(A:Answer , isChoose:Boolean ,  onClick:() -> Unit ,   )
 {
     val CardColors = if(isChoose) Color(0xFFFFAB40) else Color(0xFF444444)
     val TextColor = if(isChoose) Color.Black else Color.White
@@ -104,15 +112,25 @@ fun OneAnswer(A:Answer , isChoose:Boolean ,  onClick:() -> Unit )
         )
     }
 }
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun QNA(view : DisplayUI , Q:Question ,  goBack:() -> Unit)
+fun QNA( nav: NavController , view : DisplayUI  ,  goBack:() -> Unit)
 {
+
+
+    var detail by remember {
+        mutableStateOf(view.listDetailResult[view.nowIndexQuestion].question)
+    }
     var listA by remember {
-        mutableStateOf(mutableListOf<Answer>())
+        mutableStateOf( view.listDetailResult[view.nowIndexQuestion].answer )
     }
-    getAnswerByQuestion(Q.quesID){
-        listA = it
-    }
+
+    if(view.isChoose)
+        ChooseQuestion(nav , view){
+            detail = view.listDetailResult[view.nowIndexQuestion].question
+            listA = view.listDetailResult[view.nowIndexQuestion].answer
+        }
+
     LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally ,
             modifier = Modifier
@@ -148,14 +166,18 @@ fun QNA(view : DisplayUI , Q:Question ,  goBack:() -> Unit)
                 Modifier
                     .padding(bottom = 40.dp, top = 50.dp)
                     .fillMaxWidth(0.9f)
-                    .clickable { view.moveNextQues() } ,
+                    .clickable {
+                        view.moveNextQues()
+                        detail = view.listDetailResult[view.nowIndexQuestion].question
+                        listA = view.listDetailResult[view.nowIndexQuestion].answer
+                    } ,
                 colors = CardDefaults.cardColors(Color(0xFF6D6D6D))
             ) {
                 Text(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(20.dp) ,
-                    text = Q.detail,
+                    text = detail,
                     style = MaterialTheme.typography.labelMedium,
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
@@ -165,12 +187,14 @@ fun QNA(view : DisplayUI , Q:Question ,  goBack:() -> Unit)
             }
         }
         items(listA) {
-            val isChoose = view.answerList[view.nowIndexQuestion] == it.ansID
                 OneAnswer(
                     A = it,
-//                    isChoose = view.answerList[view.nowQuestion] == it.AnsID ,
-                    onClick = { view.chooseAnswer(it.ansID) } ,
-                    isChoose = isChoose
+                    onClick = {
+                        view.chooseAnswer(it.ansID)
+                        detail = view.listDetailResult[view.nowIndexQuestion].question
+                        listA = view.listDetailResult[view.nowIndexQuestion].answer
+                    } ,
+                    isChoose = view.answerList[view.nowIndexQuestion] == it.ansID
                 )
         }
     }
@@ -203,10 +227,11 @@ fun OneNumber(onClick : ()-> Unit , content:String , isChoose:Boolean )
         )
     }
 }
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ChooseQuestion(nav: NavController , view : DisplayUI)
+fun ChooseQuestion(nav: NavController , view : DisplayUI , changeQuestion:()->Unit)
 {
-    Dialog( onDismissRequest = { /*TODO*/ })
+    Dialog( onDismissRequest = {  })
     {
         BackHandler {
             view.toogleChoose()
@@ -224,14 +249,31 @@ fun ChooseQuestion(nav: NavController , view : DisplayUI)
                 {
                     items(view.nowTest.numberQues){
                         OneNumber(
-                            onClick = { view.changeQuestion(it) ; view.toogleChoose() },
+                            onClick = {
+                                view.changeQuestion(it) ;
+                                view.toogleChoose()
+                                changeQuestion()
+                            },
                             content = (it+1).toString() ,
                             isChoose = view.answerList[it] != "-1"
                         )
                     }
                 }
                 ButtonNav(
-                    onClick = { view.toogleChoose() ; goTo(nav , view , "Result") },
+                    onClick = {
+                        //End
+                        view.toogleChoose() ;
+                        addResult(
+                            Result(
+                                studentID = view.info.uid ,
+                                testID = view.nowTest.testID ,
+                                result = view.listDetailResult ,
+                                dateCreate = getToday()
+                            )
+                        )
+                        goTo(nav , view , "Result")
+
+                              },
                     content = "Kết Thúc Phần Thi" ,
                     color = Color.Transparent ,
                     contentColor = Color.White

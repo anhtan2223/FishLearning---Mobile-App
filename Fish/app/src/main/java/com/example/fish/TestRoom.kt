@@ -7,21 +7,36 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import com.example.fish.Controllers.getDetailTest
 import com.example.fish.Controllers.getQuestionByTest
+import com.example.fish.Controllers.getResultByUser
 import com.example.fish.Models.HandleQuestion
 import com.example.fish.Models.HandleTopic
 import com.example.fish.Untils.DemoData
+import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Document
 import com.example.fish.Untils.InitValue
 import com.example.fish.Untils.ItemTopic
+import com.example.fish.Untils.Question
 import com.example.fish.Untils.Test
 import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.getTopic
+import com.example.fish.Untils.runDispatcherDefault
 import com.google.firebase.database.getValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @Composable
 fun TestRoom(){
@@ -41,11 +56,21 @@ fun TestRoom(){
         }
         Button(onClick = {
 
-            HandleTopic.deleteOneQuestion("1" , "1" , "13")
+            val detail : MutableList<DetailResult> = getDetailTest("13")
+            Log.d(TAG, "TestRoom: $detail")
+            appendMessage(context , detail.toString())
 
         }) {
             Text(text = "Test Function")
         }
+        var content by remember {
+            mutableStateOf("Hello")
+        }
+        runDispatcherDefault {
+            content = getDetailTest("13").toString()
+        }
+
+        Text(text = content)
     }
 }
 //fun main(){
