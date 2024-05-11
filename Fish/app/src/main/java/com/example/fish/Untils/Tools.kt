@@ -2,7 +2,6 @@ package com.example.fish.Untils
 
 import android.app.Activity
 import android.content.Context
-import com.example.fish.R
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -21,8 +20,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fish.R
 import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.ui.theme.DisplayUI
 import com.google.firebase.ktx.Firebase
@@ -53,7 +51,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.UUID
-import kotlin.Result
 
 @Composable
 fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
@@ -213,11 +210,6 @@ fun RecognizeQuestion(modifier: Modifier = Modifier , onGetText:(DetailResult)->
         }
     }
 }
-var text = "5. Thân to ra là do:\n" +
-        "a. Sự lớn lên và sự phân chia của tể bào\n" +
-        "b. Sự phân chia các tế bào ở tầng sinh vỏ\n" +
-        "c. Do sự phân chia các tế bào ở tầng sinh vỏ và tầng si\n" +
-        "trụ"
 fun handleQuestion(text:String): DetailResult {
 
 //    if(text)
@@ -234,9 +226,6 @@ fun handleQuestion(text:String): DetailResult {
     listAnswer.removeAt(0)
     return DetailResult(question = question , answer = listAnswer)
 
-}
-fun main(){
-    handleQuestion(text)
 }
 @Composable
 fun selectImage(modifier:Modifier = Modifier , onGetURI:(Uri)->Unit){

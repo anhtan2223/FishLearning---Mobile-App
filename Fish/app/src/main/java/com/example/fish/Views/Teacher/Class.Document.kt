@@ -25,10 +25,7 @@ import com.example.fish.Untils.Back
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
-import com.example.fish.Views.Student.OneLine
 import com.example.fish.ui.theme.DisplayUI
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 @Composable
 fun DocumentDetailView(nav:NavController , view:DisplayUI , getContent: ActivityResultLauncher<String>){

@@ -228,6 +228,10 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                     Q.detail = it.question
                     listA = it.answer
                     isSetting = false
+                    updateQuestion(Q)
+                    for(i in listA){
+                        createNewAnswer(i.copy(quesID = Q.quesID))
+                    }
                 }
             )
         }

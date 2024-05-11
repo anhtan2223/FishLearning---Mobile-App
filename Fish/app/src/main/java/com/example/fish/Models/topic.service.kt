@@ -8,7 +8,6 @@ import com.example.fish.Untils.TextBox
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
 import com.google.firebase.database.getValue
-import kotlinx.coroutines.tasks.await
 
 class HandleTopic{
     companion object{

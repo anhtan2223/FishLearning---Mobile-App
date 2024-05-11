@@ -46,7 +46,6 @@ import com.example.fish.Untils.downloadPDF
 import com.example.fish.Untils.getTopic
 import com.example.fish.Untils.goTo
 import com.example.fish.ui.theme.DisplayUI
-import com.google.firebase.ktx.Firebase
 
 @Composable
 fun DetailClass(nav:NavController , view:DisplayUI)

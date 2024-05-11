@@ -6,7 +6,6 @@ import com.example.fish.Untils.ItemTopic
 import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.Topic
 import com.example.fish.Untils.getTopic
-import kotlinx.coroutines.runBlocking
 
 fun newTopic(info: Topic){
     HandleTopic.create(info)

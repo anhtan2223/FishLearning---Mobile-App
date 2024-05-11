@@ -1,12 +1,10 @@
 package com.example.fish
 
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
@@ -42,7 +40,6 @@ import com.example.fish.Controllers.isValidUsername
 import com.example.fish.Controllers.login
 import com.example.fish.Controllers.registerUser
 import com.example.fish.Models.HandleUser
-import com.example.fish.Untils.MyDB
 import com.example.fish.Untils.User
 import com.example.fish.Untils.ValidValue
 import com.example.fish.Untils.appendMessage
@@ -179,7 +176,7 @@ fun LoginView(nav:NavController , view:DisplayUI)
                     )
 
             }, content = "Đăng Nhập")
-//            ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
+            ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
         }
     }
     Row(
