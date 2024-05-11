@@ -39,7 +39,7 @@ fun DisplayInfo(classInfo : Class, testInfo: Test, onclick : ()->Unit)
         OneLine(title = "Bài Kiểm Tra", content = testInfo.testName)
         OneLine(title = "Số Câu Hỏi", content = testInfo.numberQues.toString())
         OneLine(title = "Thời Gian", content = formatTime(testInfo.time*60) )
-        OneLine(title = "Thực Hiện", content = "0")
+//        OneLine(title = "Thực Hiện", content = "0")
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier

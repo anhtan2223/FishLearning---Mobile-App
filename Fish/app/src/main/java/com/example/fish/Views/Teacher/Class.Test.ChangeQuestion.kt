@@ -61,6 +61,7 @@ import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Back
 import com.example.fish.Untils.Question
+import com.example.fish.Untils.RecognizeTextIcon
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.ButtonNav
@@ -217,7 +218,11 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                 onDelete = {isSetting = !isSetting; isDelete = true} ,
                 onBack = {goTo(nav, view, "TestResult")} ,
                 onMenu = { view.toogleChoose() } ,
-                onSetting = { isSetting = !isSetting }
+                onSetting = { isSetting = !isSetting } ,
+                onUpdate = {
+                    isSetting = false
+                    onChangeQuestion(it)
+                }
             )
         }
         //Question
@@ -382,35 +387,21 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                 mutableStateOf(A.detail)
             }
             Row(
+//                horizontalArrangement = Arrangement.Absolute.Right,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(CardColors)
-                    .padding(10.dp)
-            ) {
-
-                BasicTextField(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(CardColors)
-                        .weight(0.9f)
-//                        .padding(10.dp)
-                    ,
-                    value = content ,
-                    onValueChange = {
-                        content = it ;
-                        onUpdate(it)
-                    } ,
-                    textStyle = TextStyle(
-                        fontSize = 16.sp ,
-                        lineHeight = 20.sp ,
-                        textAlign = TextAlign.Center ,
-                        color = TextColor
-                    )
-                )
-
+            ){
+                Spacer(modifier = Modifier.weight(0.8f))
+                RecognizeTextIcon(modifier = Modifier
+                    .weight(0.1f)
+                    .size(20.dp)
+                ) {
+                    onUpdate(it)
+                    content = it
+                }
                 Icon(
                     modifier = Modifier
-                        .background(Color.Transparent)
                         .size(20.dp)
                         .weight(0.1f)
                         .clickable {
@@ -420,7 +411,26 @@ fun ChangeAnswer( A : Answer , isChoose: Boolean ,
                     imageVector = Icons.Filled.Delete ,
                     contentDescription = null
                 )
-
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(CardColors)
+                    .padding(10.dp)
+            ) {
+                BasicTextField(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(CardColors)
+                        .weight(0.9f)
+                    ,
+                    value = content ,
+                    onValueChange = {
+                        content = it ;
+                        onUpdate(it)
+                    } ,
+                    textStyle = TextStyle(fontSize = 16.sp , lineHeight = 20.sp , textAlign = TextAlign.Center , color = TextColor)
+                )
             }
         }
     }
@@ -474,7 +484,8 @@ fun Heading(
     onDelete: () -> Unit ,
     onBack: ()->Unit = {},
     onMenu : ()->Unit = {},
-    onSetting : ()->Unit = {}
+    onSetting : ()->Unit = {} ,
+    onUpdate: (String) -> Unit
 ){
     Box{
         Row(Modifier.padding(10.dp)) {
@@ -487,20 +498,30 @@ fun Heading(
                 contentDescription = null
             )
 
-            Spacer(modifier = Modifier.weight(0.5f))
+            Spacer(modifier = Modifier.weight(0.4f))
 
             if(isSetting)
             {
-                Icon(
+                RecognizeTextIcon(
                     modifier = Modifier
                         .weight(0.1f)
                         .size(25.dp)
-                        .clickable { onDelete() },
-                    imageVector = Icons.Filled.Delete ,
-                    contentDescription = null)
+                    ,
+                    onUpdate
+                )
+
+                Icon(
+                        modifier = Modifier
+                            .weight(0.1f)
+                            .size(25.dp)
+                            .clickable { onDelete() },
+                        imageVector = Icons.Filled.Delete ,
+                        contentDescription = null)
+
+
             }
             else
-                Spacer(modifier = Modifier.weight(0.1f))
+                Spacer(modifier = Modifier.weight(0.2f))
             Icon(
                 modifier = Modifier
                     .weight(0.1f)

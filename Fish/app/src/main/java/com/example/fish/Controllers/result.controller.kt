@@ -16,3 +16,14 @@ fun getResultByUser(testId:String , uid:String , onGet:(MutableList<Result>)->Un
         onGet(listResult)
     }
 }
+fun getResultByTest(testId: String , onGet: (MutableList<Result>) -> Unit){
+    HandleResult.getAllByTestId(testId){
+        val listResult = mutableListOf<Result>()
+        for(topicId in it.children){
+            for(result in topicId.children){
+                result.getValue(Result::class.java)?.let { it1 -> listResult.add(it1) }
+            }
+        }
+        onGet(listResult)
+    }
+}

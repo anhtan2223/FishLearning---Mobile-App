@@ -44,7 +44,9 @@ import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
 import com.example.fish.Views.Student.DetailClass
+import com.example.fish.Views.Student.ResultView
 import com.example.fish.Views.Student.UpdateInfo
+import com.example.fish.Views.Teacher.SummaryTestView
 import com.example.fish.ui.theme.DisplayUI
 import com.example.fish.ui.theme.NavItem
 
@@ -210,7 +212,9 @@ fun AdminView(
             composable("TestPrepare")
             { TestPrepareView_Admin(nav = navController, view = viewModel) }
             composable("TestSummary")
-            { SummaryTestView_Admin(navController , viewModel) }
+            { SummaryTestView(nav = navController, view = viewModel) }
+            composable("Result")
+            { ResultView(nav = navController, view = viewModel) }
         }
     }
 }

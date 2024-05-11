@@ -91,23 +91,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-//        getContent.launch("application/pdf")
     }
 
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
         if (it != null) {
-            uploadPDF(it)
+            appendMessage(this , "Đang Upload Tài Liệu Vui Lòng Chờ")
+            uploadPDF(it){
+                appendMessage(this.baseContext , "Đã Upload Tài Liệu Thành Công")
+            }
         }
     }
-//    val getPDF = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-//        if(it.resultCode == Activity.RESULT_OK){
-//            val intent = it.data
-//            if (intent != null) {
-//                intent.data?.let { it1 -> uploadPDF(it1) }
-//            }
-//        }
-//    }
 
 }
 

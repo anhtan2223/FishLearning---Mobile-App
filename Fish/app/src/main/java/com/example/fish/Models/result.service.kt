@@ -15,5 +15,8 @@ class HandleResult{
         fun getAllByUser(testId : String , uid : String , onGet:(DataSnapshot)->Unit){
             ref.child(testId).child(uid).get().addOnSuccessListener(onGet)
         }
+        fun getAllByTestId(testId: String , onGet:(DataSnapshot)->Unit){
+            ref.child(testId).get().addOnSuccessListener(onGet)
+        }
     }
 }

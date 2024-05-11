@@ -45,6 +45,7 @@ import com.example.fish.Untils.goTo
 import com.example.fish.Views.Student.AccountScreen
 import com.example.fish.Views.Student.ChangePassword
 import com.example.fish.Views.Student.NavItem
+import com.example.fish.Views.Student.ResultView
 import com.example.fish.Views.Student.UpdateInfo
 import com.example.fish.ui.theme.DisplayUI
 
@@ -218,6 +219,8 @@ fun TeacherView(
                 { SummaryTestView(nav = navController, view = viewModel) }
                 composable("DocumentDetail")
                 { DocumentDetailView(nav = navController, view = viewModel , getContent = getContent) }
+                composable("Result")
+                { ResultView(nav = navController, view = viewModel) }
             }
         }
     }

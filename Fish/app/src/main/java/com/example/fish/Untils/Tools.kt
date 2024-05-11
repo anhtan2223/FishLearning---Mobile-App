@@ -1,14 +1,17 @@
 package com.example.fish.Untils
 
 import android.app.Activity
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
+import com.example.fish.R
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +21,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -35,6 +43,9 @@ import com.example.fish.Views.Student.ButtonNav
 import com.example.fish.ui.theme.DisplayUI
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -161,7 +172,7 @@ fun selectPDF(activity: Activity){
     intent.addCategory(Intent.CATEGORY_OPENABLE)
     activity.startActivityForResult(Intent.createChooser(intent , "Select PDF File") , 123)
 }
-fun uploadPDF(data : Uri ){
+fun uploadPDF(data : Uri , onUpload:()->Unit = {}){
     var storeRef = Firebase.storage.reference
     var pdf = storeRef.child("pdf/${UUID.randomUUID()}.pdf")
     pdf.putFile(data)
@@ -170,6 +181,7 @@ fun uploadPDF(data : Uri ){
             while (!uriTask.isComplete) ;
             val uri = uriTask.getResult()
             MyDB.document.setValue(uri.toString())
+            onUpload()
         }
 }
 fun downloadPDF(context: Context ,  URL:String){
@@ -177,4 +189,36 @@ fun downloadPDF(context: Context ,  URL:String){
     var uri = Uri.parse(URL)
     val intent = Intent(Intent.ACTION_VIEW , uri)
     context.startActivity(intent)
+}
+@Composable
+fun RecognizeTextIcon(modifier: Modifier = Modifier , onGetText:(String)->Unit){
+    var context = LocalContext.current
+    selectImage(modifier){
+        val recognize = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val image:InputImage = getImage(context,it)
+        recognize.process(image).addOnSuccessListener {
+            onGetText(it.text)
+        }
+    }
+}
+@Composable
+fun selectImage(modifier:Modifier = Modifier , onGetURI:(Uri)->Unit){
+    val chooseImage = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == Activity.RESULT_OK)
+            it.data?.data?.let {
+                onGetURI(it)
+            }
+    }
+    IconButton(modifier = modifier , onClick = { openImageChooser(chooseImage) }) {
+        Icon(painter = painterResource(id = R.drawable.social_15049667), contentDescription = null)
+    }
+}
+fun getImage(context:Context, uri:Uri): InputImage {
+    var image: InputImage
+    image = InputImage.fromFilePath(context, uri)
+    return image
+}
+private fun openImageChooser(chooseImageLauncher: ActivityResultLauncher<Intent>) {
+    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    chooseImageLauncher.launch(intent)
 }
