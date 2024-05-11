@@ -53,6 +53,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.UUID
+import kotlin.Result
 
 @Composable
 fun Back(nav: NavController, view: DisplayUI ,  goTo:String = "Home")
@@ -200,6 +201,42 @@ fun RecognizeTextIcon(modifier: Modifier = Modifier , onGetText:(String)->Unit){
             onGetText(it.text)
         }
     }
+}
+@Composable
+fun RecognizeQuestion(modifier: Modifier = Modifier , onGetText:(DetailResult)->Unit){
+    var context = LocalContext.current
+    selectImage(modifier){
+        val recognize = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val image:InputImage = getImage(context,it)
+        recognize.process(image).addOnSuccessListener {
+            onGetText(handleQuestion(it.text))
+        }
+    }
+}
+var text = "5. Thân to ra là do:\n" +
+        "a. Sự lớn lên và sự phân chia của tể bào\n" +
+        "b. Sự phân chia các tế bào ở tầng sinh vỏ\n" +
+        "c. Do sự phân chia các tế bào ở tầng sinh vỏ và tầng si\n" +
+        "trụ"
+fun handleQuestion(text:String): DetailResult {
+
+//    if(text)
+    var ListResult = text.split("\n")
+
+    var question = ListResult[0]
+    var listAnswer = mutableListOf<Answer>()
+
+    for(i in ListResult){
+        listAnswer.add(
+            Answer(detail = i)
+        )
+    }
+    listAnswer.removeAt(0)
+    return DetailResult(question = question , answer = listAnswer)
+
+}
+fun main(){
+    handleQuestion(text)
 }
 @Composable
 fun selectImage(modifier:Modifier = Modifier , onGetURI:(Uri)->Unit){

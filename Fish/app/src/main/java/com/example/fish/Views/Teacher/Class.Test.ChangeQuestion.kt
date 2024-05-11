@@ -60,7 +60,9 @@ import com.example.fish.R
 import com.example.fish.Untils.AddAlert
 import com.example.fish.Untils.Answer
 import com.example.fish.Untils.Back
+import com.example.fish.Untils.DetailResult
 import com.example.fish.Untils.Question
+import com.example.fish.Untils.RecognizeQuestion
 import com.example.fish.Untils.RecognizeTextIcon
 import com.example.fish.Untils.appendMessage
 import com.example.fish.Untils.goTo
@@ -94,7 +96,6 @@ fun ChangeQuestionView(nav : NavController , view : DisplayUI)
             appendMessage(context , "Thêm Câu Hỏi Mới Thành Công")
             view.changeQuestion(view.nowTest.numberQues-1)
         }
-
     }
     else{
         val nowQuestion = listQ[view.nowIndexQuestion]
@@ -222,6 +223,11 @@ fun QNA_Correct(nav: NavController, view : DisplayUI, Q:Question ,
                 onUpdate = {
                     isSetting = false
                     onChangeQuestion(it)
+                } ,
+                onImage = {
+                    Q.detail = it.question
+                    listA = it.answer
+                    isSetting = false
                 }
             )
         }
@@ -485,7 +491,8 @@ fun Heading(
     onBack: ()->Unit = {},
     onMenu : ()->Unit = {},
     onSetting : ()->Unit = {} ,
-    onUpdate: (String) -> Unit
+    onUpdate: (String) -> Unit = {},
+    onImage: (DetailResult)->Unit = {}
 ){
     Box{
         Row(Modifier.padding(10.dp)) {
@@ -508,6 +515,13 @@ fun Heading(
                         .size(25.dp)
                     ,
                     onUpdate
+                )
+                RecognizeQuestion(
+                    modifier = Modifier
+                        .weight(0.1f)
+                        .size(25.dp)
+                    ,
+                    onImage
                 )
 
                 Icon(

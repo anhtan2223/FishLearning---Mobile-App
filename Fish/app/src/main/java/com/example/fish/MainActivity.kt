@@ -179,7 +179,7 @@ fun LoginView(nav:NavController , view:DisplayUI)
                     )
 
             }, content = "Đăng Nhập")
-            ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
+//            ButtonNav(onClick = { nav.navigate("Test") }, content = "Test Room")
         }
     }
     Row(
